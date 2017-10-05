@@ -18,20 +18,30 @@ Nathan Lewis (nbl7)
 
 External:
 * Command Parsing Class:
+
     public method to take an String input, and return specific command types as well as command parameters
 
 Internal:
 * Canvas Drawing Class:
+
     public Canvas constructor
     
 * Turtle Class:
+
     public constuctor with an image parameter
+    
     .getX() - get the X coordinate
+    
     .getY() - get the Y coordinate
+    
     .updateX - update the X coordinate
+    
     .updateY - update the Y coordinate
+    
     .updateOrientation - update where the turtle is facing towards
 
 * abstract superclass for EXECUTION
+
     one public class for each general type of execution, which extends EXECUTION
+    
     .execute(int...) - take parameters and perform instruction
