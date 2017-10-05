@@ -14,3 +14,24 @@ Nathan Lewis (nbl7)
 4. The text commands entered by the user won't know what their role is until the commands are compiled by the user. At this point they retrieve their information/actions from the appropriate Class hierarchies we have developed.
 5. When the commands have been executed the turtle should begin to move accordingly and create the correct path with the pen. Upon completion of the turtle's movement, the previous commands should move to a visible location in the window - so they can be referenced -, and a new, clear text entry should appear where further/new commands can be entered. Also if any errors occur in the command executions, they should be displayed to the GUI.
 
+### Create Your APIs
+
+External:
+* Command Parsing Class:
+    public method to take an String input, and return specific command types as well as command parameters
+
+Internal:
+* Canvas Drawing Class:
+    public Canvas constructor
+    
+* Turtle Class:
+    public constuctor with an image parameter
+    .getX() - get the X coordinate
+    .getY() - get the Y coordinate
+    .updateX - update the X coordinate
+    .updateY - update the Y coordinate
+    .updateOrientation - update where the turtle is facing towards
+
+* abstract superclass for EXECUTION
+    one public class for each general type of execution, which extends EXECUTION
+    .execute(int...) - take parameters and perform instruction
