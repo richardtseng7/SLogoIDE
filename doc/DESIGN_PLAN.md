@@ -10,8 +10,12 @@ Canvas (GUI)
 
 
 
-Turtle
+* Turtle
 
+We plan to separate the graphical interface for the Turtle class from the interpreter by having the Turtle class handle the graphical interface, 
+while the parser will interpret the commands and use the Turtle class’ public getters and setters to carry out the commands. The Turtle will encapsulate 
+the image of the turtle, the x and y coordinates of the turtle, and the pen color. The turtle will communicate with the Canvas object to set its 
+ImageView and penColor. The turtle may throw errors of the selected image is invalid or if the command would move the turtle out of bounds.
 
 
 
@@ -67,11 +71,24 @@ The user types 'fd 50' in the command window, and sees the turtle move in the di
 Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command will be.
 Additionally, each member of the team should create two use cases of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
-‘fd 50’ is read in from the terminal in the Canvas
+* The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+‘fd 50’ is read in from the terminal by the Canvas object
 the Parser object is passed this command, along with the Turtle object
-the Parser interprets the command and calls the forward method in the Movement class, which the Turtle object extends
-the forward Method updates the position of the Turtle using its getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas 
+the Parser interprets the command and calls the protected forward method in the Movement class, which the Turtle object extends
+the protected forward Method updates the position of the Turtle using the Turtle class’ public getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas
 the Property Change Listener updates the position of the Turtle on the Canvas
+
+Richard’s Use Cases
+1. The user types ‘fd sum 10 sum 10 sum 10 sum 20 20’ in the command window and sees the turtle move in the display window leaving a trail, and the command is added to the environment’s history
+    * ‘fd sum 10 sum 10 sum 10 sum 20 20’ is read in from the terminal by the Canvas object
+    * the Parser object is passed this command, along with the Turtle object
+    * the Parser interprets the command and calls the protected sum method in the Movement class four times and then the protected forward method in the Movement class, which the Turtle object extends
+    * the protected forward Method updates the position of the Turtle using the Turtle class’ public getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas
+    * the Property Change Listener updates the position of the Turtle on the Canvas
+
+2. The user sets a background color for the turtle's display area, an image to use for the turtle, and a color to use for the pen
+    * The public setters of the Turtle object are called and the appropriate Property Change Listeners updates these properties of the Turtle on the Canvas
+
 
 
 
