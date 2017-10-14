@@ -220,6 +220,19 @@ Nathan's Use Cases
 
 * These commands call updates on the turtle's position and its path which is passed to the GUI and subsequently drawn onto the display.
 
+Paul's Use Cases
+
+* User enters 'fd (sum 10 sum 10 10) or (sum 10 sum 20 20)', this is first passed to the parser.
+
+* Parser calls sum within the mathFunc class with input arguments 10 and 10.
+
+* Parser then calls sum with returned value and 10.
+
+* Parser calls sum(20, 20), then sum(10, 40)
+
+* Parser then calls or within the mathBool as or(30, 40).
+
+* For any command using math or bool operations this continues until all relevant functions are calculated.
 
 # Design Considerations
 
