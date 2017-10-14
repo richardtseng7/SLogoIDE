@@ -48,14 +48,20 @@ This section describes how the user will interact with your program (keep it sim
 
 Along the top of the display in the User Interface I will have specific toolbar options which the user can utilize. These include an 'Edit' toolbar option which will drop-down to allow you to change the image of the turtle, the background color, the pen color and any additional aestethic changes, where each option will produce a pop-up in which the user can actively edit the chosen option. Other options in the toolbar will include 'New' which acts as a reset for the canvas/turtle, 'Language' which will allow you to choose your own language and 'Help' which will create a pop up containing all the information necessary to run the program. There will then be the main canvas with the turtle initially in the center to the left of the screen, but will update as commands are entered accordingly. Then to the right will be a text input box where the user can type their entry and above it will be a space where the history of the users input will be stored and displayed. Beyond this will be two boxes displaying the current active variables and current user defined commands.
 
+![Image of UI]
+(UIDisplay.jpg)
+
 
 # API Details
  
 This section describes each API introduced in the Overview in detail. Describe how each API supports specific features given in the assignment specification, what resources it might use, how it is intended to be used, and how it could be extended to include additional requirements (from the assignment specification or discussed by your team). Finally, justify the decision to create each class introduced with respect to the design's key goals, principles, and abstractions. Your APIs should be written as Java interfaces, types that cannot contain instance variables or private methods, in appropriate packages. These should be Java code files that compile and contain extensive comments to explain the purpose of each interface and each method within the interface (note this code can be generated directly from a UML diagram). Include any Exceptions you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
 
 GUI:
+This API is used to display all appropriate objects and information on the screen for the user to see. The API will intialize all the JavaFX code such as the scene and group and most some methods will run once to simply set up the display. There won't be too many classes in this API but classes will be introduced to handle the updating of each bit of information displayed to the user e.g. the turtle or active variables. These will be called upon the completion of the back-end's processing of the user input text. It should be able to be easily extended to add further features to the User Interface simply by adding to the initialization method and creating a  new class for the new specific function.
+
 ```java
 public interface GUI{
+
 
     private void initalizeView();
     //Used to initialize placement and specifics of the user interface so everything appears appropriately on screen.
@@ -92,36 +98,6 @@ Turtle:
 Parser:
 
 Commands:
-```java
-public abstract class Commands {
-  private int myin1;
-  private int myin2;
-  public Commands(int input1, int input2){
-      myin1 = input1;
-      myin2 = input2;
-  }
-  //this is the main commands class
-  public int getIn1(){
-      return myin1;
-  }
-  public int getIn2(){
-      return myin2;
-  }
-  //getters
-}
-public class mathFunc extends Commands {
-   public mathFunc(int input1, int input2) {
-      Commands(input1, input2);
-   }
-   //All math functions go here, getting inputs from commands
-}
-public class mathBool extends Commands {
-   public mathBool(int input1, int input2) {
-      Commands(input1, input2);
-   }
-   //All boolean ops go here, getting inputs from commands
-}
-```
 
 # API Example Code
 
