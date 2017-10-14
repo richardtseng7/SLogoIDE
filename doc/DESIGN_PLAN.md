@@ -25,7 +25,7 @@ The part of parsing the input string of command into individual commands should 
 
 * Commands
 
-
+This group will act more as a library containing many classes/methods that correspond to commands that we have within the sLogo langauge. They will execute the necessary actions/functions when called upon to do so and provided with the appropriate arguments. There will be a class hierarchy present where each command belonging to a specific group (e.g. boolean) may have their own class/method and a parent class which they inherit from. These commands should not be able to be modified elsewhere in the program.
 
 
 # Introduction
@@ -53,7 +53,45 @@ Along the top of the display in the User Interface I will have specific toolbar 
  
 This section describes each API introduced in the Overview in detail. Describe how each API supports specific features given in the assignment specification, what resources it might use, how it is intended to be used, and how it could be extended to include additional requirements (from the assignment specification or discussed by your team). Finally, justify the decision to create each class introduced with respect to the design's key goals, principles, and abstractions. Your APIs should be written as Java interfaces, types that cannot contain instance variables or private methods, in appropriate packages. These should be Java code files that compile and contain extensive comments to explain the purpose of each interface and each method within the interface (note this code can be generated directly from a UML diagram). Include any Exceptions you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
 
+GUI:
+```java
+public interface GUI{
 
+    private void initalizeView();
+    //Used to initialize placement and specifics of the user interface so everything appears appropriately on screen.
+    
+    private void drawTurtlePath();
+    //When called this method will update the display of the turtle and it's path after the user has entered their commands and they have been processed by the back end and the Turtle object has been updated.
+        
+    public String userInputText();
+    //This method will take the user's text input from the displayed text box and send it to the Parser for interpretation upon submission.
+    
+    private void toolbarOptions();
+    //This method will contain the set up for each of the available toolbar options and the pop ups upon the clicking of each option.
+    
+    public String displayError();
+    //Used to display a pop-up error to the screen when received from the back end.
+    
+    //Each of the following is used to occupy the appropriate boxes on the display with the correct data.
+    protected void displayHistory();
+    
+    public String displayVariables();
+    
+    public String displayUserMethods();
+    
+    protected ImageView changeTurtleImage();
+    
+    protected Color changeBackgroundColor();
+    
+    protected Color changePenColor();
+}
+```
+
+Turtle:
+
+Parser:
+
+Commands:
 
 # API Example Code
 
