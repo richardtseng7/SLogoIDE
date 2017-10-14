@@ -5,7 +5,7 @@
 The GUI will contain classes and methods responsible for displaying and drawing everything on the screen and accquiring appropriate user inputs. There a few key components within this group which require information to be retrieved in order to update the display appropriately. This includes retrieving information about the turtle's position so it can be drawn in the correct space on the canvas and the path it took so that can be correctly drawn. Additionally the history of the user's commands will need to be displayed which will be sourced from the user's text input. This leads to the additional requirement of this group which is, having the text input space and sending the inputted text to the Parser API, which will appropriately handled the entered information.
 
 
-* Turtle
+* Movement/Turtle
 
 We plan to separate the graphical interface for the Turtle class from the interpreter by having the Turtle class handle the graphical interface, while the parser will interpret the commands and use the Turtle class’ public getters and setters to carry out the commands. The Turtle will encapsulate the image of the turtle, the x and y coordinates of the turtle, and the pen color. The turtle will communicate with the Canvas object to set its ImageView and penColor. The turtle may throw errors of the selected image is invalid or if the command would move the turtle out of bounds.
 
