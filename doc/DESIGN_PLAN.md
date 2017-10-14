@@ -222,6 +222,14 @@ Nathan's Use Cases
 
 Paul's Use Cases
 
+* User enters and 123 0
+
+* Parser calls and within the boolFunc class with input arguments 10, 10
+
+* and(123, 0) returns 1 to Parser
+
+
+
 * User enters 'fd (sum 10 sum 10 10) or (sum 10 sum 20 20)', this is first passed to the parser.
 
 * Parser calls sum within the mathFunc class with input arguments 10 and 10.
@@ -231,6 +239,8 @@ Paul's Use Cases
 * Parser calls sum(20, 20), then sum(10, 40)
 
 * Parser then calls or within the mathBool as or(30, 40).
+
+* Parser then calls fd function in turtle, which is not in commands.
 
 * For any command using math or bool operations this continues until all relevant functions are calculated.
 
