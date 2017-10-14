@@ -102,13 +102,13 @@ Commands:
 public abstract class Commands {
   private int myin1;
   private int myin2;
-  public Commands(int input1, int input2){
+  protected Commands(int input1, int input2){
       myin1 = input1;
       myin2 = input2;
   }
   //this is the main commands class
-  public int getIn1(){   return myin1;  }
-  public int getIn2(){   return myin2;  }
+  protected int getIn1(){   return myin1;  }
+  protected int getIn2(){   return myin2;  }
   //getters
 }
 public class mathFunc extends Commands {
