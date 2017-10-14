@@ -96,8 +96,7 @@ Commands:
 public abstract class Commands {
   private int myin1;
   private int myin2;
-  public Commands(int
- input1, int input2){
+  public Commands(int input1, int input2){
       myin1 = input1;
       myin2 = input2;
   }
