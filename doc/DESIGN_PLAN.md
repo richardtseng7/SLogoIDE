@@ -92,6 +92,37 @@ Turtle:
 Parser:
 
 Commands:
+```java
+public class Commands {
+  private int myin1;
+  private int myin2;
+  public Commands(int
+ input1, int input2){
+      myin1 = input1;
+      myin2 = input2;
+  }
+  //this is the main commands class
+  public int getIn1(){
+      return myin1;
+  }
+  public int getIn2(){
+      return myin2;
+  }
+  //getters
+}
+public class mathFunc extends Commands {
+   public mathFunc(int input1, int input2) {
+      Commands(input1, input2);
+   }
+   //All math functions go here, getting inputs from commands
+}
+public class mathBool extends Commands {
+   public mathBool(int input1, int input2) {
+      Commands(input1, input2);
+   }
+   //All boolean ops go here, getting inputs from commands
+}
+```
 
 # API Example Code
 
