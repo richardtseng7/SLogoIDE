@@ -98,6 +98,7 @@ Turtle:
 Parser:
 
 Commands:
+```java
 public abstract class Commands {
   private int myin1;
   private int myin2;
@@ -118,6 +119,7 @@ public class mathBool extends Commands {
    public mathBool(int input1, int input2) { Commands(input1, input2);  }
    //All boolean ops go here, getting inputs from commands
 }
+```
 
 
 # API Example Code
