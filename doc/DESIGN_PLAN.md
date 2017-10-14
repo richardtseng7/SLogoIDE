@@ -1,6 +1,4 @@
-# External:
-
-between the two sub-groups
+# External: between the two sub-groups
 
 How you plan to separate the graphical interface from the interpreter and how you plan to let them communicate when necessary.
 What objects will be used for communication: making it clear how needed information will get where it is needed, what will be available and what will be encapsulated, what things will be immutable, and what errors may be thrown.
@@ -12,7 +10,7 @@ Canvas (GUI)
 
 Turtle
 
-
+We plan to separate the graphical interface for the Turtle class from the interpreter by having the Turtle class handle the graphical interface, while the parser will interpret the commands and use the Turtle class’ public getters and setters to carry out the commands. The Turtle will encapsulate the image of the turtle, the x and y coordinates of the turtle, and the pen color. The turtle will communicate with the Canvas object to set its ImageView and penColor. The turtle may throw errors of the selected image is invalid or if the command would move the turtle out of bounds.
 
 
 # Internal: 
@@ -22,9 +20,6 @@ between each sub-group and its future programmers (maintainers)
 How you plan to provide paths for extension through interfaces, inheritance, and design patterns for new features you might reasonably expect to be added to the program.
 What subclasses or implementing classes will be used to extend your part to add new features: making it clear what kind of code someone will be expected to write, what parts of your code you expect to be closed to modification, and what errors may be thrown.
 Note, while some of these methods may be public, many may be protected or package friendly.
-
-* Commands
-
 
 
 * Parser
@@ -62,18 +57,54 @@ This section describes each API introduced in the Overview in detail. Describe h
 # API Example Code
 
 It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
+
 Show an actual "sequence of code" that implements the following use case using only methods described in your APIs: 
+
 The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+
 Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command will be.
+
 Additionally, each member of the team should create two use cases of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
-‘fd 50’ is read in from the terminal in the Canvas
-the Parser object is passed this command, along with the Turtle object
-the Parser interprets the command and calls the forward method in the Movement class, which the Turtle object extends
-the forward Method updates the position of the Turtle using its getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas 
-the Property Change Listener updates the position of the Turtle on the Canvas
+* The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+
+* ‘fd 50’ is read in from the terminal by the Canvas object
+
+* the Parser object is passed this command, along with the Turtle object
+
+* the Parser interprets the command and calls the protected forward method in the Movement class, which the Turtle object extends
+
+* the protected forward Method updates the position of the Turtle using the Turtle class’ public getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas
+
+* the Property Change Listener updates the position of the Turtle on the Canvas
+
+Richard’s Use Cases
+
+* The user types ‘fd sum 10 sum 10 sum 10 sum 20 20’ in the command window and sees the turtle move in the display window leaving a trail, and the command is added to the environment’s history
+
+* ‘fd sum 10 sum 10 sum 10 sum 20 20’ is read in from the terminal by the Canvas object
+
+* the Parser object is passed this command, along with the Turtle object
+
+* the Parser interprets the command and calls the protected sum method in the Movement class four times and then the protected forward method in the Movement class, which the Turtle object extends
+the protected forward Method updates the position of the Turtle using the Turtle class’ public getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas
+
+* the Property Change Listener updates the position of the Turtle on the Canvas
+
+* The user sets a background color for the turtle's display area, an image to use for the turtle, and a color to use for the pen
+
+* The public setters of the Turtle object are called and the appropriate Property Change Listeners updates these properties of the Turtle on the Canvas
 
 
+Peilin’s Use Cases
+
+* The user types ‘fd sum 10 sum 10 sum 10 sum 20 20’ in the command window and sees the turtle move in the display window leaving a trail, and the command is added to the environment’s history
+
+* The string of command with a Turtle object are passed into the Parser.
+
+* The parser will parse the string into individual commands, and decided on the order that they will be executed, and return an error when there's a wrong number of parameters for certain commands or invalid command names.
+
+* After deciding on which order the commands will be executed, the parser will call on those commands. In this case, the algebraic method "sum" will be executed 4 times first, then the a movement method will be called on the Turtle.
 
 
 # Design Considerations
