@@ -97,6 +97,22 @@ Turtle:
 
 Parser:
 
+```java
+public interface Parser{
+
+    private ArrayList<Object> content();
+    //Used to parse the input String into an ArrayList of strings, integers and symbols, using Object[] content = str.split(" ");
+    
+    private void callCommand();
+// Used to execute a list of command according to the orders，which should be the most important/core method of this Parser
+
+	private boolean readyCommand();
+	// Used to check whether a specific command has enough/correct parameters to be executed, takes in the ArrayList of parsed user input, as well as the command index
+
+}
+```
+
+
 Commands:
 ```java
 public abstract class Commands {
