@@ -8,7 +8,7 @@ Canvas (GUI)
 
 
 
-Turtle
+* Turtle
 
 We plan to separate the graphical interface for the Turtle class from the interpreter by having the Turtle class handle the graphical interface, while the parser will interpret the commands and use the Turtle class’ public getters and setters to carry out the commands. The Turtle will encapsulate the image of the turtle, the x and y coordinates of the turtle, and the pen color. The turtle will communicate with the Canvas object to set its ImageView and penColor. The turtle may throw errors of the selected image is invalid or if the command would move the turtle out of bounds.
 
