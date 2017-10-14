@@ -93,7 +93,7 @@ Parser:
 
 Commands:
 ```java
-public class Commands {
+public abstract class Commands {
   private int myin1;
   private int myin2;
   public Commands(int
