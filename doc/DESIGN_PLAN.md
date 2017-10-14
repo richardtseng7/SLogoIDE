@@ -12,11 +12,6 @@ We plan to separate the graphical interface for the Turtle class from the interp
 
 # Internal: between each sub-group and its future programmers (maintainers)
 
-How you plan to provide paths for extension through interfaces, inheritance, and design patterns for new features you might reasonably expect to be added to the program.
-What subclasses or implementing classes will be used to extend your part to add new features: making it clear what kind of code someone will be expected to write, what parts of your code you expect to be closed to modification, and what errors may be thrown.
-Note, while some of these methods may be public, many may be protected or package friendly.
-
-
 * Parser
 
 The parser will have a file that contains different type of input that it can recognize. For potential extension that requires taking a different type of input (for example,  mathematical notations like “pi”, we can simply add to that file).
@@ -36,15 +31,11 @@ The SLogo project is attempting to create a GUI based interactive program where 
 
 # Design Overview
 
-This section serves as a map of your design for other programmers to gain a general understanding of how and why the program was divided up, and how the individual parts work together to provide the desired functionality. Describe the four APIs you intend to create (their purpose with regards to the program's functionality, and how they collaborate with each other) focusing specifically on the behavior, not the internal state. Include a picture of how the components are related (these pictures can be hand drawn and scanned in, created with a standard drawing program, or screen shots from a UML design program). Discuss specific classes, methods, and data structures, but not individual lines of code.
-
 We are dividing the program by the model view controller pattern. The model will have an abstract Commands class, which will be extended by a Math class and a Boolean class. These classes will be public and serve as libraries. The view will have the private Canvas (GUI) class and the private Turtle class, which extends the protected Movement class (forward, backward, left, right, etc.). The controller will have a protected Variable/Control Structures class (for, Repeat, etc.), which is extended by a private Parser class. The controller will create an instance of the Canvas and an instance of the Turtle, passing the Turtle object to the Parser to handle the input, whenever the user has entered a new command.
 
 [Include picture of whiteboard]
 
 # User Interface
-
-This section describes how the user will interact with your program (keep it simple to start). Describe the overall appearance of program's user interface components and how users interact with these components (especially those specific to your program, i.e., means of input other than menus or toolbars). Include one or more pictures of the user interface (these pictures can be hand drawn and scanned in, created with a standard drawing program, or screen shots from a dummy program that serves as a exemplar). Describe any erroneous situations that are reported to the user (i.e., bad input data, empty data, etc.).
 
 Along the top of the display in the User Interface I will have specific toolbar options which the user can utilize. These include an 'Edit' toolbar option which will drop-down to allow you to change the image of the turtle, the background color, the pen color and any additional aestethic changes, where each option will produce a pop-up in which the user can actively edit the chosen option. Other options in the toolbar will include 'New' which acts as a reset for the canvas/turtle, 'Language' which will allow you to choose your own language and 'Help' which will create a pop up containing all the information necessary to run the program. There will then be the main canvas with the turtle initially in the center to the left of the screen, but will update as commands are entered accordingly. Then to the right will be a text input box where the user can type their entry and above it will be a space where the history of the users input will be stored and displayed. Beyond this will be two boxes displaying the current active variables and current user defined commands.
 
@@ -95,6 +86,52 @@ public interface GUI{
 
 Turtle:
 
+```java
+public interface Movement {
+
+    public Point2D getPos();
+    //Get the current position of the object.
+    
+    public Point2D setPos(Point2D newPos);
+    //Set the position of the object to newPos. Returns distance the object moved. Throws out of bounds exception if newPos is invalid.
+    
+    public int forward(int pixels);
+    //Move the object forward by pixels distance. Returns the value of pixels. Throws out of bounds exception if the new position is invalid.
+    
+    public int back(int pixels);
+    //Move the object back by pixels distance. Returns the value of pixels. Throws out of bounds exception if the new position is invalid.
+
+    public int left(int degrees);
+    //Turn the object counterclockwise by degrees angle. Returns the value of degrees. Throws out of bounds exception if the new position is invalid.
+
+    public int right(int degrees);
+    //Turn the object clockwise by degrees angle. Returns the value of degrees. Throws out of bounds exception if the new position is invalid.
+
+    public int setHeading(int degrees);
+    //Turn object to an absolute heading. Returns number of degrees moved.
+
+    public int penDown();
+    //Puts pen down such that when the object moves, it leaves a trail. Returns 1.
+    
+    public int penUp();
+    //Puts pen up such that when the object moves, it does not leave a trail. Returns 0.
+    
+    public int show();
+    //Makes object visible. Returns 1.
+    
+    public int hide();
+    //Makes object invisible. Returns 0.
+
+    public int home();
+    //Moves object to the center of the screen (0, 0). Returns the distance object moved.
+    
+     public int clearScreen();
+    //Erases turtle's trails and sends it to the home position. Returns the distance turtle moved.
+}
+```
+
+
+
 Parser:
 
 ```java
@@ -138,19 +175,12 @@ public class mathBool extends Commands {
 ```
 
 
+
 # API Example Code
-
-It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
-
-Show an actual "sequence of code" that implements the following use case using only methods described in your APIs: 
-
-The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
-
-Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command will be.
 
 Additionally, each member of the team should create two use cases of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
-* The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
 
 * ‘fd 50’ is read in from the terminal by the Canvas object
 
@@ -201,13 +231,12 @@ Nathan's Use Cases
 
 # Design Considerations
 
-This section describes any issues which need to be addressed or resolved before attempting to devise a complete design solution. Include any design decisions that the group discussed at length (include pros and cons from all sides of the discussion) as well as any ambiguities, assumptions, or dependencies regarding the program that impact the overall design.
-
 The first ambiguity is where to execute the Control commands, like for loops. Initially for our structure, Math Operations, Boolean, and Control/Variable were all parallel subclasses that extended an abstract command class, and these commands would be called in the Parser class. However, then we ran into the issue of how to pass a list of commands into the Control class. So later we decided to make the Parser an extension of the Control/Variable class.
 
 In order to make fewer methods public, instead of having the turtle movement commands a subclass of Command.
 
 There also needs to be a way for the program to check for syntax errors in the SLogo code without crashing. A try catch block would returns a specific value through catch upon failing to execute the code in the try block could be a solution.
+
 
 
 # Team Responsibilities
