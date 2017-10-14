@@ -25,8 +25,6 @@ This group will act more as a library containing many classes/methods that corre
 
 # Introduction
 
-This section describes the problem your team is trying to solve by writing this program, the primary design goals of the project (i.e., where is it most flexible), and the primary architecture of the design (i.e., what is closed and what is open). Discuss the program at a high-level (i.e., without referencing specific classes, data structures, or code).
-
 The SLogo project is attempting to create a GUI based interactive program where the form of interaction is the SLogo language, which drives a “turtle” around the screen using commands. New commands for the turtle can be added by altering classes that are extended by lower classes that contain the logic, which would both be protected to restrict access to said lower level classes. There will be a class for the turtle, as well as multiple classes to handle drawing out the buttons, textbox, or the visual representation of the turtle. These will also handle the end user text input and and are responsible for iterating and stepping through any SLogo commands that the user gives the program.
 
 # Design Overview
@@ -45,8 +43,6 @@ Along the top of the display in the User Interface I will have specific toolbar 
 
 # API Details
  
-This section describes each API introduced in the Overview in detail. Describe how each API supports specific features given in the assignment specification, what resources it might use, how it is intended to be used, and how it could be extended to include additional requirements (from the assignment specification or discussed by your team). Finally, justify the decision to create each class introduced with respect to the design's key goals, principles, and abstractions. Your APIs should be written as Java interfaces, types that cannot contain instance variables or private methods, in appropriate packages. These should be Java code files that compile and contain extensive comments to explain the purpose of each interface and each method within the interface (note this code can be generated directly from a UML diagram). Include any Exceptions you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
-
 GUI:
 This API is used to display all appropriate objects and information on the screen for the user to see. The API will intialize all the JavaFX code such as the scene and group and most some methods will run once to simply set up the display. There won't be too many classes in this API but classes will be introduced to handle the updating of each bit of information displayed to the user e.g. the turtle or active variables. These will be called upon the completion of the back-end's processing of the user input text. It should be able to be easily extended to add further features to the User Interface simply by adding to the initialization method and creating a  new class for the new specific function.
 
@@ -84,7 +80,8 @@ public interface GUI{
 }
 ```
 
-Turtle:
+
+Movement/Turtle:
 
 ```java
 public interface Movement {
@@ -126,10 +123,9 @@ public interface Movement {
     //Moves object to the center of the screen (0, 0). Returns the distance object moved.
     
      public int clearScreen();
-    //Erases turtle's trails and sends it to the home position. Returns the distance turtle moved.
+    //Erases object's trails and sends it to the home position. Returns the distance object moved.
 }
 ```
-
 
 
 Parser:
@@ -175,10 +171,7 @@ public class mathBool extends Commands {
 ```
 
 
-
 # API Example Code
-
-Additionally, each member of the team should create two use cases of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
 The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
 
@@ -228,7 +221,6 @@ Nathan's Use Cases
 * These commands call updates on the turtle's position and its path which is passed to the GUI and subsequently drawn onto the display.
 
 
-
 # Design Considerations
 
 The first ambiguity is where to execute the Control commands, like for loops. Initially for our structure, Math Operations, Boolean, and Control/Variable were all parallel subclasses that extended an abstract command class, and these commands would be called in the Parser class. However, then we ran into the issue of how to pass a list of commands into the Control class. So later we decided to make the Parser an extension of the Control/Variable class.
@@ -236,7 +228,6 @@ The first ambiguity is where to execute the Control commands, like for loops. In
 In order to make fewer methods public, instead of having the turtle movement commands a subclass of Command.
 
 There also needs to be a way for the program to check for syntax errors in the SLogo code without crashing. A try catch block would returns a specific value through catch upon failing to execute the code in the try block could be a solution.
-
 
 
 # Team Responsibilities
