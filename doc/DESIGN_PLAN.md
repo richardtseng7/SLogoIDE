@@ -122,7 +122,7 @@ public interface Movement {
     public int home();
     //Moves object to the center of the screen (0, 0). Returns the distance object moved.
     
-     public int clearScreen();
+    public int clearScreen();
     //Erases object's trails and sends it to the home position. Returns the distance object moved.
 }
 ```
