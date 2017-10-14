@@ -148,20 +148,20 @@ Additionally, each member of the team should create two use cases of their own (
 
 Richard’s Use Cases
 
-* The user types ‘fd sum 10 sum 10 sum 10 sum 20 20’ in the command window and sees the turtle move in the display window leaving a trail, and the command is added to the environment’s history
+1. The user types ‘fd sum 10 sum 10 sum 10 sum 20 20’ in the command window and sees the turtle move in the display window leaving a trail, and the command is added to the environment’s history
 
-* ‘fd sum 10 sum 10 sum 10 sum 20 20’ is read in from the terminal by the Canvas object
+    * ‘fd sum 10 sum 10 sum 10 sum 20 20’ is read in from the terminal by the Canvas object
 
-* the Parser object is passed this command, along with the Turtle object
+    * the Parser object is passed this command, along with the Turtle object
 
-* the Parser interprets the command and calls the protected sum method in the Movement class four times and then the protected forward method in the Movement class, which the Turtle object extends
+    * the Parser interprets the command and calls the protected sum method in the Movement class four times and then the protected forward method in the Movement class, which the Turtle object extends
 the protected forward Method updates the position of the Turtle using the Turtle class’ public getters and setters and notifies the appropriate Property Change Listener that the position of the Turtle needs to be updated on the Canvas
 
-* the Property Change Listener updates the position of the Turtle on the Canvas
+    * the Property Change Listener updates the position of the Turtle on the Canvas
 
-* The user sets a background color for the turtle's display area, an image to use for the turtle, and a color to use for the pen
+2. The user sets a background color for the turtle's display area, an image to use for the turtle, and a color to use for the pen
 
-* The public setters of the Turtle object are called and the appropriate Property Change Listeners updates these properties of the Turtle on the Canvas
+    * The public setters of the Turtle object are called and the appropriate Property Change Listeners updates these properties of the Turtle on the Canvas
 
 
 Peilin’s Use Cases
