@@ -1,11 +1,8 @@
 # External: between the two sub-groups
 
-How you plan to separate the graphical interface from the interpreter and how you plan to let them communicate when necessary.
-What objects will be used for communication: making it clear how needed information will get where it is needed, what will be available and what will be encapsulated, what things will be immutable, and what errors may be thrown.
-Note, all of these methods will need to be public.
+* Canvas/GUI
 
-Canvas (GUI)
-
+The GUI will contain classes and methods responsible for displaying and drawing everything on the screen and accquiring appropriate user inputs. There a few key components within this group which require information to be retrieved in order to update the display appropriately. This includes retrieving information about the turtle's position so it can be drawn in the correct space on the canvas and the path it took so that can be correctly drawn. Additionally the history of the user's commands will need to be displayed which will be sourced from the user's text input. This leads to the additional requirement of this group which is, having the text input space and sending the inputted text to the Parser API, which will appropriately handled the entered information.
 
 
 * Turtle
@@ -13,9 +10,7 @@ Canvas (GUI)
 We plan to separate the graphical interface for the Turtle class from the interpreter by having the Turtle class handle the graphical interface, while the parser will interpret the commands and use the Turtle class’ public getters and setters to carry out the commands. The Turtle will encapsulate the image of the turtle, the x and y coordinates of the turtle, and the pen color. The turtle will communicate with the Canvas object to set its ImageView and penColor. The turtle may throw errors of the selected image is invalid or if the command would move the turtle out of bounds.
 
 
-# Internal: 
-
-between each sub-group and its future programmers (maintainers)
+# Internal: between each sub-group and its future programmers (maintainers)
 
 How you plan to provide paths for extension through interfaces, inheritance, and design patterns for new features you might reasonably expect to be added to the program.
 What subclasses or implementing classes will be used to extend your part to add new features: making it clear what kind of code someone will be expected to write, what parts of your code you expect to be closed to modification, and what errors may be thrown.
@@ -24,8 +19,13 @@ Note, while some of these methods may be public, many may be protected or packag
 
 * Parser
 
-The parser will have a file that contains different type of input that it can recognize. For potential extension that requires taking a different type of input (for example,  mathematical notations like “pi”, we can simply add to that file.) 
+The parser will have a file that contains different type of input that it can recognize. For potential extension that requires taking a different type of input (for example,  mathematical notations like “pi”, we can simply add to that file).
+The main role of 
 The part of parsing the input string of command into individual commands should be closed to modification. If additional commands that should be recognized by the program are added later, we should add respective calls of those new commands in the parser.
+
+* Commands
+
+
 
 
 # Introduction
@@ -46,6 +46,7 @@ We are dividing the program by the model view controller pattern. The model will
 
 This section describes how the user will interact with your program (keep it simple to start). Describe the overall appearance of program's user interface components and how users interact with these components (especially those specific to your program, i.e., means of input other than menus or toolbars). Include one or more pictures of the user interface (these pictures can be hand drawn and scanned in, created with a standard drawing program, or screen shots from a dummy program that serves as a exemplar). Describe any erroneous situations that are reported to the user (i.e., bad input data, empty data, etc.).
 
+Along the top of the display in the User Interface I will have specific toolbar options which the user can utilize. These include an 'Edit' toolbar option which will drop-down to allow you to change the image of the turtle, the background color, the pen color and any additional aestethic changes, where each option will produce a pop-up in which the user can actively edit the chosen option. Other options in the toolbar will include 'New' which acts as a reset for the canvas/turtle, 'Language' which will allow you to choose your own language and 'Help' which will create a pop up containing all the information necessary to run the program. There will then be the main canvas with the turtle initially in the center to the left of the screen, but will update as commands are entered accordingly. Then to the right will be a text input box where the user can type their entry and above it will be a space where the history of the users input will be stored and displayed. Beyond this will be two boxes displaying the current active variables and current user defined commands.
 
 
 # API Details
@@ -106,6 +107,21 @@ Peilin’s Use Cases
 
 * After deciding on which order the commands will be executed, the parser will call on those commands. In this case, the algebraic method "sum" will be executed 4 times first, then the a movement method will be called on the Turtle.
 
+Nathan's Use Cases
+
+* User enters 'for [ fd sum 10 20 ]', this clearly lacks the appropriate syntax required for the 'for' loop.
+
+* This user entered text is passed to the Parser which interprets this text and acknowledges the syntax error in the 'for' command.
+
+* This error is sent to the GUI which displays it as a pop-up error on the display.
+
+* User enters 'fd 10 rt 50'.
+
+* This entered text is passed to the Parser which interprets these commands and calls the appropriate commands 'forward' and 'right' in the correct order which the correct arguments. 
+
+* These commands call updates on the turtle's position and its path which is passed to the GUI and subsequently drawn onto the display.
+
+
 
 # Design Considerations
 
@@ -125,3 +141,5 @@ Paul will do Boolean and Control variable classes, as well as the overarching ab
 Peilin Lai: Peilin will do the parsing part. The Parse class will extend the control/variable class (for/repeat etc). It will take in a Turtle object and a string of commands. It will parse the string of command, and decide the logic and order of executing these commands. And it will call the commands.
 
 Richard: Math operations class which extends the abstract Commands class, Movement class (forward, back, left, right, etc.), Turtle class (position of the turtle) which extends the Movement class.
+
+Nathan: Nathan will initially create the User Interface and handle the creation of the GUI api. This includes displaying the turtle and its path correctly on the canvas sourcing the correct information, as well as handling the user input and sending it to the parser. As this role may require less time and work than the others, when finished I will continue to work on the parser, so we correctly handle the user input.
