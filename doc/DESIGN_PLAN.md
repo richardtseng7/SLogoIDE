@@ -31,7 +31,11 @@ The SLogo project is attempting to create a GUI based interactive program where 
 
 We are dividing the program by the model view controller pattern. The model will have an abstract Commands class, which will be extended by a Math class and a Boolean class. These classes will be public and serve as libraries. The view will have the private Canvas (GUI) class and the private Turtle class, which extends the protected Movement class (forward, backward, left, right, etc.). The controller will have a protected Variable/Control Structures class (for, Repeat, etc.), which is extended by a private Parser class. The controller will create an instance of the Canvas and an instance of the Turtle, passing the Turtle object to the Parser to handle the input, whenever the user has entered a new command.
 
-[Include picture of whiteboard]
+![Image of Design1]
+(/images/IMG_2086[1].JPG)
+
+![Image of Design2]
+(/images/IMG_2087[1].JPG)
 
 # User Interface
 
