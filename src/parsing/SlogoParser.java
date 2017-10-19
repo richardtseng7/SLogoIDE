@@ -31,8 +31,16 @@ public class SlogoParser {
 	public String getSymbol (String text) {
         //for (Entry<String, Pattern> e : mySymbols) {
 		Pattern constants = Pattern.compile("-?[0-9]+\\\\.?[0-9]*");
+		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
+		Pattern variables = Pattern.compile(":[a-zA-Z]+");
 		if (match(text, constants)) {
-                return "Constant";
+			return "Constant";
+		}
+		else if (match(text, commands)) {
+			return "Command";
+		}
+		else if (match(text, variables)) {
+			return "Variable";
 		}
 		else return text;
     }
@@ -45,7 +53,7 @@ public class SlogoParser {
 		final String ERROR = "NO MATCH";
 		for (Entry<String, Pattern> e : mySymbols) {
             if (match(text, e.getValue())) {
-            		if (e.getKey().equalsIgnoreCase("Constant"))
+            		if (e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable"))
             			return text;
             		else return e.getKey();
             }
