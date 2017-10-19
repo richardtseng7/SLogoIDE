@@ -11,6 +11,7 @@ public class LogicCenter {
 	}
 
 	public void doInstructions(String input) {
+		//first parse instructions
 		InputReader reader = new InputReader(lang, input);;
 		ArrayList<String> inputParsed = reader.getInputParsed();
 		ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
@@ -19,6 +20,6 @@ public class LogicCenter {
 
 	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
 		int index = 0; //used to keep track of the current reading from both ArrayLists
-		
+		// loop through inputParsedSymbols, if .equals("Command"), build a Factory object
 	}
 }
