@@ -5,20 +5,20 @@ import parsing.SlogoParser;
 
 public class LogicCenter {	
 	private SlogoParser lang;
-	private InputReader reader;
-	private ArrayList<String> inputParsed;
-	private ArrayList<String> inputParsedSymbols;
 	
-	public LogicCenter(String input) {
+	public LogicCenter() {
 		lang = new SlogoParser();
-		reader = new InputReader(lang, input);
-		inputParsed = reader.getInputParsed();
-		inputParsedSymbols = reader.getInputParsedSymbols();
-		
+	}
+
+	public void doInstructions(String input) {
+		InputReader reader = new InputReader(lang, input);;
+		ArrayList<String> inputParsed = reader.getInputParsed();
+		ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
 		doLogic(inputParsed, inputParsedSymbols);
 	}
 
-	private void doLogic(ArrayList<String> inputParsed2, ArrayList<String> inputParsedSymbols2) {
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
+		int index = 0; //used to keep track of the current reading from both ArrayLists
 		
 	}
 }
