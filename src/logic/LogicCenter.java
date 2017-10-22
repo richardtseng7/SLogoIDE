@@ -5,6 +5,11 @@ import javax.swing.JOptionPane;
 import parsing.InputReader;
 import parsing.SlogoParser;
 
+/**
+ * @author Peilin Lai
+ *          Paul Lee
+ */
+
 public class LogicCenter {	
 	private SlogoParser lang;
 	
