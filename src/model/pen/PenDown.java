@@ -7,7 +7,11 @@ import model.turtle.Turtle;
  *
  */
 public class PenDown extends Pen{
-	@Override
+	/**
+	 * puts pen down such that when the turtle moves, it leaves a trail
+	 * @return 1
+	 */
+	@Override	
 	public int execute(Turtle t) {
 		return putPen(t, true);
 	}
