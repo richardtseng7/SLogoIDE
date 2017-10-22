@@ -19,6 +19,7 @@ public class Turtle {
 	private Point2D home;
 	private final int myID;
 	private double heading = 90;
+	private boolean showing = true;
 	
 	public Turtle(int ID, Dimension2D canvasDimension) {
 		myID = ID;
@@ -38,6 +39,10 @@ public class Turtle {
 	public Point2D getPos() {
 		return myPos;
 	}	
+	
+	public void setPos(Point2D newPos) {
+		myPos = newPos;
+	}
 	
 	public double getXCor() {
 		return myPos.getX();
@@ -59,20 +64,18 @@ public class Turtle {
 		return myID;
 	}
 	
+	public int getShowing() {
+		return showing ? 1 : 0;
+	}
+	
+	public void setShowing(boolean bool) {
+		showing = bool;
+	}
+	
 	public double home() {
 		double distance = myPos.distance(home);
 		myPos = home;
 		return distance;
-	}
-	
-	public int show() {
-		
-		return 1;
-	}
-	
-	public int hide() {
-		
-		return 0;
 	}
 	
 	public ImageView getImageView() {

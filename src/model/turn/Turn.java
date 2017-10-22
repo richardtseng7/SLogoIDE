@@ -8,10 +8,9 @@ import model.turtle.Turtle;
  */
 public abstract class Turn {
 
-	protected int turn(Turtle t, int direction) {
-	    double degrees = direction*pixels;
+	protected double turn(Turtle t, int direction, int pixels) {
+	    double degrees = direction * pixels;
 	    t.setHeading(degrees);
-		
 		return degrees;
 	}
 }
