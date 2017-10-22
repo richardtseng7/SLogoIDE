@@ -32,9 +32,9 @@ public class GUI {
 	
 	//Input and Input History
 	private Node inputVBox;
-	private TextArea textInput;
-	private TextArea inputHistory;
-	private Button runButton;
+	protected TextArea textInput;
+	protected TextArea inputHistory;
+	protected Button runButton;
 	
 	//Active Variables and Methods
 	private Node variableVBox;
@@ -85,13 +85,6 @@ public class GUI {
 		inputHistory = new TextArea();
 		setTextArea(inputHistory,false,290,270);
 		runButton = new Button("Run");
-		runButton.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-			public void handle(ActionEvent arg0) {
-				//System.out.println("ABC");
-				
-			}
-		});
 		
 		inputVBox = new VBox(5);
 		((VBox) inputVBox).getChildren().add(inputHistory);
