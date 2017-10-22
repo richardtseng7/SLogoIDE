@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 import java.util.Enumeration;
 import java.util.AbstractMap.SimpleEntry;
 
+/**
+ * @author Peilin Lai
+ */
+
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
 
@@ -18,7 +22,7 @@ public class SlogoParser {
         //add as many Patterns as needed/exist
     }
 	
-	public void addPatterns (String syntax) {
+	private void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
