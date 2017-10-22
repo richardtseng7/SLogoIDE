@@ -12,17 +12,34 @@ public class Turtle {
 	private ImageView myImageView;
 	private Point2D myPos;
 	private Point2D home;
+	private final int myID;
 	
-	public Turtle() {
-		
-	
+	public Turtle(int ID) {
+		myID = ID;
 		myPos = home;
 	}
 	
-
 	public Point2D getPos() {
-		return this.myPos;
+		return myPos;
 	}	
+	
+	public double getXCor() {
+		return myPos.getX();
+	}
+	
+	public double getYCor() {
+		return myPos.getY();
+	}
+	
+	public int getID() {
+		return myID;
+	}
+	
+	public double home() {
+		double distance = myPos.distance(home);
+		myPos = home;
+		return distance;
+	}
 	
 	public int show() {
 		

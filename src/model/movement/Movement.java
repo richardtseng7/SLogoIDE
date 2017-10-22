@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public abstract class Movement {
 	
-	protected int move(Turtle t, int pixels) {
+	protected int move(Turtle t, int direction) {
 		
 		return pixels;
 	}

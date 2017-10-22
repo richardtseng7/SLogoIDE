@@ -1,4 +1,4 @@
-package model.movement;
+package model.turn;
 
 import model.turtle.Turtle;
 
@@ -6,9 +6,9 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class Forward extends Movement{
+public class Left extends Turn{
 	@Override
 	public int execute(Turtle t) {
-		return move(t, 1);
+		return turn(t, 1);
 	}
 }
