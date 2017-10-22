@@ -17,7 +17,7 @@ public class Factory {
             return o;
         } catch (Exception e) {
             // print error message saying command is invalid
-        		return null;
+        		return null; 
         }
 	}
 	

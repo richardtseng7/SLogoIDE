@@ -2,6 +2,8 @@ package gui;
 
 
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javax.swing.*;
 
 public class GUI {
 	
@@ -29,9 +32,9 @@ public class GUI {
 	
 	//Input and Input History
 	private Node inputVBox;
-	private TextArea textInput;
-	private TextArea inputHistory;
-	private Button runButton;
+	protected TextArea textInput;
+	protected TextArea inputHistory;
+	protected Button runButton;
 	
 	//Active Variables and Methods
 	private Node variableVBox;
