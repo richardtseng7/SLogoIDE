@@ -13,6 +13,7 @@ public class Turtle {
 	private Point2D myPos;
 	private Point2D home;
 	private final int myID;
+	private double heading = 90;
 	
 	public Turtle(int ID) {
 		myID = ID;
@@ -29,6 +30,14 @@ public class Turtle {
 	
 	public double getYCor() {
 		return myPos.getY();
+	}
+	
+	public double getHeading(){
+	    return heading;
+	}
+	
+	public void setHeading(double degrees){
+	    heading = degrees;
 	}
 	
 	public int getID() {
