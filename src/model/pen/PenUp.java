@@ -1,4 +1,4 @@
-package model.visible;
+package model.pen;
 
 import model.turtle.Turtle;
 
@@ -6,9 +6,9 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class ShowTurtle extends Visible{
+public class PenUp extends Pen{
 	@Override
 	public int execute(Turtle t) {
-		return show(t, true);
+		return putPen(t, false);
 	}
 }

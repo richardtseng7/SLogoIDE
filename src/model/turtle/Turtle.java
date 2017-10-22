@@ -20,6 +20,7 @@ public class Turtle {
 	private final int myID;
 	private double heading = 90;
 	private boolean showing = true;
+	private boolean penDown = true;
 	
 	public Turtle(int ID, Dimension2D canvasDimension) {
 		myID = ID;
@@ -64,12 +65,20 @@ public class Turtle {
 		return myID;
 	}
 	
-	public int getShowing() {
-		return showing ? 1 : 0;
+	public boolean getShowing() {
+		return showing;
 	}
 	
 	public void setShowing(boolean bool) {
 		showing = bool;
+	}
+	
+	public boolean getPenDown() {
+		return penDown;
+	}
+	
+	public void setPen(boolean bool) {
+		penDown = bool;
 	}
 	
 	public double home() {
