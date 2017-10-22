@@ -4,6 +4,7 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -28,14 +29,16 @@ import javax.swing.*;
 
 public class GUI {
 	
+	private static final double CANVAS_HEIGHT = 500;
+	private static final double CANVAS_WIDTH = 500;
+	protected Dimension2D canvasDimension;
+	
 	protected BorderPane mainPane;
 	
 	//Canvas and turtle
-	private Pane canvasPane;
-	protected Node canvas;
-	protected static final int CANVAS_SIZE = 500;
-	private static final int TURTLE_SIZE = 30;
-	
+	protected Pane canvasPane;
+	private Node canvas;
+
 	//Input and Input History
 	private Node inputVBox;
 	protected TextArea textInput;
@@ -97,9 +100,15 @@ public class GUI {
 		toolbar = new ToolBar(newButton, editButton, languageButton, helpButton);
 		mainPane.setTop(toolbar);
 		
-		
-		
-		
+		canvasPane = new Pane();
+		canvasDimension = new Dimension2D(CANVAS_HEIGHT, CANVAS_WIDTH);
+		canvasPane.setPrefSize(canvasDimension.getHeight(), canvasDimension.getWidth());
+		canvas = new Rectangle(canvasDimension.getHeight(), canvasDimension.getWidth());
+		((Rectangle) canvas).setFill(Color.WHITE);
+		canvasPane.getChildren().add(canvas);
+		mainPane.setLeft(canvasPane);
+		mainPane.setMargin(canvasPane, new Insets(20,0,0,10));
+						
 		textInput = new TextArea();
 		setTextArea(textInput,true,175,270);
 		inputHistory = new TextArea();

@@ -5,7 +5,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-	public static final String TITLE = "Cell Society";
+	public static final String TITLE = "SLogo";
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 1000;
 	public static final Paint BACKGROUND = Color.CADETBLUE;
