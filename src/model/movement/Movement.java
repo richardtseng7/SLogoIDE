@@ -16,7 +16,6 @@ public abstract class Movement {
 		double unitX = x/pos.magnitude();
 		double y = pos.getY();
 		double unitY = y/pos.magnitude();
-		double ang = pos.angle(1, 0);
 		
 		t.setPos(x+unitX*pixels*direction,y+unitY*pixels*direction);
 		return pixels;
