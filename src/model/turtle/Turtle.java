@@ -10,12 +10,12 @@ import javafx.scene.image.ImageView;
 public class Turtle {
 	
 	private ImageView myImageView;
+	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
 	private Point2D myPos;
 	private Point2D home;
 	
 	public Turtle() {
 		
-	
 		myPos = home;
 	}
 	

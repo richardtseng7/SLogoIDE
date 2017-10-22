@@ -6,8 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -17,6 +21,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import javax.swing.*;
 
 public class GUI {
@@ -25,9 +32,8 @@ public class GUI {
 	
 	//Canvas and turtle
 	private Pane canvasPane;
-	private Node canvas;
-	private ImageView turtleImage;
-	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
+	protected Node canvas;
+	protected static final int CANVAS_SIZE = 500;
 	private static final int TURTLE_SIZE = 30;
 	
 	//Input and Input History
@@ -46,7 +52,10 @@ public class GUI {
 	//Toolbar Buttons
 	private ToolBar toolbar;
 	private Button newButton;
-	private Button editButton;
+	private MenuButton editButton;
+	private MenuItem canvasColor;
+	private MenuItem penColor;
+	private MenuItem turtleImage;
 	private Button languageButton;
 	private Button helpButton;
 	
@@ -57,28 +66,39 @@ public class GUI {
 	protected void init() {
 		mainPane = new BorderPane();
 		
-		newButton = new Button("New");
-		editButton = new Button("Edit...");
-		languageButton = new Button("Languages");
-		helpButton = new Button("Help");
-		toolbar = new ToolBar(newButton, editButton, languageButton, helpButton);
-		mainPane.setTop(toolbar);
-		
 		canvasPane = new Pane();
-		canvasPane.setPrefSize(500, 500);
-		canvas = new Rectangle(500,500);
+		canvasPane.setPrefSize(CANVAS_SIZE, CANVAS_SIZE);
+		canvas = new Rectangle(CANVAS_SIZE,CANVAS_SIZE);
 		((Rectangle) canvas).setFill(Color.WHITE);
 		canvasPane.getChildren().add(canvas);
 		mainPane.setLeft(canvasPane);
 		mainPane.setMargin(canvasPane, new Insets(20,0,0,10));
 		
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
-		turtleImage = new ImageView(image);
-		turtleImage.setFitHeight(TURTLE_SIZE);
-		turtleImage.setFitWidth(TURTLE_SIZE);
-		turtleImage.setX(canvas.getLayoutBounds().getMaxX()/2);
-		turtleImage.setY(canvas.getLayoutBounds().getMaxY()/2);
-		canvasPane.getChildren().add(turtleImage);
+		newButton = new Button("New");
+		editButton = new MenuButton("Edit...");
+		canvasColor = new MenuItem("Canvas Color");
+		canvasColor.setOnAction((event) -> {
+			CanvasColorPopUp popup = new CanvasColorPopUp();
+			popup.showPopUp();
+		});
+		penColor = new MenuItem("Pen Color");
+		penColor.setOnAction((event) -> {
+			PenColorPopUp popup = new PenColorPopUp();
+			popup.showPopUp();
+		});
+		turtleImage = new MenuItem("Turtle Image");
+		turtleImage.setOnAction((event) -> {
+			TurtleImagePopUp popup = new TurtleImagePopUp();
+			popup.showPopUp();
+		});
+		editButton.getItems().addAll(canvasColor,penColor,turtleImage);
+		languageButton = new Button("Languages");
+		helpButton = new Button("Help");
+		toolbar = new ToolBar(newButton, editButton, languageButton, helpButton);
+		mainPane.setTop(toolbar);
+		
+		
+		
 		
 		textInput = new TextArea();
 		setTextArea(textInput,true,175,270);
@@ -121,6 +141,7 @@ public class GUI {
 		text.setMaxWidth(width);
 		text.setEditable(editable);
 	}
+	
 	
 	
 }

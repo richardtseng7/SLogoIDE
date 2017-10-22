@@ -33,6 +33,7 @@ public class UIController {
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
+
 	}
 	
 	public void step(double elapsedTime) {
@@ -48,6 +49,7 @@ public class UIController {
 			gui.textInput.clear();
 		});
 	}
+	
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
