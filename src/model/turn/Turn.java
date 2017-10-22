@@ -9,7 +9,8 @@ import model.turtle.Turtle;
 public abstract class Turn {
 
 	protected int turn(Turtle t, int direction) {
-	    t.setHeading((double)direction);
+	    double degrees = direction*pixels;
+	    t.setHeading(degrees);
 		
 		return degrees;
 	}
