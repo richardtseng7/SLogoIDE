@@ -2,6 +2,9 @@ package gui;
 
 
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,23 +18,25 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javax.swing.*;
 
 public class GUI {
+	
+	private static final double CANVAS_HEIGHT = 500;
+	private static final double CANVAS_WIDTH = 500;
+	protected Dimension2D canvasDimension;
 	
 	protected BorderPane mainPane;
 	
 	//Canvas and turtle
-	private Pane canvasPane;
+	protected Pane canvasPane;
 	private Node canvas;
-	private ImageView turtleImage;
-	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
-	private static final int TURTLE_SIZE = 30;
-	
+
 	//Input and Input History
 	private Node inputVBox;
-	private TextArea textInput;
-	private TextArea inputHistory;
-	private Button runButton;
+	protected TextArea textInput;
+	protected TextArea inputHistory;
+	protected Button runButton;
 	
 	//Active Variables and Methods
 	private Node variableVBox;
@@ -62,21 +67,14 @@ public class GUI {
 		mainPane.setTop(toolbar);
 		
 		canvasPane = new Pane();
-		canvasPane.setPrefSize(500, 500);
-		canvas = new Rectangle(500,500);
+		canvasDimension = new Dimension2D(CANVAS_HEIGHT, CANVAS_WIDTH);
+		canvasPane.setPrefSize(canvasDimension.getHeight(), canvasDimension.getWidth());
+		canvas = new Rectangle(canvasDimension.getHeight(), canvasDimension.getWidth());
 		((Rectangle) canvas).setFill(Color.WHITE);
 		canvasPane.getChildren().add(canvas);
 		mainPane.setLeft(canvasPane);
 		mainPane.setMargin(canvasPane, new Insets(20,0,0,10));
-		
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
-		turtleImage = new ImageView(image);
-		turtleImage.setFitHeight(TURTLE_SIZE);
-		turtleImage.setFitWidth(TURTLE_SIZE);
-		turtleImage.setX(canvas.getLayoutBounds().getMaxX()/2);
-		turtleImage.setY(canvas.getLayoutBounds().getMaxY()/2);
-		canvasPane.getChildren().add(turtleImage);
-		
+						
 		textInput = new TextArea();
 		setTextArea(textInput,true,175,270);
 		inputHistory = new TextArea();

@@ -1,4 +1,4 @@
-package commands;
+package Commands;
 
 public interface BoolFunc {
 	boolean LESS(double in1, double in2);

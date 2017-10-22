@@ -1,4 +1,4 @@
-package model.movement;
+package model.visible;
 
 import model.turtle.Turtle;
 
@@ -6,9 +6,9 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class Forward extends Movement{
+public class HideTurtle extends Visible{
 	@Override
 	public int execute(Turtle t) {
-		return move(t, 1);
+		return show(t, false);
 	}
 }
