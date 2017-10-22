@@ -37,7 +37,7 @@ public class GUI {
 	
 	//Canvas and turtle
 	protected Pane canvasPane;
-	private Node canvas;
+	protected Node canvas;
 
 	//Input and Input History
 	private Node inputVBox;
@@ -69,13 +69,6 @@ public class GUI {
 	protected void init() {
 		mainPane = new BorderPane();
 		
-		canvasPane = new Pane();
-		canvasPane.setPrefSize(CANVAS_SIZE, CANVAS_SIZE);
-		canvas = new Rectangle(CANVAS_SIZE,CANVAS_SIZE);
-		((Rectangle) canvas).setFill(Color.WHITE);
-		canvasPane.getChildren().add(canvas);
-		mainPane.setLeft(canvasPane);
-		mainPane.setMargin(canvasPane, new Insets(20,0,0,10));
 		
 		newButton = new Button("New");
 		editButton = new MenuButton("Edit...");
