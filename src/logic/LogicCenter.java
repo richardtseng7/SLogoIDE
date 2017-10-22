@@ -21,10 +21,12 @@ public class LogicCenter {
 		//first parse instructions
 		InputReader reader = new InputReader(lang, input);
 		ArrayList<String> inputParsed = reader.getInputParsed();
-		System.out.println(inputParsed.toString());
-		ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
-		System.out.println(inputParsedSymbols.toString());
-		doLogic(inputParsed, inputParsedSymbols);
+		if(inputParsed!= null && inputParsed.size()!=0){ //Prevent crash from no commands typed.
+			System.out.println(inputParsed.toString());
+			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
+			System.out.println(inputParsedSymbols.toString());
+			doLogic(inputParsed, inputParsedSymbols);
+		}
 	}
 
 	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
