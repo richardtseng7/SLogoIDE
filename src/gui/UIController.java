@@ -1,4 +1,5 @@
 package gui;
+import logic.LogicCenter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
@@ -15,6 +16,7 @@ public class UIController {
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
+	private LogicCenter lc;
 	private Timeline animation = new Timeline();
 	private KeyFrame frame;
 	
@@ -27,12 +29,24 @@ public class UIController {
 	     
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		
+		lc = new LogicCenter();
 		root.getChildren().addAll(gui.mainPane);
+		
+		initRunButton();
 	}
 	
 	public void step(double elapsedTime) {
 		
+	}
+	
+	private void initRunButton() {
+		gui.runButton.setOnAction((event) -> {
+			String input  = gui.textInput.getText();
+			lc.doInstructions(input);
+			gui.inputHistory.appendText(input + "\n");
+			//Send string input to Parser
+			gui.textInput.clear();
+		});
 	}
 
 	public javafx.scene.Scene getScene() {

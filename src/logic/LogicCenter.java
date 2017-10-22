@@ -1,3 +1,4 @@
+package logic;
 import java.util.ArrayList;
 
 import parsing.InputReader;
@@ -12,9 +13,11 @@ public class LogicCenter {
 
 	public void doInstructions(String input) {
 		//first parse instructions
-		InputReader reader = new InputReader(lang, input);;
+		InputReader reader = new InputReader(lang, input);
 		ArrayList<String> inputParsed = reader.getInputParsed();
+		System.out.println(inputParsed.toString());
 		ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
+		System.out.println(inputParsedSymbols.toString());
 		doLogic(inputParsed, inputParsedSymbols);
 	}
 
