@@ -22,7 +22,7 @@ public class SlogoParser {
         //add as many Patterns as needed/exist
     }
 	
-	public void addPatterns (String syntax) {
+	private void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {

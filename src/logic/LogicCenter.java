@@ -32,6 +32,7 @@ public class LogicCenter {
 		for (int i = 0; i< inputParsedSymbols.size(); i++) {
 			if (inputParsedSymbols.get(i).equals("Command")) {
 				Factory comm = new Factory(inputParsedSymbols.get(i));
+				
 			}
 		}
 	}
