@@ -2,6 +2,10 @@ package parsing;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * @author Peilin Lai
+ */
+
 public class Factory {
 	private Object theCommand;
 	
