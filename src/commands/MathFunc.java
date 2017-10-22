@@ -1,4 +1,4 @@
-package commands;
+package Commands;
 
 public interface MathFunc {
 	double SUM (double in1, double in2);
