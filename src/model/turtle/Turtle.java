@@ -1,6 +1,8 @@
 package model.turtle;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -10,14 +12,27 @@ import javafx.scene.image.ImageView;
 public class Turtle {
 	
 	private ImageView myImageView;
+	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
+	private static final int TURTLE_SIZE = 30;
+
 	private Point2D myPos;
 	private Point2D home;
 	private final int myID;
 	private double heading = 90;
 	
-	public Turtle(int ID) {
+	public Turtle(int ID, Dimension2D canvasDimension) {
 		myID = ID;
 		myPos = home;
+		setImageView(canvasDimension);
+	}
+	
+	private void setImageView(Dimension2D canvasDimension) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
+		myImageView = new ImageView(image);
+		myImageView.setFitHeight(TURTLE_SIZE);
+		myImageView.setFitWidth(TURTLE_SIZE);
+		myImageView.setX(canvasDimension.getWidth()/2);
+		myImageView.setY(canvasDimension.getHeight()/2);
 	}
 	
 	public Point2D getPos() {
@@ -58,5 +73,9 @@ public class Turtle {
 	public int hide() {
 		
 		return 0;
+	}
+	
+	public ImageView getImageView() {
+		return myImageView;
 	}
 }
