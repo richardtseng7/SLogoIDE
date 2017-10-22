@@ -9,6 +9,11 @@ import java.util.ResourceBundle;
 import java.util.Enumeration;
 import java.util.AbstractMap.SimpleEntry;
 
+/**
+ * @author Peilin Lai
+ *          Paul Lee
+ */
+
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
 	private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
