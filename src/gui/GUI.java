@@ -7,8 +7,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -18,6 +22,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import javax.swing.*;
 
 public class GUI {
@@ -30,7 +37,7 @@ public class GUI {
 	
 	//Canvas and turtle
 	protected Pane canvasPane;
-	private Node canvas;
+	protected Node canvas;
 
 	//Input and Input History
 	private Node inputVBox;
@@ -48,7 +55,10 @@ public class GUI {
 	//Toolbar Buttons
 	private ToolBar toolbar;
 	private Button newButton;
-	private Button editButton;
+	private MenuButton editButton;
+	private MenuItem canvasColor;
+	private MenuItem penColor;
+	private MenuItem turtleImage;
 	private Button languageButton;
 	private Button helpButton;
 	
@@ -59,8 +69,25 @@ public class GUI {
 	protected void init() {
 		mainPane = new BorderPane();
 		
+		
 		newButton = new Button("New");
-		editButton = new Button("Edit...");
+		editButton = new MenuButton("Edit...");
+		canvasColor = new MenuItem("Canvas Color");
+		canvasColor.setOnAction((event) -> {
+			CanvasColorPopUp popup = new CanvasColorPopUp();
+			popup.showPopUp();
+		});
+		penColor = new MenuItem("Pen Color");
+		penColor.setOnAction((event) -> {
+			PenColorPopUp popup = new PenColorPopUp();
+			popup.showPopUp();
+		});
+		turtleImage = new MenuItem("Turtle Image");
+		turtleImage.setOnAction((event) -> {
+			TurtleImagePopUp popup = new TurtleImagePopUp();
+			popup.showPopUp();
+		});
+		editButton.getItems().addAll(canvasColor,penColor,turtleImage);
 		languageButton = new Button("Languages");
 		helpButton = new Button("Help");
 		toolbar = new ToolBar(newButton, editButton, languageButton, helpButton);
@@ -116,6 +143,7 @@ public class GUI {
 		text.setMaxWidth(width);
 		text.setEditable(editable);
 	}
+	
 	
 	
 }
