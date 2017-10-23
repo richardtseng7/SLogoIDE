@@ -1,5 +1,6 @@
 package gui;
 import logic.LogicCenter;
+import model.Model;
 import model.turtle.Turtle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,8 +32,12 @@ public class UIController {
 	     
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		Turtle t = new Turtle(turtleID++, gui.canvasDimension);
-		gui.canvasPane.getChildren().add(t.getImageView());
+		
+		Model m = new Model(gui.canvasDimension);
+		for (int i = 0; i < 1; i++) {
+			m.addTurtle();
+			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
+		}
 		
 		lc = new LogicCenter();
 		root.getChildren().addAll(gui.mainPane);
