@@ -7,7 +7,7 @@ import model.turtle.Turtle;
  *
  */
 public abstract class Pen {
-	protected int putPen(Turtle t, boolean penDown){
+	protected double putPen(Turtle t, boolean penDown){
 		t.setPen(penDown);
 		return penDown ? 1 : 0;
 	}

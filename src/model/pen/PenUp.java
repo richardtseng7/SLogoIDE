@@ -12,7 +12,7 @@ public class PenUp extends Pen{
 	 * @return 0
 	 */
 	@Override
-	public int execute(Turtle t) {
+	public double execute(Turtle t) {
 		return putPen(t, false);
 	}
 }
