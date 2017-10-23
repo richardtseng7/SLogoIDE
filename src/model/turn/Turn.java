@@ -7,7 +7,8 @@ import model.turtle.Turtle;
  * 
  */
 public abstract class Turn {
-	protected double turn(Turtle t, int direction, int degrees) {
+	protected double turn(Turtle t, int direction) {
+		int degrees = 0;
 	    double oldHeading = t.getHeading();
 		double newHeading = (direction) == 0 ? degrees : oldHeading + (direction * degrees);
 	    t.setHeading(newHeading);
