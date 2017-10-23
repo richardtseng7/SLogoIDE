@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import parsing.InputReader;
 import parsing.SlogoParser;
+import expression.ExpressionTree;
 
 /**
  * @author Peilin Lai
@@ -34,9 +35,8 @@ public class LogicCenter {
 		// loop through inputParsedSymbols, if .equals("Command"), build a Factory object
 		String errorMessage = checkSyntax(inputParsedSymbols);
 		if(errorMessage == ""){
-			for(int i = 0; i < inputParsed.size(); i++){
-				//Dologic body
-			}
+			ExpressionTree et = new ExpressionTree(inputParsed, inputParsedSymbols);
+			
 		}
 		else{
 			//Popup with error message
