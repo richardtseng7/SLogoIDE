@@ -16,7 +16,6 @@ public class Model {
 	private Dimension2D canvasDimension;
 	private Map<Integer, Turtle> turtles;
 	
-	
 	public Model(Dimension2D canvas) {
 		turtleID = 0;
 		canvasDimension = canvas;
@@ -33,4 +32,7 @@ public class Model {
 		return turtles.get(ID);
 	}
 	
+	public Map<Integer, Turtle> getTurtles(){
+		return turtles;
+	}
 }
