@@ -8,9 +8,7 @@ import javafx.geometry.Point2D;
  *	
  */
 public abstract class Movement {
-	
 	protected double move(Turtle t, int direction, int pixels) {
-	    //direction is 1 for forward, -1 for backwards
 		Point2D pos = t.getPos();
 		double x = pos.getX();
 		double unitX = x/pos.magnitude();

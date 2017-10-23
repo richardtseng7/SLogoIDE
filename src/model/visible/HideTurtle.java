@@ -12,7 +12,7 @@ public class HideTurtle extends Visible{
 	 * @return 0
 	 */
 	@Override
-	public int execute(Turtle t) {
+	public double execute(Turtle t) {
 		return show(t, false);
 	}
 }

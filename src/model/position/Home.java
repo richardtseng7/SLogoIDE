@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public class Home extends Position{
 	@Override
-	public int execute(Turtle t) {
+	public double execute(Turtle t) {
 		return moveTo(t, t.getHome().getX(), t.getHome().getY());
 	}
 }

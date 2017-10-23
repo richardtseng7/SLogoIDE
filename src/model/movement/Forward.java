@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public class Forward extends Movement{
 	@Override
-	public int execute(Turtle t) {
+	public double execute(Turtle t) {
 		return move(t, 1);
 	}
 }

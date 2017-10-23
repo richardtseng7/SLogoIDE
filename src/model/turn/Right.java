@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public class Right extends Turn{
 	@Override
-	public int execute(Turtle t) {
+	public double execute(Turtle t) {
 		return turn(t, -1);
 	}
 }
