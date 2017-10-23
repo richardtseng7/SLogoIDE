@@ -9,6 +9,8 @@ import javafx.geometry.Point2D;
  */
 public abstract class Movement {
 	protected double move(Turtle t, int direction) {
+		UIController ui = new UIController();
+		ui.storeOriginalPos(t);
 		int pixels = 0;
 		Point2D oldPos = t.getPos();
 		double angle = Math.toRadians(t.getHeading());
