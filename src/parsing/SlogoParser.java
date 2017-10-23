@@ -4,13 +4,30 @@ import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Enumeration;
 import java.util.AbstractMap.SimpleEntry;
 
+/**
+ * @author Peilin Lai
+ *          Paul Lee
+ */
+
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
+	private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
+			"FORWARD", "FD", "BACK", "BK", "LEFT", "LT", "RIGHT", "RT",
+			"SETHEADING", "SETH", "TOWARDS", "SETXY", "GOTO", "PENDOWN", "PD",
+			"PENUP", "PU", "SHOWTURTLE", "ST", "HIDETURTLE", "HT", "HOME", "CLEARSCREEN",
+			"CS", "XCOR", "YCOR", "HEADING", "PENDOWN?", "PENDOWNP", "SHOWING?", "SHOWINGP",
+			"SUM", "DIFFERENCE", "PRODUCT", "QUOTIENT", "REMAINDER", "MINUS", "RANDOM",
+			"SIN", "COS", "TAN", "ATAN", "LOG", "POW", "PI", "LESS?", "LESSP","GREATER?","GREATERP",
+			"EQUAL?","EQUALP","NOTEQUAL?","NOTEQUALP", "AND", "OR", "NOT","MAKE","SET",
+			"REPEAT", "DOTIMES","FOR", "FOR", "IF", "IFELSE", "TO"
+			));
 
+	
 	public SlogoParser () {
         mySymbols = new ArrayList<>();
         this.addPatterns("resources/languages/English");
@@ -30,6 +47,7 @@ public class SlogoParser {
 	
 	public String getSymbol (String text) {
         //for (Entry<String, Pattern> e : mySymbols) {
+		
 		Pattern constants = Pattern.compile("-?[0-9]+\\\\.?[0-9]*");
 		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
 		Pattern variables = Pattern.compile(":[a-zA-Z]+");
@@ -37,12 +55,15 @@ public class SlogoParser {
 			return "Constant";
 		}
 		else if (match(text, commands)) {
-			return "Command";
+			if(comms.contains(text)){
+				return "Command";
+			}
+			else { return "Syntax Error - Command Not Found";}
 		}
 		else if (match(text, variables)) {
 			return "Variable";
 		}
-		else return text;
+		else return "Syntax Error - Missing Space";
     }
 	
 	private boolean match (String text, Pattern regex) {

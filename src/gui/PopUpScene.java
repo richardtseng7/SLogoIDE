@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public abstract class PopUpScene {
 	
 	protected Stage popUpStage;
-	private static final int POPUP_SIZE = 200;
+	private static final int POPUP_SIZE = 300;
 	
 	public PopUpScene() {
 		popUpStage = new Stage();
