@@ -1,6 +1,6 @@
 package expression;
 
-public class Node {
+public abstract class Node {
 	String value;
 	Node left, right;
 	
