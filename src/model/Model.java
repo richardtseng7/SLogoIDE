@@ -28,8 +28,8 @@ public class Model {
 		turtleID++;
 	}
 	
-	public Turtle getTurtle(int turtleID) {
-		return turtles.get(turtleID);
+	public Turtle getTurtle(int ID) {
+		return turtles.get(ID);
 	}
 	
 	public Map<Integer, Turtle> getTurtles(){
