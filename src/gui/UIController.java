@@ -4,9 +4,12 @@ import model.Model;
 import model.turtle.Turtle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class UIController {
@@ -22,6 +25,12 @@ public class UIController {
 	private Timeline animation = new Timeline();
 	private KeyFrame frame;
 	private int turtleID = 0;
+	private Model m;
+	private Point2D originalPos;
+	
+	public UIController() {
+		
+	}
 	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -33,10 +42,11 @@ public class UIController {
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
 		
-		Model m = new Model(gui.canvasDimension);
+		m = new Model(gui.canvasDimension);
 		for (int i = 0; i < 1; i++) {
 			m.addTurtle();
 			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
+			System.out.println(m.getTurtle(0).getID());
 		}
 		
 		lc = new LogicCenter();
@@ -60,6 +70,23 @@ public class UIController {
 		});
 	}
 	
+	public void storeOriginalPos(Turtle t) {
+		originalPos = t.getPos();
+	}
+	
+	public void updateScene(Turtle t) {
+		Line penLine = new Line(t.getPos().getX(),t.getPos().getY(), originalPos.getX(), originalPos.getY());
+		t.getImageView().setX(t.getPos().getX());
+		t.getImageView().setY(t.getPos().getY());
+		gui.canvasPane.getChildren().add(penLine);
+		
+	}
+	
+	protected void updateImage(String fileName) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
+		m.getTurtle(0).getImageView().setImage(image);
+		//Will need to change iterate over all turtles
+	}
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
