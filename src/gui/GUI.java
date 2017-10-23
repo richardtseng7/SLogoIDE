@@ -144,6 +144,4 @@ public class GUI {
 		text.setEditable(editable);
 	}
 	
-	
-	
 }
