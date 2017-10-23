@@ -7,7 +7,6 @@ import model.turtle.Turtle;
  *
  */
 public abstract class Visible {
-	
 	protected int show(Turtle t, boolean isVisible) {
 		t.setShowing(isVisible);
 		t.getImageView().setVisible(isVisible);

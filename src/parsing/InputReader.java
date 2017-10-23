@@ -1,6 +1,10 @@
 package parsing;
 import java.util.ArrayList;
 
+/**
+ * @author Peilin Lai
+ */
+
 // With a trained SlogoParser and user input, an InputReader gives an ArrayList of input strings in standardized slogo language
 public class InputReader {
 	private ArrayList<String> inputParsed;

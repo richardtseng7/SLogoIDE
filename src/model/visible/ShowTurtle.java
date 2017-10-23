@@ -7,6 +7,10 @@ import model.turtle.Turtle;
  *
  */
 public class ShowTurtle extends Visible{
+	/**
+	 * makes turtle visible
+	 * @return 1
+	 */
 	@Override
 	public int execute(Turtle t) {
 		return show(t, true);
