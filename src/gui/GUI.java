@@ -140,9 +140,10 @@ public class GUI {
 		methodsLabel = new Label("User Defined Methods:");
 		methodsLabel.setTextFill(Color.WHITE);
 		variablesText = new ListView<String>();
-		variablesText.getItems().add("baby:10");
+		variablesText.getItems().add("test:10");
 		variablesText.setPrefSize(RIGHT_WIDTH, 210);
 		methodsText = new ListView<String>();
+		methodsText.getItems().add("test method");
 		methodsText.setPrefSize(RIGHT_WIDTH, 210);
 		
 		variableVBox = new VBox(5);
