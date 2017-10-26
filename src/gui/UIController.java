@@ -7,9 +7,11 @@ import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class UIController {
@@ -21,6 +23,10 @@ public class UIController {
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
+	private CanvasColorPopUp canvasPop;
+	private TurtleImagePopUp turtlePop;
+	private PenColorPopUp penPop;
+	private TurtleInfoTabs turtleTab;
 	private LogicCenter lc;
 	private Timeline animation = new Timeline();
 	private KeyFrame frame;
@@ -53,18 +59,62 @@ public class UIController {
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
-
+		
+		turtleTab = new TurtleInfoTabs(m);
+		for(Tab tab:turtleTab.tabList) {
+			gui.turtleInfo.getTabs().add(tab);
+		}
+			
+		gui.canvasColor.setOnAction((event) -> {
+			canvasPop = new CanvasColorPopUp();
+			canvasPop.showPopUp();
+			initCanvasColorPicker();
+		});
+		gui.turtleImage.setOnAction((event) -> {
+			turtlePop = new TurtleImagePopUp();
+			turtlePop.setTurtleSelection(m);
+			turtlePop.showPopUp();
+			initTurtleImagePick();
+		});
+		gui.penColor.setOnAction((event) -> {
+			penPop = new PenColorPopUp();
+			penPop.showPopUp();
+		});
 	}
 	
 	public void step(double elapsedTime) {
 		
 	}
 	
+	private void initCanvasColorPicker() {
+		canvasPop.colorPicker.setOnAction((event) ->{
+			((Rectangle) gui.canvas).setFill(canvasPop.colorPicker.getValue());
+		});
+	}
+	
+	private void initPenColorPicker() {
+		penPop.colorPicker.setOnAction((event) ->{
+			
+		});
+	}
+	
+	private void initTurtleImagePick() {
+		turtlePop.turtle1.setOnAction((event) -> {
+			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.DEFAULT_IMAGE)));
+		});
+		turtlePop.turtle2.setOnAction((event) -> {
+			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.IMAGE2)));
+		});
+		turtlePop.turtle3.setOnAction((event) -> {
+			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.IMAGE3)));
+		});
+	}
+	
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			lc.doInstructions(input);
-			gui.inputHistory.appendText(input + "\n");
+			//lc.doInstructions(input);
+			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
 		});
