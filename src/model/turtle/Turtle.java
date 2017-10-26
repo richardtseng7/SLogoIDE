@@ -96,7 +96,6 @@ public class Turtle {
 		myImageView.setY(home.getY());
 	}
 	
-	
 	public void setPos(Point2D newPos) {
 		myPos = newPos;
 	}

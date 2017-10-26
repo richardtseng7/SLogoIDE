@@ -14,4 +14,9 @@ public abstract class Turn {
 	    t.setHeading(newHeading);
 		return newHeading;
 	}
+	
+	@Override
+	protected int getNumParam() {
+		return 1;
+	}
 }

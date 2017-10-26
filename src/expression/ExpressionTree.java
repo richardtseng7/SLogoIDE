@@ -30,17 +30,43 @@ public class ExpressionTree {
 			));
 	private extendNode current;
 	private extendNode tree;
+	private extendNode last;
 	public ExpressionTree (ArrayList<String> input, ArrayList<String> symbol) {
 		int len = Collections.frequency(symbol, "Command");
 		int counter = 0;
 		ArrayList<Integer> commIndexes = indexAll(symbol);
+		ArrayList<extendNode> nodeList = new ArrayList<extendNode>();
 		
 		tree = new extendNode(input.get(0));
-		current = tree;
-
-		for(int i = 1 ; i<commIndexes.size(); i++){
-//			tree = new extendNode(input.get(commIndexes.get(i)));//
+		
+		for(int i = 0 ; i<commIndexes.size(); i++){
+			
+			extendNode newNode = new extendNode(input.get(commIndexes.get(i)));
+			nodeList.add(newNode);
+			
 		}
+		
+		for(int i = 0; i<nodeList.size(); i++){
+			int numArguments = numArgs(symbol.get(commIndexes.get(i)));
+			if(numArguments == 1){
+				nodeList.get(i).left = nodeList.get(i+1); 
+			}
+			else if(numArguments == 2){
+				nodeList.get(i).left = nodeList.get(i+1);
+				nodeList.get(i).right = nodeList.get(i+2);
+			}
+			else if(numArguments == 3){
+				nodeList.get(i).left = nodeList
+			}
+		}
+	}
+	
+	private int nextIndex(int ind, ArrayList<String> ar){
+		if(ind == ar.size()) {return -1;}
+		for(int i = ind+1; i<ar.size(); i++){
+			if(ar.get(i) == "Command"){ return i;}
+		}
+		return -1;
 	}
 	
 	private int numArgs(String s){

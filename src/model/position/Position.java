@@ -14,4 +14,9 @@ public abstract class Position {
 		t.setPos(newPos);
 		return oldPos.distance(newPos);
 	}
+	
+	@Override
+	protected int getNumParam() {
+		return 2;
+	}
 }
