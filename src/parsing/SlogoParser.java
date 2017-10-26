@@ -16,6 +16,7 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
+	
 	private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
 			"FORWARD", "FD", "BACK", "BK", "LEFT", "LT", "RIGHT", "RT",
 			"SETHEADING", "SETH", "TOWARDS", "SETXY", "GOTO", "PENDOWN", "PD",
@@ -55,15 +56,13 @@ public class SlogoParser {
 			return "Constant";
 		}
 		else if (match(text, commands)) {
-			if(comms.contains(text)){
-				return "Command";
-			}
-			else { return "Syntax Error - Command Not Found";}
+			return "Command";
 		}
 		else if (match(text, variables)) {
 			return "Variable";
 		}
-		else return "Syntax Error - Missing Space";
+		// Call command
+		else return "Syntax Error - Some input is invalid";
     }
 	
 	private boolean match (String text, Pattern regex) {
