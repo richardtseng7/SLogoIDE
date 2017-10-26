@@ -17,4 +17,9 @@ public abstract class Movement {
 		t.setPos(newPos);
 		return pixels;
 	}
+	
+	@Override
+	protected int getNumParam() {
+		return 1;
+	}
 }
