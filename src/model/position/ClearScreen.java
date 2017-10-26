@@ -1,9 +1,13 @@
 package model.position;
 
-public class ClearScreen {
+import expression.Node;
+import model.turtle.Turtle;
+
+public class ClearScreen extends Node{
 	@Override
 	public double execute(Turtle t) {
 		//clear screen
-		return Home.execute(t);
+		Home h = new Home();
+		return h.execute(t);
 	}
 }

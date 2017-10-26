@@ -3,7 +3,7 @@ package model;
 import java.util.Observable;
 
 public class ObjectObservable extends Observable{
-	private Object obj = false;
+	private Object obj;
 	
 	public ObjectObservable(Object val) {
 		obj = val;

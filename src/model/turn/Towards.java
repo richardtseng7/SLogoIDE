@@ -1,5 +1,6 @@
 package model.turn;
 
+import expression.Node;
 import javafx.geometry.Point2D;
 import model.turtle.Turtle;
 
@@ -7,7 +8,7 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class Towards {
+public class Towards extends Node{
 	@Override
 	public double execute(Turtle t) {
 		Point2D home = t.getHome();
@@ -18,5 +19,10 @@ public class Towards {
 		double oldHeading = t.getHeading();
 		t.setHeading(newHeading);
 		return newHeading - oldHeading;
+	}
+	
+	@Override
+	public int getNumParam() {
+		return 2;
 	}
 }

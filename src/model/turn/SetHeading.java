@@ -1,5 +1,7 @@
 package model.turn;
 
+import model.turtle.Turtle;
+
 /**
  * @author richardtseng
  *
