@@ -24,7 +24,6 @@ public class UIController {
 	private LogicCenter lc;
 	private Timeline animation = new Timeline();
 	private KeyFrame frame;
-	private int turtleID = 0;
 	private Model m;
 	private Point2D originalPos;
 	
@@ -46,9 +45,8 @@ public class UIController {
 		for (int i = 0; i < 1; i++) {
 			m.addTurtle();
 			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
-			System.out.println(m.getTurtle(0).getID());
 		}
-		
+
 		lc = new LogicCenter();
 		root.getChildren().addAll(gui.mainPane);
 		

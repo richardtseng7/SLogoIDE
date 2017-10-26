@@ -21,4 +21,9 @@ public abstract class Movement {
 		ui.updateScene(t);
 		return pixels;
 	}
+	
+	@Override
+	protected int getNumParam() {
+		return 1;
+	}
 }
