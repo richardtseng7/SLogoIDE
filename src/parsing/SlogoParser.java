@@ -17,7 +17,7 @@ import java.util.AbstractMap.SimpleEntry;
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
 	
-	private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
+	/*private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
 			"FORWARD", "FD", "BACK", "BK", "LEFT", "LT", "RIGHT", "RT",
 			"SETHEADING", "SETH", "TOWARDS", "SETXY", "GOTO", "PENDOWN", "PD",
 			"PENUP", "PU", "SHOWTURTLE", "ST", "HIDETURTLE", "HT", "HOME", "CLEARSCREEN",
@@ -26,7 +26,7 @@ public class SlogoParser {
 			"SIN", "COS", "TAN", "ATAN", "LOG", "POW", "PI", "LESS?", "LESSP","GREATER?","GREATERP",
 			"EQUAL?","EQUALP","NOTEQUAL?","NOTEQUALP", "AND", "OR", "NOT","MAKE","SET",
 			"REPEAT", "DOTIMES","FOR", "FOR", "IF", "IFELSE", "TO"
-			));
+			));*/
 
 	
 	public SlogoParser () {
@@ -61,8 +61,7 @@ public class SlogoParser {
 		else if (match(text, variables)) {
 			return "Variable";
 		}
-		// Call command
-		else return "Syntax Error - Some input is invalid";
+		else return text;
     }
 	
 	private boolean match (String text, Pattern regex) {
@@ -70,14 +69,12 @@ public class SlogoParser {
     }
 
 	public String getTranslation(String text) {
-		final String ERROR = "NO MATCH";
 		for (Entry<String, Pattern> e : mySymbols) {
             if (match(text, e.getValue())) {
-            		if (e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable"))
-            			return text;
-            		else return e.getKey();
+            		if (!(e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable")))
+            			e.getKey();
             }
         }
-		return ERROR;
+		return text;
 	}
 }
