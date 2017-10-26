@@ -1,5 +1,6 @@
 package expression;
 import expression.extendNode;
+import parsing.Factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,21 +14,6 @@ import java.util.Collections;
 
 
 public class ExpressionTree {
-	private ArrayList<String> zeroargComms = new ArrayList<String>(Arrays.asList(
-			"PENDOWN", "PENUP", "SHOWTURTLE", "HIDETURTLE", "HOME", "CLEARSCREEN",
-			"XCOR", "YCOR", "HEADING", "PENDOWN","SHOWING", "PI"
-			));
-	private ArrayList<String> oneargComms = new ArrayList<String>(Arrays.asList(
-			"FORWARD", "BACK", "LEFT", "RIGHT", "SETHEADING",  "MINUS", "RANDOM",
-			"SIN", "COS", "TAN", "ATAN", "LOG", "NOT"
-			));
-	private ArrayList<String> twoargComms = new ArrayList<String>(Arrays.asList(
-			"TOWARDS", "SETXY",	"SUM", "DIFFERENCE", "PRODUCT", "QUOTIENT", "REMAINDER", "POW", 
-			"LESS","GREATER","EQUAL","NOTEQUAL", "AND", "OR","MAKE","SET"
-			));
-	private ArrayList<String> threeplusComms = new ArrayList<String>(Arrays.asList(
-			"REPEAT", "DOTIMES","FOR", "FOR", "IF", "IFELSE", "TO"
-			));
 	private extendNode current;
 	private extendNode tree;
 	private extendNode last;
@@ -35,28 +21,33 @@ public class ExpressionTree {
 		int len = Collections.frequency(symbol, "Command");
 		int counter = 0;
 		ArrayList<Integer> commIndexes = indexAll(symbol);
-		ArrayList<extendNode> nodeList = new ArrayList<extendNode>();
+		ArrayList<extendNode> extendNodeList = new ArrayList<extendNode>();
 		
 		tree = new extendNode(input.get(0));
 		
 		for(int i = 0 ; i<commIndexes.size(); i++){
 			
-			extendNode newNode = new extendNode(input.get(commIndexes.get(i)));
-			nodeList.add(newNode);
+			extendNode newextendNode = new extendNode(input.get(commIndexes.get(i)));
+			extendNodeList.add(newextendNode);
 			
 		}
 		
-		for(int i = 0; i<nodeList.size(); i++){
-			int numArguments = numArgs(symbol.get(commIndexes.get(i)));
+		Factory comms;
+		
+		for(int i = 0; i<extendNodeList.size(); i++){
+			
+			comms = new Factory(extendNodeList.get(i).getItem());
+			
+			int numArguments =  comms.getParameter();
 			if(numArguments == 1){
-				nodeList.get(i).left = nodeList.get(i+1); 
+				extendNodeList.get(i).left = extendNodeList.get(i+1); 
 			}
 			else if(numArguments == 2){
-				nodeList.get(i).left = nodeList.get(i+1);
-				nodeList.get(i).right = nodeList.get(i+2);
+				extendNodeList.get(i).left = extendNodeList.get(i+1);
+				extendNodeList.get(i).right = extendNodeList.get(i+2);
 			}
 			else if(numArguments == 3){
-				nodeList.get(i).left = nodeList
+				//extendNodeList.get(i).left = extendNodeList
 			}
 		}
 	}
@@ -67,13 +58,6 @@ public class ExpressionTree {
 			if(ar.get(i) == "Command"){ return i;}
 		}
 		return -1;
-	}
-	
-	private int numArgs(String s){
-		if(zeroargComms.contains(s)) {return 0;}
-		if(oneargComms.contains(s)) {return 1;}
-		if(twoargComms.contains(s)) {return 2;}
-		else{ return 3;}
 	}
 	
 	private ArrayList<Integer> indexAll(ArrayList<String> symbol){
