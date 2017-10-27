@@ -31,27 +31,6 @@ public class LogicCenter {
 	}
 
 	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
-		int index = 0; //used to keep track of the current reading from both ArrayLists
-		// loop through inputParsedSymbols, if .equals("Command"), build a Factory object
-		String errorMessage = checkSyntax(inputParsedSymbols);
-		if(errorMessage == ""){
-			ExpressionTree et = new ExpressionTree(inputParsed, inputParsedSymbols);
-			
-		}
-		else{
-			//Popup with error message
-			JOptionPane.showMessageDialog(null, errorMessage, "Syntax Error", JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
-	}
-	
-	private String checkSyntax(ArrayList<String> inputParsedSymbols){
-		for(String s : inputParsedSymbols){
-			if(s == "Syntax Error - Command Not Found" || s == "Syntax Error - Missing Space"){
-				return s;
-			}
-			
-		}
-		return "";
+		ExpressionTree tree = new ExpressionTree(inputParsed, inputParsedSymbols);
 	}
 }
