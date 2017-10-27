@@ -11,6 +11,7 @@ public class InputReader {
 	//inputParsedSymbols translates all constants in inputParsed into "Constant" symbols
 	private ArrayList<String> inputParsedSymbols;
 	
+	
 	public InputReader (SlogoParser lang, String input) {
 		String WHITESPACE = "\\s+";
 		parseText(lang, input.split(WHITESPACE));
