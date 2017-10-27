@@ -1,4 +1,4 @@
-package gui;
+package gui.popups;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,14 +21,15 @@ import model.Model;
 
 public class TurtleImagePopUp extends PopUpScene{
 	
-	protected static final String DEFAULT_IMAGE = "Turtle_Slogo.png"; 
-	protected static final String IMAGE2 = "Turtle 2.png";
-	protected static final String IMAGE3 = "Turtle 3.png";
+	private static final String DEFAULT_IMAGE = "Turtle_Slogo.png"; 
+	private static final String IMAGE2 = "Turtle 2.png";
+	private static final String IMAGE3 = "Turtle 3.png";
 	
-	protected Button turtle1;
-	protected Button turtle2;
-	protected Button turtle3;
-	protected ComboBox<String> selectTurtle;
+	private Button turtle1;
+	private Button turtle2;
+	private Button turtle3;
+	private ComboBox<String> selectTurtle;
+	private Model model;
 	
 	@Override
 	protected Pane setUpPane() {
@@ -57,11 +58,18 @@ public class TurtleImagePopUp extends PopUpScene{
 
 	@Override
 	protected String stageTitle() {
-		return new String("Choose Turtle Image");
+		return "Choose Turtle Image";
 	}
 	
-	protected void setTurtleSelection(Model m) {
-		for(int i=0; i<1; i++) { //To change to no. of turtles
+	
+	public void setTurtlePopUp(Model m) {
+		model = m;
+		setTurtleSelect();
+		setTurtleButtonEvent();
+	}
+
+	private void setTurtleSelect() {
+		for(int i=0; i<model.getTurtles().size(); i++) { //To change to no. of turtles
 			selectTurtle.getItems().add("Turtle " + (i+1));
 		}
 	}
@@ -72,6 +80,18 @@ public class TurtleImagePopUp extends PopUpScene{
 		graphic.setFitHeight(15);
 		graphic.setFitWidth(15);
 		return graphic;
+	}
+	
+	private void setTurtleButtonEvent() {
+		turtle1.setOnAction((event) -> {
+			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
+		});
+		turtle2.setOnAction((event) -> {
+			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE2)));
+		});
+		turtle3.setOnAction((event) -> {
+			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE3)));
+		});
 	}
 	
 	

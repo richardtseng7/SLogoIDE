@@ -1,4 +1,4 @@
-package gui;
+package gui.popups;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

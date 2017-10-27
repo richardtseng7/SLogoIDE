@@ -1,12 +1,13 @@
 package model.turn;
 
+import expression.Node;
 import model.turtle.Turtle;
 
 /**
  * @author richardtseng
  * 
  */
-public abstract class Turn {
+public abstract class Turn extends Node {
 	protected double turn(Turtle t, int direction) {
 		int degrees = 0;
 	    double oldHeading = t.getHeading();

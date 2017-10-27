@@ -1,12 +1,13 @@
 package model.movement;
 
 import model.turtle.Turtle;
+import expression.Node;
 import javafx.geometry.Point2D;
 /**
  * @author richardtseng
  *	
  */
-public abstract class Movement {
+public abstract class Movement extends Node{
 	protected double move(Turtle t, int direction) {
 		int pixels = 0;
 		Point2D oldPos = t.getPos();

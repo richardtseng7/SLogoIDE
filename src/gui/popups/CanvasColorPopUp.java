@@ -1,4 +1,4 @@
-package gui;
+package gui.popups;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -6,6 +6,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -13,7 +14,7 @@ import javafx.scene.text.TextAlignment;
 
 public class CanvasColorPopUp extends PopUpScene {
 	
-	protected ColorPicker colorPicker;
+	private ColorPicker colorPicker;
 
 	@Override
 	protected Pane setUpPane() {
@@ -33,9 +34,13 @@ public class CanvasColorPopUp extends PopUpScene {
 
 	@Override
 	protected String stageTitle() {
-		return new String("Choose Canvas Color");
+		return "Choose Canvas Color";
 	}
 	
-	
+	public void setPickerEvent(Rectangle canvas) {
+		colorPicker.setOnAction((event) ->{
+			canvas.setFill(colorPicker.getValue());
+		});
+	}
 	
 }
