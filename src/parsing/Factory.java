@@ -48,6 +48,11 @@ public class Factory {
 		parameter = para;
 	}
 	
+	public int getParameter(){
+		return numofpm;
+	}
+	
+	
 	public void doExecution() {
 		try {
 			method.invoke(theCommand, parameter);

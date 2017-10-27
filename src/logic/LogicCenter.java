@@ -25,12 +25,14 @@ public class LogicCenter {
 		if(inputParsed!= null && inputParsed.size()!=0){ //Prevent crash from no commands typed.
 			System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
+			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
+			ArrayList<Integer> inputParsedBounds = reader.getInputParsedBounds();
 			System.out.println(inputParsedSymbols.toString());
-			doLogic(inputParsed, inputParsedSymbols);
+			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
-		ExpressionTree tree = new ExpressionTree(inputParsed, inputParsedSymbols);
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Integer> inputParsedBounds) {
+		ExpressionTree tree = new ExpressionTree(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
 	}
 }
