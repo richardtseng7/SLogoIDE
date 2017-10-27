@@ -13,7 +13,7 @@ import java.util.Collections;
 
 public class ExpressionTree {
 	private extendNode tree;
-	public ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<String> layers, ArrayList<Integer> bracketBounds) {
+	public ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds) {
 		ArrayList<Integer> commIndexes = indexAll(symbol);
 		ArrayList<extendNode> extendNodeList = new ArrayList<extendNode>();
 		
@@ -43,6 +43,24 @@ public class ExpressionTree {
 					}
 					if(outofbrackets != -1) { extendNodeList.get(i).left = extendNodeList.get(outofbrackets);}
 					
+					if(extendNodeList.get(i).getItem() != "IfElse"){
+						extendNodeList.get(i).setCond1(new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+					}
+					else{
+						extendNodeList.get(i).setCond1(
+								new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+						extendNodeList.get(i).setCond2(new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+						
+					}
 				}
 				else if(numArguments == 1){
 					extendNodeList.get(i).left = extendNodeList.get(i+1); 
