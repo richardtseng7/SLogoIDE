@@ -2,6 +2,12 @@ package gui;
 import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
+
+import java.util.Observable;
+import java.util.Observer;
+import gui.popups.CanvasColorPopUp;
+import gui.popups.PenColorPopUp;
+import gui.popups.TurtleImagePopUp;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -14,7 +20,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class UIController {
+public class UIController implements Observer {
 	
 	public double FRAMES_PER_SECOND = 1;
 	public double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -33,9 +39,6 @@ public class UIController {
 	private Model m;
 	private Point2D originalPos;
 	
-	public UIController() {
-		
-	}
 	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -58,55 +61,37 @@ public class UIController {
 		
 		initRunButton();
 		
-		turtleTab = new TurtleInfoTabs(m);
-		for(Tab tab:turtleTab.tabList) {
-			gui.turtleInfo.getTabs().add(tab);
-		}
+		updateTurtleTabs();
 			
 		gui.canvasColor.setOnAction((event) -> {
 			canvasPop = new CanvasColorPopUp();
 			canvasPop.showPopUp();
-			initCanvasColorPicker();
+			canvasPop.setPickerEvent((Rectangle) gui.canvas);
 		});
+		
 		gui.turtleImage.setOnAction((event) -> {
 			turtlePop = new TurtleImagePopUp();
-			turtlePop.setTurtleSelection(m);
+			turtlePop.setTurtlePopUp(m);
 			turtlePop.showPopUp();
-			initTurtleImagePick();
 		});
+		
 		gui.penColor.setOnAction((event) -> {
 			penPop = new PenColorPopUp();
 			penPop.showPopUp();
 		});
+	}
+
+	private void updateTurtleTabs() {
+		turtleTab = new TurtleInfoTabs(m);
+		for(Tab tab:turtleTab.tabList) {
+			gui.turtleInfo.getTabs().add(tab);
+		}
 	}
 	
 	public void step(double elapsedTime) {
 		
 	}
 	
-	private void initCanvasColorPicker() {
-		canvasPop.colorPicker.setOnAction((event) ->{
-			((Rectangle) gui.canvas).setFill(canvasPop.colorPicker.getValue());
-		});
-	}
-	
-	private void initPenColorPicker() {
-		penPop.colorPicker.setOnAction((event) ->{
-			
-		});
-	}
-	
-	private void initTurtleImagePick() {
-		turtlePop.turtle1.setOnAction((event) -> {
-			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.DEFAULT_IMAGE)));
-		});
-		turtlePop.turtle2.setOnAction((event) -> {
-			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.IMAGE2)));
-		});
-		turtlePop.turtle3.setOnAction((event) -> {
-			m.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(TurtleImagePopUp.IMAGE3)));
-		});
-	}
 	
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
@@ -138,5 +123,11 @@ public class UIController {
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

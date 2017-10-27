@@ -1,4 +1,4 @@
-package gui;
+package gui.popups;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,9 +14,9 @@ import javafx.scene.text.FontWeight;
 
 public class PenColorPopUp extends PopUpScene{
 	
-	ColorPicker colorPicker;
-	Slider widthSlider;
-	CheckBox upDownCheck;
+	private ColorPicker colorPicker;
+	private Slider widthSlider;
+	private CheckBox upDownCheck;
 
 	@Override
 	protected Pane setUpPane() {
@@ -38,13 +38,17 @@ public class PenColorPopUp extends PopUpScene{
 
 	@Override
 	protected String stageTitle() {
-		return new String("Choose Pen Color");
+		return "Choose Pen Color";
 	}
 	
 	private Label createLabel(String message) {
 		Label label = new Label(message);
 		label.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		return label;
+	}
+	
+	public void setPickerEvent() {
+		
 	}
 	
 }
