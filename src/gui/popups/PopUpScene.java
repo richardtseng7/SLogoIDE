@@ -1,4 +1,4 @@
-package gui;
+package gui.popups;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;

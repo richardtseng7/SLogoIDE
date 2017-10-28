@@ -11,67 +11,83 @@ import java.util.Collections;
  * 			Paul Lee
  */
 
-
-
 public class ExpressionTree {
-	private extendNode current;
 	private extendNode tree;
-	private extendNode last;
-	public ExpressionTree (ArrayList<String> input, ArrayList<String> symbol) {
-		int len = Collections.frequency(symbol, "Command");
-		int counter = 0;
+	public ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds) {
 		ArrayList<Integer> commIndexes = indexAll(symbol);
 		ArrayList<extendNode> extendNodeList = new ArrayList<extendNode>();
 		
-		tree = new extendNode(input.get(0));
+		tree = new extendNode(input.get(0), symbol.get(0));
 		
-		for(int i = 0 ; i<commIndexes.size(); i++){
+		for(int i = 0 ; i<input.size(); i++){
 			
-			extendNode newextendNode = new extendNode(input.get(commIndexes.get(i)));
+			extendNode newextendNode = new extendNode(input.get(i), symbol.get(i));
 			extendNodeList.add(newextendNode);
 			
 		}
-		
 		Factory comms;
-		
-		for(int i = 0; i<extendNodeList.size(); i++){
+		try{
+			for(int i = 0; i<extendNodeList.size(); i++){
+				
+				comms = new Factory(extendNodeList.get(i).getItem());
+				
+				int numArguments =  comms.getParameter();
+				if(numArguments == 3 || extendNodeList.get(i).getType() == "Conditional"){
+					extendNodeList.get(i).left = extendNodeList.get(i+1);
+					int outofbrackets = -1;
+					for(int j = i+2; j < extendNodeList.size(); j++){
+						if(layers.get(j) == layers.get(i)){
+							outofbrackets = j;
+							break;
+						}
+					}
+					if(outofbrackets != -1) { extendNodeList.get(i).left = extendNodeList.get(outofbrackets);}
+					
+					if(extendNodeList.get(i).getItem() != "IfElse"){
+						extendNodeList.get(i).setCond1(new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+					}
+					else{
+						extendNodeList.get(i).setCond1(
+								new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+						extendNodeList.get(i).setCond2(new ExpressionTree(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+								new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
+								new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets))));
+						
+					}
+				}
+				else if(numArguments == 1){
+					extendNodeList.get(i).left = extendNodeList.get(i+1); 
+				}
+				else if(numArguments == 2){
+					extendNodeList.get(i).left = extendNodeList.get(i+1);
+					extendNodeList.get(i).right = extendNodeList.get(i+2);
+				}
+			}
+		}
+		catch(Exception ex){
 			
-			comms = new Factory(extendNodeList.get(i).getItem());
-			
-			int numArguments =  comms.getParameter();
-			if(numArguments == 1){
-				extendNodeList.get(i).left = extendNodeList.get(i+1); 
-			}
-			else if(numArguments == 2){
-				extendNodeList.get(i).left = extendNodeList.get(i+1);
-				extendNodeList.get(i).right = extendNodeList.get(i+2);
-			}
-			else if(numArguments == 3){
-				//extendNodeList.get(i).left = extendNodeList
-			}
 		}
 	}
 	
-	private int nextIndex(int ind, ArrayList<String> ar){
-		if(ind == ar.size()) {return -1;}
-		for(int i = ind+1; i<ar.size(); i++){
-			if(ar.get(i) == "Command"){ return i;}
-		}
-		return -1;
+	public extendNode getHeader(){
+		return tree;
 	}
 	
 	private ArrayList<Integer> indexAll(ArrayList<String> symbol){
 		ArrayList<Integer> returnlist = new ArrayList<Integer>();
 		for(int i = 0; i<symbol.size(); i++){
-			if(symbol.get(i) == "Command"){
+			if(symbol.get(i) == "Command" || symbol.get(i) == "Conditional"){
 				returnlist.add(i);
 			}
 		}
 		return returnlist;
 	}
 	
-	private boolean isOperator(String s) {
-		if (s.equals("Command")) return true;
-		else return false;
-	}
 }

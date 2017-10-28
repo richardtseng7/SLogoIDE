@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 
 /**
@@ -16,6 +21,9 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
+	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction"};
+	private static final HashSet<String> cond = new HashSet<String>(Arrays.asList(conditional));
+	//private HashSet<String> otherSymbols;
 	
 	/*private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
 			"FORWARD", "FD", "BACK", "BK", "LEFT", "LT", "RIGHT", "RT",
@@ -29,13 +37,34 @@ public class SlogoParser {
 			));*/
 
 	
-	public SlogoParser () {
+	public SlogoParser (){
         mySymbols = new ArrayList<>();
         this.addPatterns("resources/languages/English");
         this.addPatterns("resources/languages/Syntax");
+        //this.addOtherSyntax("Symbol.txt");
         //add as many Patterns as needed/exist
     }
 	
+	
+	/*// add other syntax like "(" and ")"
+	private void addOtherSyntax(String fileName) {
+		try {
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String line = null;
+			while((line = bufferedReader.readLine()) != null) {
+				otherSymbols.add(line);
+			}
+			bufferedReader.close();
+		}
+		catch(FileNotFoundException ex) {
+			System.out.println("error in Slogo Parser"); 
+        }
+		catch(IOException ex) {
+			System.out.println("error in Slogo Parser"); 
+		}
+	}*/
+
 	public void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
@@ -55,11 +84,14 @@ public class SlogoParser {
 		if (match(text, constants)) {
 			return "Constant";
 		}
-		else if (match(text, commands)) {
-			return "Command";
-		}
 		else if (match(text, variables)) {
 			return "Variable";
+		}
+		else if (match(text, commands)) {
+			if (cond.contains(text)) {
+				return "Conditional";
+			}
+			else return "Command";
 		}
 		else return text;
     }
@@ -73,8 +105,9 @@ public class SlogoParser {
             if (match(text, e.getValue())) {
             		if (!(e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable")))
             			e.getKey();
+            		else return text;
             }
         }
-		return text;
+		return "error message";
 	}
 }
