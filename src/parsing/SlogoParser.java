@@ -72,7 +72,9 @@ public class SlogoParser {
         while (iter.hasMoreElements()) {
             String key = iter.nextElement();
             String regex = resources.getString(key);
-            myList.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+            System.out.println(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+            System.out.println(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+            //myList.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
 	
