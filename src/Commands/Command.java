@@ -29,5 +29,9 @@ public abstract class Command {
 		myParam.add(argValue);		
 	}
 	
+	public int getNumParam() {
+		return 0;
+	}
+	
 	public abstract double execute();
 }

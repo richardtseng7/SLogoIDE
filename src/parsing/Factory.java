@@ -41,11 +41,11 @@ public class Factory {
 		return null;
 	}
 
-	/*public Object getCommand() {
+	public Command getCommand() {
 		return theCommand;
 	}
 	
-	public void setParameter(int[] para) {
+	/*public void setParameter(int[] para) {
 		parameter = para;
 	}
 	
