@@ -1,6 +1,7 @@
 package Commands;
+import expression.Node;
 
-public class Cosine {
+public class Cosine extends Node {
 	public double execute(double in1){
 		return Math.cos(in1);
 	}
