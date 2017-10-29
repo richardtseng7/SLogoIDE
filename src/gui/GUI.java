@@ -30,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.scene.control.window.Window;
 
 import javax.swing.*;
 
@@ -56,6 +57,14 @@ public class GUI {
 	private ScrollPane inputScroll;
 	private ScrollPane historyScroll;
 	protected Button runButton;
+	
+	//Windows
+	private Window inputWindow;
+	private Window turtleInfoWindow;
+	private Window variablesWindow;
+	private Window methodsWindow;
+	private VBox centerBox;
+	private VBox rightBox;
 	
 	//Active Variables and Methods
 	private Node variableVBox;
@@ -116,7 +125,7 @@ public class GUI {
 		textInput.setWrapText(true);
 		inputScroll = new ScrollPane();
 		inputScroll.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
-		inputScroll.setPrefSize(CENTER_WIDTH,95);
+		inputScroll.setPrefSize(CENTER_WIDTH,85);
 		inputScroll.setContent(textInput);
 		inputHistory = new TextArea();
 		inputHistory.setPrefSize(CENTER_WIDTH, 195);
@@ -128,11 +137,22 @@ public class GUI {
 		historyScroll.setContent(inputHistory);
 		runButton = new Button("Run");
 		
+		
 		inputVBox = new VBox(5);
-		((VBox) inputVBox).getChildren().addAll(turtleInfo,historyScroll,inputScroll,runButton);
+		((VBox) inputVBox).getChildren().addAll(historyScroll,inputScroll,runButton);
+		inputWindow = new Window();
+		inputWindow.setPrefSize(CENTER_WIDTH, 285);
+		inputWindow.setResizableWindow(false);
+		inputWindow.getContentPane().getChildren().add(inputVBox);
+		turtleInfoWindow = new Window();
+		turtleInfoWindow.setResizableWindow(false);
+		turtleInfoWindow.setPrefSize(CENTER_WIDTH, 170);
+		turtleInfoWindow.getContentPane().getChildren().add(turtleInfo);
 		
+		centerBox = new VBox(5);
+		centerBox.getChildren().addAll(inputWindow,turtleInfoWindow);
 		
-		mainPane.setCenter(inputVBox);
+		mainPane.setCenter(centerBox);
 		BorderPane.setMargin(inputVBox, new Insets(20,10,0,10));
 		
 		variablesLabel = new Label("Active Variables:");
