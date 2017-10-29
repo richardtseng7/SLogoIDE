@@ -1,6 +1,7 @@
 package Commands;
+import expression.Node;
 
-public class Not {
+public class Not extends Node{
 	public boolean execute(double in1){
 		return in1 == 0;
 	}
