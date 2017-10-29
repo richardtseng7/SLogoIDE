@@ -35,5 +35,6 @@ public class LogicCenter {
 
 	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds) {
 		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+		tree.executeStarter();
 	}
 }
