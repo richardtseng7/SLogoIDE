@@ -14,7 +14,6 @@ public class Factory {
 	// for all commands, should take in 2 integers as parameters, okay not to use them
 	private int[] parameter = new int[2];
 	private static int numofpm = 0;
-	
 	public Factory(String type) {
 		theCommand = makeClass(type);
 	}
@@ -26,7 +25,7 @@ public class Factory {
 		Class<?> noparams[] = {};
 		
         try {
-        		Class<?> clazz = Class.forName("parsing.ExpressiontTree");
+        		Class<?> clazz = Class.forName("Commands." + type);
         		Constructor<?> ctor = clazz.getDeclaredConstructor(String.class);
             Object o = ctor.newInstance(type);
             method = clazz.getDeclaredMethod("execute", paramInt);
