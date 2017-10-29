@@ -21,6 +21,7 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols;
+	private List<Entry<String, Pattern>> myCommands;
 	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction"};
 	private static final HashSet<String> cond = new HashSet<String>(Arrays.asList(conditional));
 	//private HashSet<String> otherSymbols;
@@ -39,8 +40,8 @@ public class SlogoParser {
 	
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
-        this.addPatterns("resources/languages/English");
-        this.addPatterns("resources/languages/Syntax");
+        this.addPatterns(myCommands, "resources/languages/English");
+        this.addPatterns(mySymbols, "resources/languages/Syntax");
         //this.addOtherSyntax("Symbol.txt");
         //add as many Patterns as needed/exist
     }
@@ -65,13 +66,13 @@ public class SlogoParser {
 		}
 	}*/
 
-	public void addPatterns (String syntax) {
+	public void addPatterns (List<Entry<String, Pattern>> myList, String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
             String key = iter.nextElement();
             String regex = resources.getString(key);
-            mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+            myList.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
 	
