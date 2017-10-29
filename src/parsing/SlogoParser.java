@@ -20,8 +20,8 @@ import java.util.AbstractMap.SimpleEntry;
  */
 
 public class SlogoParser {
-	private List<Entry<String, Pattern>> mySymbols;
-	private List<Entry<String, Pattern>> myCommands;
+	private List<Entry<String, Pattern>> mySymbols = new ArrayList<Entry<String, Pattern>>();
+	private List<Entry<String, Pattern>> myCommands = new ArrayList<Entry<String, Pattern>>();
 	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction"};
 	private static final HashSet<String> cond = new HashSet<String>(Arrays.asList(conditional));
 	//private HashSet<String> otherSymbols;
