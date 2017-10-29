@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 // With a trained SlogoParser and user input, an InputReader gives an ArrayList of input strings in standardized slogo language
 public class InputReader {
-	private ArrayList<String> inputParsed;
+	private ArrayList<String> inputParsed = new ArrayList<String>();
 	//inputParsedSymbols translates all constants in inputParsed into "Constant" symbols
-	private ArrayList<String> inputParsedSymbols;
-	private ArrayList<Integer> bracketOrder;
-	private ArrayList<Integer> brackets;
-	private ArrayList<Boolean> indexWarning;
+	private ArrayList<String> inputParsedSymbols = new ArrayList<String>();
+	private ArrayList<Integer> bracketOrder = new ArrayList<Integer>();
+	private ArrayList<Integer> brackets = new ArrayList<Integer>();
+	private ArrayList<Boolean> indexWarning = new ArrayList<Boolean>();
 	
 	public InputReader (SlogoParser lang, String input) {
 		String WHITESPACE = "\\s+";
