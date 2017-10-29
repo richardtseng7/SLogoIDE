@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import Commands.Command;
+import model.commands.Command;
 
 /**
  * @author Peilin Lai
