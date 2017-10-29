@@ -19,6 +19,7 @@ public class Turtle {
 	private final int myID;
 	private double heading = 90;
 	private boolean showing = true;
+	private int shape = 0;
 	private Dimension2D canvasDimension;
 	private Pen myPen;
 	
@@ -46,11 +47,6 @@ public class Turtle {
 	    return heading;
 	}
 	
-	//returns 1 if turtle's pen is down, 0 if it is up
-	public int getPenDown() {
-		return penDown ? 1 : 0;
-	}
-
 	//returns 1 if turtle is showing, 0 if it is hiding
 	public int getShowing() {
 		return showing ? 1 : 0;
@@ -68,12 +64,16 @@ public class Turtle {
 		return myImageView;
 	}
 	
+	public Pen getPen(){
+		return myPen;
+	}
+	
 	public Point2D getPos() {
 		return myPos;
 	}	
 	
-	public Pen getPen() {
-		return myPen;
+	public int getShape(){
+		return shape;
 	}
 	
 	public void setHeading(double degrees){
@@ -99,5 +99,9 @@ public class Turtle {
 	
 	public void setPos(Point2D newPos) {
 		myPos = newPos;
+	}
+	
+	public void setShape(int index) {
+		shape = index;
 	}
 }

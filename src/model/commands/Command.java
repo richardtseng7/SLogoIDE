@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Queue;
 
 import logic.Parameter;
+import model.turtle.Turtle;
 
 
 /**
- * @author Peilin Lai
+ * @author Peilin Lai, richardtseng
  */
 
 public abstract class Command {
@@ -33,5 +34,5 @@ public abstract class Command {
 		return 0;
 	}
 	
-	public abstract double execute();
+	public abstract double execute(Turtle t);
 }
