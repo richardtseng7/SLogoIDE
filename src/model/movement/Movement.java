@@ -20,7 +20,7 @@ public abstract class Movement extends Node{
 	}
 	
 	@Override
-	protected int getNumParam() {
+	public int getNumParam() {
 		return 1;
 	}
 }

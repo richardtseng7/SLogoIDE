@@ -1,6 +1,8 @@
 package Commands;
 
-public class ArcTangent {
+import expression.Node;
+
+public class ArcTangent extends Node {
 	public double execute(double in1){
 		return Math.atan(in1);
 	}
