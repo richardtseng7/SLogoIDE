@@ -13,14 +13,14 @@ public class Executor extends ExpressionTree {
 		branchOut(treeOfNodes);
 	}
 	
-	private void executeFromTreeNode(extendNode current){
+	private void executeFromTreeNode(Node current){
 		Factory fact = new Factory(current.value);
 		fact.doExecution();
 		branchOut(current);
 		
 	}
 	
-	private void branchOut(extendNode current){
+	private void branchOut(Node current){
 		if(current.right != null) { executeFromTreeNode(current.right);}
 		if(current.left != null) { executeFromTreeNode(current.left);}
 	}

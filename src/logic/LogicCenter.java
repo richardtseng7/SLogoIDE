@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import parsing.InputReader;
 import parsing.SlogoParser;
+import expression.Executor;
 import expression.ExpressionTree;
 
 /**
@@ -26,13 +27,14 @@ public class LogicCenter {
 			System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
 			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
-			ArrayList<Integer> inputParsedBounds = reader.getInputParsedBounds();
+			ArrayList<Boolean> inputParsedBounds = reader.getInputParsedBounds();
 			System.out.println(inputParsedSymbols.toString());
 			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Integer> inputParsedBounds) {
-		ExpressionTree tree = new ExpressionTree(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds) {
+		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+		tree.executeStarter();
 	}
 }

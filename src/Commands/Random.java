@@ -1,6 +1,6 @@
 package Commands;
-
-public class Random {
+import expression.Node;
+public class Random extends Node{
 	public double execute(double in1){
 		return ThreadLocalRandom.current().nextDouble(0.0, in1);
 	}
