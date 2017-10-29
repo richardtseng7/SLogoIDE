@@ -16,9 +16,6 @@ public class Node extends Command {
 		left = right = null;
 		type = symbol;
 	}
-	protected int getNumParam() {
-		return 0;
-	}
 	
 	private Turtle myT;
 	private String mySymbol;

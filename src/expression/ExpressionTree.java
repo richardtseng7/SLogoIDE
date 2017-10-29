@@ -42,9 +42,8 @@ public abstract class ExpressionTree {
 
 	private void checkALandBuild(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i) {
-		Factory comms;
-		comms = new Factory(NodeList.get(i).getItem());
-		int numArguments =  comms.getParameter();
+		Factory comms = new Factory(NodeList.get(i).getItem());
+		int numArguments =  comms.getCommand().getNumParam();
 		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
 			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
 		}
