@@ -3,16 +3,17 @@ package expression;
 import model.turtle.Turtle;
 
 public class Node {
-	String value;
+	String value, type;
 	Node left, right;
 	
 	public Node() {
 		
 	}
 	
-	public Node(String item) {
+	public Node(String item, String symbol) {
 		value = item;
 		left = right = null;
+		type = symbol;
 	}
 	protected int getNumParam() {
 		return 0;
