@@ -1,6 +1,8 @@
 package Commands;
 
-public class And {
+import expression.Node;
+
+public class And extends Node{
 	public boolean execute(double in1, double in2){
 		return in1!=0 && in2!=0;
 	}
