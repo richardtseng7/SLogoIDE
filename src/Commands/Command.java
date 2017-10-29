@@ -3,6 +3,8 @@ package Commands;
 import java.util.List;
 import java.util.Queue;
 
+import logic.Parameter;
+
 
 /**
  * @author Peilin Lai
@@ -11,10 +13,8 @@ import java.util.Queue;
 public abstract class Command {
 	private List<String> myParam;
 	private Queue<String> myParamType;
-	private Parameter myParameter;
 	
-	public Command(Parameter parameter) {
-		myParameter = parameter;
+	public Command() {
 	}
 	
 	public Boolean needMoreParam() {
@@ -22,7 +22,7 @@ public abstract class Command {
 	}
 	
 	public String getNextParamType() {
-		return myArgType.poll();
+		return myParamType.poll();
 	}
 	
 	public void setNextParam(String argValue) {
