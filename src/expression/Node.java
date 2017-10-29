@@ -2,7 +2,7 @@ package expression;
 
 import model.turtle.Turtle;
 
-public abstract class Node {
+public class Node {
 	String value;
 	Node left, right;
 	
@@ -15,7 +15,10 @@ public abstract class Node {
 		left = right = null;
 	}
 	
-	protected abstract double execute(Turtle t);
+	protected double execute(Turtle t) {
+		return 0;
+	};
+	
 	protected int getNumParam() {
 		return 0;
 	}
