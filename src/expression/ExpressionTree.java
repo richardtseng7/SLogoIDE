@@ -14,7 +14,7 @@ import java.util.Collections;
 public abstract class ExpressionTree {
 	protected Node treeOfNodes;
 	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds) {
-		ArrayList<Integer> commIndexes = indexAll(symbol);
+		//ArrayList<Integer> commIndexes = indexAll(symbol);
 		ArrayList<Node> NodeList = new ArrayList<Node>();
 		
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
@@ -23,13 +23,13 @@ public abstract class ExpressionTree {
 			Node newNode = new Node(input.get(i), symbol.get(i));
 			NodeList.add(newNode);
 		}
-		Factory comms;
+		//Factory comms;
 		buildTree(input, symbol, layers, bracketBounds, NodeList);
 	}
 
 	private void buildTree(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList) {
-		Factory comms;
+		//Factory comms;
 		try{
 			for(int i = 0; i<NodeList.size(); i++){
 				checkALandBuild(input, symbol, layers, bracketBounds, NodeList, i);

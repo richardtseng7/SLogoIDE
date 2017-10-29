@@ -9,13 +9,13 @@ public class Executor extends ExpressionTree {
 	
 	public void executeStarter(){
 		Factory fact = new Factory(treeOfNodes.value);
-		fact.doExecution();
+		fact.getCommand().execute();
 		branchOut(treeOfNodes);
 	}
 	
 	private void executeFromTreeNode(Node current){
 		Factory fact = new Factory(current.value);
-		fact.doExecution();
+		fact.getCommand().execute();
 		branchOut(current);
 		
 	}
