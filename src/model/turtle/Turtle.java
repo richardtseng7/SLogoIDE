@@ -29,7 +29,6 @@ public class Turtle {
 		setHome();
 		setPos(home);
 		setImageView();
-		myPen = new Pen();
 	}
 		
 	//returns the turtle's X coordinate from the center of the screen
@@ -75,11 +74,11 @@ public class Turtle {
 	public int getShape(){
 		return shape;
 	}
-	
+
 	public void setHeading(double degrees){
 	    heading = degrees;
 	}
-	
+
 	public void setShowing(boolean bool) {
 		showing = bool;
 	}
