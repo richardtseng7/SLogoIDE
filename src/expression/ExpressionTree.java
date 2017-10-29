@@ -1,5 +1,5 @@
 package expression;
-import expression.extendNode;
+import expression.Node;
 import parsing.Factory;
 
 import java.util.ArrayList;
@@ -20,10 +20,8 @@ public abstract class ExpressionTree {
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
-			
 			Node newNode = new Node(input.get(i), symbol.get(i));
 			NodeList.add(newNode);
-			
 		}
 		Factory comms;
 		buildTree(input, symbol, layers, bracketBounds, NodeList);
@@ -43,59 +41,58 @@ public abstract class ExpressionTree {
 	}
 
 	private void checkALandBuild(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Boolean> bracketBounds, ArrayList<extendNode> extendNodeList, int i) {
+			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i) {
 		Factory comms;
-		comms = new Factory(extendNodeList.get(i).getItem());
+		comms = new Factory(NodeList.get(i).getItem());
 		int numArguments =  comms.getParameter();
-		if(numArguments == 3 || extendNodeList.get(i).getType() == "Conditional"){
-			ifConditional(input, symbol, layers, bracketBounds, extendNodeList, i);
-			extendNodeList.get(i).setConditional(input.get(i));
+		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
+			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
 		}
 		else if(numArguments == 1){
-			extendNodeList.get(i).left = extendNodeList.get(i+1); 
+			NodeList.get(i).left = NodeList.get(i+1); 
 		}
 		else if(numArguments == 2){
-			extendNodeList.get(i).left = extendNodeList.get(i+1);
-			extendNodeList.get(i).right = extendNodeList.get(i+2);
+			NodeList.get(i).left = NodeList.get(i+1);
+			NodeList.get(i).right = NodeList.get(i+2);
 		}
 	}
 
 	private void ifConditional(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Boolean> bracketBounds, ArrayList<extendNode> extendNodeList, int i) {
-		extendNodeList.get(i).left = extendNodeList.get(i+1);
+			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i) {
+		NodeList.get(i).left = NodeList.get(i+1);
 		int outofbrackets = -1;
-		outofbrackets = buildNodeList(layers, extendNodeList, i, outofbrackets);
-		if(outofbrackets != -1) { extendNodeList.get(i).left = extendNodeList.get(outofbrackets);}
+		outofbrackets = buildNodeList(layers, NodeList, i, outofbrackets);
+		if(outofbrackets != -1) { NodeList.get(i).left = NodeList.get(outofbrackets);}
 		
-		if(extendNodeList.get(i).getItem() != "IfElse"){
-			oneCond(input, symbol, layers, bracketBounds, extendNodeList, i, outofbrackets);
+		if(NodeList.get(i).getItem() != "IfElse"){
+			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
 		}
 		else{
-			twoCond(input, symbol, layers, bracketBounds, extendNodeList, i, outofbrackets);
+			twoCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
 					
 		}
 	}
 
 	private void twoCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Boolean> bracketBounds, ArrayList<extendNode> extendNodeList, int i, int outofbrackets) {
-		oneCond(input, symbol, layers, bracketBounds, extendNodeList, i, outofbrackets);
-		extendNodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i, int outofbrackets) {
+		oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
+		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
 				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
 				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
 				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets))));
 	}
 
 	private void oneCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Boolean> bracketBounds, ArrayList<extendNode> extendNodeList, int i, int outofbrackets) {
-		extendNodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
+			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i, int outofbrackets) {
+		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
 				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
 				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
 				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets))));
 	}
 
-	private int buildNodeList(ArrayList<Integer> layers, ArrayList<extendNode> extendNodeList, int i,
+	private int buildNodeList(ArrayList<Integer> layers, ArrayList<Node> NodeList, int i,
 			int outofbrackets) {
-		for(int j = i+2; j < extendNodeList.size(); j++){
+		for(int j = i+2; j < NodeList.size(); j++){
 			if(layers.get(j) == layers.get(i)){
 				outofbrackets = j;
 				break;
@@ -105,7 +102,7 @@ public abstract class ExpressionTree {
 	}
 	
 	/*
-	public extendNode getHeader(){
+	public Node getHeader(){
 		return tree;
 	}
 	*/
