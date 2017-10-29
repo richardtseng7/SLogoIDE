@@ -19,8 +19,8 @@ public class Turtle {
 	private final int myID;
 	private double heading = 90;
 	private boolean showing = true;
+	private boolean penDown = true;
 	private Dimension2D canvasDimension;
-	private Pen myPen;
 	
 	public Turtle(int ID, Dimension2D canvas) {
 		myID = ID;
@@ -28,7 +28,6 @@ public class Turtle {
 		setHome();
 		setPos(home);
 		setImageView();
-		myPen = new Pen();
 	}
 		
 	//returns the turtle's X coordinate from the center of the screen
@@ -72,14 +71,14 @@ public class Turtle {
 		return myPos;
 	}	
 	
-	public Pen getPen() {
-		return myPen;
-	}
-	
 	public void setHeading(double degrees){
 	    heading = degrees;
 	}
 	
+	public void setPen(boolean bool) {
+		penDown = bool;
+	}
+
 	public void setShowing(boolean bool) {
 		showing = bool;
 	}
