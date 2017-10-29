@@ -1,6 +1,6 @@
 package expression;
 
-import Commands.Command;
+import model.commands.Command;
 import model.turtle.Turtle;
 
 public class Node extends Command {
