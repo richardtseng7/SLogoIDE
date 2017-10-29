@@ -105,15 +105,7 @@ public class SlogoParser {
 		for (Entry<String, Pattern> e : mySymbols) {
             if (match(text, e.getValue())) {
             		if (!(e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable")))
-            			return e.getKey();
-            		else if (e.getKey().equalsIgnoreCase("Command")) {
-            			for (Entry<String, Pattern> c : myCommands)  {
-            				if (match(text, c.getValue())) {
-            					return e.getKey();
-            				}
-            			}
-            			return "Unrecognizable command";
-            		}
+            			e.getKey();
             		else return text;
             }
         }
