@@ -1,8 +1,9 @@
 package expression;
 
+import Commands.Command;
 import model.turtle.Turtle;
 
-public class Node {
+public class Node extends Command {
 	String value, type;
 	Node left, right;
 	
@@ -23,16 +24,6 @@ public class Node {
 	private String mySymbol;
 	private Executor c1, c2;
 	
-	public double execute(Turtle t){
-		return 0;
-	}
-	
-	public void setTurtle(Turtle t){
-		myT = t;
-	}
-	
-	
-	
 	public String getItem(){
 		return value;
 	}
@@ -46,6 +37,12 @@ public class Node {
 	
 	public void setCond2(Executor e){
 		c2 = e;
+	}
+
+	@Override
+	public double execute() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
