@@ -1,6 +1,6 @@
 package Commands;
-
-public class NaturalLog {
+import expression.Node;
+public class NaturalLog extends Node{
 	public double execute(double in1){
 		return Math.log(in1);
 	}

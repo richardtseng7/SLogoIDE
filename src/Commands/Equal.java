@@ -1,6 +1,6 @@
 package Commands;
-
-public class Equal {
+import expression.Node;
+public class Equal extends Node {
 	public boolean execute(double in1, double in2){
 		return in1==in2;
 	}

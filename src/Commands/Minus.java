@@ -1,6 +1,6 @@
 package Commands;
-
-public class Minus {
+import expression.Node;
+public class Minus extends Node{
 	public double execute(double in1){
 		return -in1;
 	}
