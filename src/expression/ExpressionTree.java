@@ -12,29 +12,29 @@ import java.util.Collections;
  */
 
 public abstract class ExpressionTree {
-	protected extendNode treeOfNodes;
+	protected Node treeOfNodes;
 	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds) {
 		ArrayList<Integer> commIndexes = indexAll(symbol);
-		ArrayList<extendNode> extendNodeList = new ArrayList<extendNode>();
+		ArrayList<Node> NodeList = new ArrayList<Node>();
 		
-		treeOfNodes = new extendNode(input.get(0), symbol.get(0));
+		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
 			
-			extendNode newextendNode = new extendNode(input.get(i), symbol.get(i));
-			extendNodeList.add(newextendNode);
+			Node newNode = new Node(input.get(i), symbol.get(i));
+			NodeList.add(newNode);
 			
 		}
 		Factory comms;
-		buildTree(input, symbol, layers, bracketBounds, extendNodeList);
+		buildTree(input, symbol, layers, bracketBounds, NodeList);
 	}
 
 	private void buildTree(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Boolean> bracketBounds, ArrayList<extendNode> extendNodeList) {
+			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList) {
 		Factory comms;
 		try{
-			for(int i = 0; i<extendNodeList.size(); i++){
-				checkALandBuild(input, symbol, layers, bracketBounds, extendNodeList, i);
+			for(int i = 0; i<NodeList.size(); i++){
+				checkALandBuild(input, symbol, layers, bracketBounds, NodeList, i);
 			}
 		}
 		catch(Exception ex){
