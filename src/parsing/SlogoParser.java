@@ -2,11 +2,14 @@ package parsing;
 
 import java.util.regex.Pattern;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,32 +24,34 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols = new ArrayList<Entry<String, Pattern>>();
-	private List<Entry<String, Pattern>> myCommands = new ArrayList<Entry<String, Pattern>>();
+	private Map<String, String> myCommands = new TreeMap<String, String>();
 	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction"};
 	private static final HashSet<String> cond = new HashSet<String>(Arrays.asList(conditional));
-	//private HashSet<String> otherSymbols;
-	
-	/*private ArrayList<String> comms = new ArrayList<String>(Arrays.asList(
-			"FORWARD", "FD", "BACK", "BK", "LEFT", "LT", "RIGHT", "RT",
-			"SETHEADING", "SETH", "TOWARDS", "SETXY", "GOTO", "PENDOWN", "PD",
-			"PENUP", "PU", "SHOWTURTLE", "ST", "HIDETURTLE", "HT", "HOME", "CLEARSCREEN",
-			"CS", "XCOR", "YCOR", "HEADING", "PENDOWN?", "PENDOWNP", "SHOWING?", "SHOWINGP",
-			"SUM", "DIFFERENCE", "PRODUCT", "QUOTIENT", "REMAINDER", "MINUS", "RANDOM",
-			"SIN", "COS", "TAN", "ATAN", "LOG", "POW", "PI", "LESS?", "LESSP","GREATER?","GREATERP",
-			"EQUAL?","EQUALP","NOTEQUAL?","NOTEQUALP", "AND", "OR", "NOT","MAKE","SET",
-			"REPEAT", "DOTIMES","FOR", "FOR", "IF", "IFELSE", "TO"
-			));*/
-
-	
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
-        this.addPatterns(myCommands, "resources/languages/English");
-        this.addPatterns(mySymbols, "resources/languages/Syntax");
+        myCommands.putAll(createLanguageMap("resources/languages/English"));
+        this.addPatterns("resources/languages/Syntax");
         //this.addOtherSyntax("Symbol.txt");
         //add as many Patterns as needed/exist
     }
 	
 	
+	private Map<String, String> createLanguageMap(String string) {
+		HashMap<String, String> langMap = new HashMap<String, String>();
+		ResourceBundle resources = ResourceBundle.getBundle(string);
+		for (String key : resources.keySet()) {
+			if (resources.getString(key).contains("|")) {
+				String[] allTrans = resources.getString(key).split("\\|");
+				for (String indiTrans : allTrans) {
+					langMap.put(indiTrans.trim(), key);
+				}
+			}
+			else langMap.put(resources.getString(key).trim(), key);
+		}
+		return langMap;
+	}
+
+
 	/*// add other syntax like "(" and ")"
 	private void addOtherSyntax(String fileName) {
 		try {
@@ -66,15 +71,15 @@ public class SlogoParser {
 		}
 	}*/
 
-	public void addPatterns (List<Entry<String, Pattern>> myList, String syntax) {
+	private void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
             String key = iter.nextElement();
             String regex = resources.getString(key);
-            //System.out.println(key);
+            //System.out.println(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
             //System.out.println(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
-            myList.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+            mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
 	
@@ -109,8 +114,8 @@ public class SlogoParser {
             		if (!(e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable")))
             			return e.getKey();
             		else if (e.getKey().equalsIgnoreCase("Command")) {
-            			for (Entry<String, Pattern> c : myCommands)  {
-            				if (match(text, c.getValue())) {
+            			for (String c : myCommands.keySet())  {
+            				if (text.equals(c)) {
             					return e.getKey();
             				}
             			}
