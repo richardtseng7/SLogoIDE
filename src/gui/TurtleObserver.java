@@ -30,12 +30,17 @@ public class TurtleObserver implements Observer {
 			Turtle t = turtleModel.getTurtle(1);
 			Pen p = t.getPen();
 			if (p.getPenDown()) {
-				Line l = new Line(t.getOldPos().getX(), t.getOldPos().getY(), ((Point2D) arg).getX(), ((Point2D) arg).getY());
+				double offsetX = t.getImageView().getLayoutBounds().getWidth()/2;
+				double offsetY = t.getImageView().getLayoutBounds().getHeight()/2;
+				double oldPosX = t.getOldPos().getX() + offsetX;
+				double oldPosY = t.getOldPos().getY() + offsetY;
+				Line l = new Line(oldPosX, oldPosY, ((Point2D) arg).getX() + offsetX, ((Point2D) arg).getY() + offsetY);
 				l.setStrokeWidth(p.getPenSize());
 				l.setFill(p.getColor());
 				canvasPane.getChildren().add(l);
 				p.addLine(l);
 			}
+			t.getImageView().toFront();
 			t.getImageView().setX(((Point2D) arg).getX());
 			t.getImageView().setY(((Point2D) arg).getY());
 	}
