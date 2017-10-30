@@ -6,20 +6,20 @@ import javafx.geometry.Point2D;
 
 public class PositionObservable extends Observable {
 	
-	private Point2D myPos;
+	private Point2D pos;
 	
-	public PositionObservable(Point2D pos) {
-		myPos = pos;
+	public PositionObservable(Point2D newPos) {
+		pos = newPos;
 	}
 	
-	public void setValue(Point2D pos) {
-		myPos.add(pos.getX() - myPos.getX(), pos.getY() - myPos.getY());
+	public void setValue(Point2D newPos) {
+		pos = newPos;
 		setChanged();
-		notifyObservers();
+		notifyObservers(pos);
 	}
 	
 	public Point2D getValue() {
-		return myPos;
+		return pos;
 	}
 }
 
