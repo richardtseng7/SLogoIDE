@@ -2,6 +2,7 @@ package expression;
 import expression.Node;
 import parsing.Factory;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,10 +34,6 @@ public abstract class ExpressionTree {
 	private void buildTree(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList) {
 		//Factory comms;
-		System.out.println(input.toString());
-		System.out.println(symbol.toString());
-		System.out.println(layers.toString());
-		System.out.println(bracketBounds.toString());
 		try{
 			for(int i = 0; i<NodeList.size(); i++){
 				checkALandBuild(input, symbol, layers, bracketBounds, NodeList, i);
@@ -49,22 +46,31 @@ public abstract class ExpressionTree {
 
 	private void checkALandBuild(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList, int i) {
-		Factory comms = new Factory(NodeList.get(i).getItem());
-		int numArguments =  comms.getCommand().getNumParam();
+		int numArguments =0;
+		if(symbol.get(i).equals("Command")){
+			Factory comms = new Factory(NodeList.get(i).getItem());
+			numArguments =  comms.numComs();
+		}
+		
 		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
-			System.out.println("3");
+			//System.out.println("3");
 			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
 		}
 		else if(numArguments == 1){
-			System.out.println("1");
-			NodeList.get(i).left = NodeList.get(i+1); 
+			//System.out.println(NodeList.get(i).value);
+			//System.out.println(NodeList.get(i+1).value);
+			
+			NodeList.get(i).left = NodeList.get(i+1);
+			System.out.println(NodeList.get(i).left.value);
 		}
 		else if(numArguments == 2){
-			System.out.println("2");
+			//System.out.println("2");
 			NodeList.get(i).left = NodeList.get(i+1);
 			NodeList.get(i).right = NodeList.get(i+2);
 		}
-		else{System.out.println("HERE");}
+		else{
+			//System.out.println("HERE");
+		}
 	}
 
 	private void ifConditional(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,

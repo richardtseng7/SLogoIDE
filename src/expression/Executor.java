@@ -8,9 +8,10 @@ public class Executor extends ExpressionTree {
 	}
 	
 	public void executeStarter(){
-		for(int i = 0; i < NodeList.size(); i++){ System.out.println(NodeList.get(i).value);}
-		//System.out.println(treeOfNodes.right.value);
+		//for(int i = 0; i < NodeList.size(); i++){ System.out.println(NodeList.get(i).value);}
+		//System.out.println(NodeList.get(0).left.value);
 		Factory fact = new Factory(treeOfNodes.value);
+		fact.setArgs({0,0});
 		branchOut(treeOfNodes);
 	}
 	
@@ -22,7 +23,7 @@ public class Executor extends ExpressionTree {
 	}
 	
 	private void branchOut(Node current){
-		if(current.right != null) { executeFromTreeNode(current.right);}
-		if(current.left != null) { executeFromTreeNode(current.left);}
+		//if(current.right != null) { executeFromTreeNode(current.right);}
+		//if(current.left != null) { executeFromTreeNode(current.left);}
 	}
 }

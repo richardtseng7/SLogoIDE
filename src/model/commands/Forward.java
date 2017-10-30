@@ -15,4 +15,8 @@ public class Forward extends Movement{
 		addmyParamType();
 		return move(t, 1);
 	}
+	@Override
+	public int getNumParam() {
+		return 1;
+	}
 }
