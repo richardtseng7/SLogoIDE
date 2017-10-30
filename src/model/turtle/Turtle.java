@@ -16,11 +16,11 @@ import model.ObjectObservable;
 public class Turtle {
 	
 	private ImageView myImageView;
+	//private ObjectObservable myImageView;
 	private static final String IMAGE1 = "Turtle_Slogo.png";
 	private static final String IMAGE2 = "Turtle 2.png";
 	private static final String IMAGE3 = "Turtle 3.png";
 	private Map<Integer, String> turtleImages;
-	
 	private static final int TURTLE_SIZE = 30;
 	private Point2D oldPos;
 	private Point2D myPos;
