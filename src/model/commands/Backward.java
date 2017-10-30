@@ -4,7 +4,7 @@ import model.turtle.Turtle;
 
 /**
  * @author richardtseng
- *
+ *		Paul Lee
  */
 public class Backward extends Movement{
 	@Override

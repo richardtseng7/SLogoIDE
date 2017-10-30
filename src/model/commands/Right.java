@@ -4,11 +4,20 @@ import model.turtle.Turtle;
 
 /**
  * @author richardtseng
- *
+ *		Paul Lee
  */
 public class Right extends Turn{
 	@Override
+	public double execute(Turtle t, double degrees) {
+		return turn(t, -degrees);
+	}
+	@Override
+	public int getNumParam() {
+		return 1;
+	}
+	@Override
 	public double execute(Turtle t) {
-		return turn(t, -1);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
