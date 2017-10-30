@@ -6,6 +6,7 @@ import parsing.InputReader;
 import parsing.SlogoParser;
 import expression.Executor;
 import expression.ExpressionTree;
+import model.Model;
 import model.turtle.Turtle;
 
 /**
@@ -20,7 +21,7 @@ public class LogicCenter {
 		lang = new SlogoParser();
 	}
 
-	public void doInstructions(String input, Turtle t) {
+	public void doInstructions(String input, Model t) {
 		//first parse instructions
 		InputReader reader = new InputReader(lang, input);
 		ArrayList<String> inputParsed = reader.getInputParsed();
@@ -34,8 +35,11 @@ public class LogicCenter {
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds, Turtle t) {
-		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
-		tree.executeStarter();
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds, Model mod) {
+		for (int i = 0; i<mod.getActiveTurtles().size(); i++) {
+			Turtle t = mod.getActiveTurtles().get(i);
+			Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
+			tree.executeStarter();
+		}
 	}
 }
