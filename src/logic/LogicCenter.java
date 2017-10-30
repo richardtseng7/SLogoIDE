@@ -29,7 +29,7 @@ public class LogicCenter {
 			//System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
 			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
-			ArrayList<Boolean> inputParsedBounds = reader.getInputParsedBounds();
+			ArrayList<Integer> inputParsedBounds = reader.getInputParsedBounds();
 			//System.out.println(inputParsedSymbols.toString());
 			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
 		}
