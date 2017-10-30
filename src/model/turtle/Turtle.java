@@ -44,13 +44,13 @@ public class Turtle {
 		
 	//returns the turtle's X coordinate from the center of the screen
 	public double getXCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth();
+		return canvasDimension.getHeight() - ((Point2D) myPos.getValue()).getX();
 		//return myPos.getX() - canvasDimension.getWidth();
 	}
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getHeight();
+		return canvasDimension.getHeight() - ((Point2D) myPos.getValue()).getY();
 		//return myPos.getY() - canvasDimension.getHeight();
 	}
 	

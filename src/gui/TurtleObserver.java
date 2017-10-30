@@ -17,12 +17,8 @@ public class TurtleObserver implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof Point2D) {
-			
-			//System.out.println(((Point2D) arg).getY());
 			turtleModel.getTurtle(1).getImageView().setX(((Point2D) arg).getX());
 			turtleModel.getTurtle(1).getImageView().setY(((Point2D) arg).getY());
-		}
 	}
 
 }
