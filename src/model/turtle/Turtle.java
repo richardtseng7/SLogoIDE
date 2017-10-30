@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.ObjectObservable;
+import model.PositionObservable;
 
 /**
  * @author richardtseng
@@ -24,10 +25,10 @@ public class Turtle {
 	private static final int TURTLE_SIZE = 30;
 	private Point2D oldPos;
 	//private Point2D myPos;
-	private ObjectObservable myPos;
+	private PositionObservable myPos;
 	private Point2D home;
 	private final int myID;
-	private ObjectObservable heading = new ObjectObservable(90);
+	private ObjectObservable heading = new ObjectObservable(90.0);
 	private ObjectObservable showing = new ObjectObservable(true);
 	private int shape = 0;
 	private Dimension2D canvasDimension;
@@ -55,6 +56,7 @@ public class Turtle {
 	
 	//returns the turtle's heading in degrees
 	public double getHeading(){
+		
 	    return (double) heading.getValue();
 	}
 	
@@ -83,7 +85,7 @@ public class Turtle {
 		return oldPos;
 	}
 	
-	public ObjectObservable getPosObservable() {
+	public PositionObservable getPosObservable() {
 		return myPos;
 	}
 	
@@ -107,7 +109,7 @@ public class Turtle {
 	private void setHome() {
 		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
 		oldPos = home;
-		myPos = new ObjectObservable(home);
+		myPos = new PositionObservable(home);
 		//myPos = home;
 	}
 	

@@ -50,6 +50,7 @@ public class Factory {
             Method myMethod = cls.getDeclaredMethod("execute", params);
             Object val = myMethod.invoke(_instance, args);
             
+            System.out.println(val.toString() + " = val");
         	return val;
         } catch (Exception e) {
             e.printStackTrace();
