@@ -1,12 +1,16 @@
 package model.commands;
 
 import model.turtle.Turtle;
+
+import java.util.Queue;
+
 import javafx.geometry.Point2D;
 /**
  * @author richardtseng
  *	
  */
 public abstract class Movement extends Command{
+	
 	protected double move(Turtle t, int direction) {
 		int pixels = 0;
 		Point2D oldPos = t.getPos();
@@ -18,6 +22,10 @@ public abstract class Movement extends Command{
 		return pixels;
 	}
 	
+	@Override
+	public void addmyParamType() {
+		myParamType.add("Double");
+	}
 	@Override
 	public int getNumParam() {
 		return 1;
