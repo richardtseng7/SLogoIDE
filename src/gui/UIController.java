@@ -51,9 +51,10 @@ public class UIController implements Observer {
 		gui = new GUI();
 		
 		m = new Model(gui.canvasDimension);
+		m.addTurtle();
+		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());
 		for (int i = 0; i < 1; i++) {
-			m.addTurtle();
-			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
+
 		}
 
 		lc = new LogicCenter();
@@ -96,7 +97,7 @@ public class UIController implements Observer {
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			//lc.doInstructions(input);
+			lc.doInstructions(input);
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();

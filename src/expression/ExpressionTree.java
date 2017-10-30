@@ -13,10 +13,13 @@ import java.util.Collections;
 
 public abstract class ExpressionTree {
 	protected Node treeOfNodes;
+	protected ArrayList<Node> NodeList;
 	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds) {
 		//ArrayList<Integer> commIndexes = indexAll(symbol);
-		ArrayList<Node> NodeList = new ArrayList<Node>();
+		NodeList = new ArrayList<Node>();
 		
+		//System.out.println(input.get(0));
+		//System.out.println(symbol.get(0));
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
@@ -30,13 +33,17 @@ public abstract class ExpressionTree {
 	private void buildTree(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Boolean> bracketBounds, ArrayList<Node> NodeList) {
 		//Factory comms;
+		System.out.println(input.toString());
+		System.out.println(symbol.toString());
+		System.out.println(layers.toString());
+		System.out.println(bracketBounds.toString());
 		try{
 			for(int i = 0; i<NodeList.size(); i++){
 				checkALandBuild(input, symbol, layers, bracketBounds, NodeList, i);
 			}
 		}
 		catch(Exception ex){
-			//instantiate GUI popup
+			ex.printStackTrace();
 		}
 	}
 
@@ -45,15 +52,19 @@ public abstract class ExpressionTree {
 		Factory comms = new Factory(NodeList.get(i).getItem());
 		int numArguments =  comms.getCommand().getNumParam();
 		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
+			System.out.println("3");
 			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
 		}
 		else if(numArguments == 1){
+			System.out.println("1");
 			NodeList.get(i).left = NodeList.get(i+1); 
 		}
 		else if(numArguments == 2){
+			System.out.println("2");
 			NodeList.get(i).left = NodeList.get(i+1);
 			NodeList.get(i).right = NodeList.get(i+2);
 		}
+		else{System.out.println("HERE");}
 	}
 
 	private void ifConditional(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,

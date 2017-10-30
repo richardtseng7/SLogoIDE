@@ -8,14 +8,15 @@ public class Executor extends ExpressionTree {
 	}
 	
 	public void executeStarter(){
+		for(int i = 0; i < NodeList.size(); i++){ System.out.println(NodeList.get(i).value);}
+		//System.out.println(treeOfNodes.right.value);
 		Factory fact = new Factory(treeOfNodes.value);
-		fact.getCommand().execute();
 		branchOut(treeOfNodes);
 	}
 	
 	private void executeFromTreeNode(Node current){
+		//System.out.println(current.value);
 		Factory fact = new Factory(current.value);
-		fact.getCommand().execute();
 		branchOut(current);
 		
 	}

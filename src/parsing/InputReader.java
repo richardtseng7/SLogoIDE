@@ -32,6 +32,7 @@ public class InputReader {
             if (s.trim().length() > 0) {
             		//translate user input to standardized language for slogo and store in an arraylist
             		String translation = lang.getTranslation(s);
+            		//System.out.println(translation);
             		inputParsed.add(translation);
             		inputParsedSymbols.add(lang.getSymbol(translation));
             }
