@@ -1,5 +1,8 @@
 package model.turtle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -13,7 +16,11 @@ import model.ObjectObservable;
 public class Turtle {
 	
 	private ImageView myImageView;
-	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
+	private static final String IMAGE1 = "Turtle_Slogo.png";
+	private static final String IMAGE2 = "Turtle 2.png";
+	private static final String IMAGE3 = "Turtle 3.png";
+	private Map<Integer, String> turtleImages;
+	
 	private static final int TURTLE_SIZE = 30;
 	private Point2D oldPos;
 	private ObjectObservable myPos;
@@ -29,7 +36,7 @@ public class Turtle {
 		myID = ID;
 		canvasDimension = canvas;
 		setHome();		
-		setImageView();
+		initializeImageView();
 		myPen = new Pen();
 	}
 		
@@ -95,13 +102,23 @@ public class Turtle {
 		myPos.setValue(home);
 	}
 	
-	private void setImageView() {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
+	private void initializeImageView() {
+		turtleImages = new HashMap<>();
+		turtleImages.put(1, IMAGE1);
+		turtleImages.put(2, IMAGE2);
+		turtleImages.put(3, IMAGE3);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
 		myImageView = new ImageView(image);
 		myImageView.setFitHeight(TURTLE_SIZE);
 		myImageView.setFitWidth(TURTLE_SIZE);
 		myImageView.setX(home.getX());
 		myImageView.setY(home.getY());
+	}
+	
+	private int setImageView(int index) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
+		myImageView.setImage(image);
+		return index;
 	}
 	
 	public void setPos(Point2D newPos) {
