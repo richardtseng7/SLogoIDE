@@ -1,7 +1,11 @@
 package model.commands;
 import expression.Node;
+import model.turtle.Turtle;
+/**
+ * @author Paul Lee
+ */
 public class Sine extends Node{
-	public double execute(double in1){
+	public double execute(Turtle t, double in1){
 		return Math.sin(in1);
 	}
 	@Override

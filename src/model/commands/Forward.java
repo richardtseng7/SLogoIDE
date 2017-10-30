@@ -6,7 +6,7 @@ import model.turtle.Turtle;
 
 /**
  * @author richardtseng
- *
+ *		Paul Lee
  */
 public class Forward extends Movement{
 	
