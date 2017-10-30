@@ -5,7 +5,7 @@ import model.turtle.Turtle;
 
 public class Node extends Command {
 	String value, type;
-	Node left, right;
+	Node left, right, prev;
 	
 	public Node() {
 		
@@ -13,7 +13,7 @@ public class Node extends Command {
 	
 	public Node(String item, String symbol) {
 		value = item;
-		left = right = null;
+		left = right = prev = null;
 		type = symbol;
 	}
 	

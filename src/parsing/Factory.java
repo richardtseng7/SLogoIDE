@@ -19,11 +19,11 @@ public class Factory {
 
 	}
 	
-	public void setArgs(Object[] args){
-		theCommand = makeClass(myType, args);
+	public Object setArgs(Object[] args){
+		return doClass(myType, args);
 	}
 	
-	private static Command makeClass(String type, Object[] args) {
+	private Object doClass(String type, Object[] args) {
         try {
             Class<?> params[] = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
@@ -47,9 +47,9 @@ public class Factory {
             Object _instance = cls.newInstance();
            
             Method myMethod = cls.getDeclaredMethod("execute", params);
-            myMethod.invoke(_instance, args);
+            Object val = myMethod.invoke(_instance, args);
             
-        	return null;
+        	return val;
         } catch (Exception e) {
             e.printStackTrace();
             // return some sort of error
