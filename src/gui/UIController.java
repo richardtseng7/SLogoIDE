@@ -60,7 +60,7 @@ public class UIController {
 		lc = new LogicCenter();
 		
 		turtleObs = new TurtleObserver(m);
-		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
+		m.getTurtle(1).getObjectObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);

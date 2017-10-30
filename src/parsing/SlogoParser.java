@@ -30,13 +30,7 @@ public class SlogoParser {
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
         myCommands.putAll(createLanguageMap("resources/languages/English"));
-        //System.out.println(myCommands);
-        //this.addPatterns("resources/languages/Syntax");
-        //this.addOtherSyntax("Symbol.txt");
-        //add as many Patterns as needed/exist
-        for(int i = 0 ; i < myCommands.size(); i++){
-        	
-        }
+        //System.out.println(myCommands.toString());
     }
 	
 	
@@ -50,46 +44,16 @@ public class SlogoParser {
 				String[] allTrans = resources.getString(key).split("\\|");
 				for (String indiTrans : allTrans) {
 					//System.out.println(indiTrans);
-					langMap.put(indiTrans.trim(), key);
+					String s = indiTrans.trim();
+					s = s.replaceAll("\\\\", "");
+					s = s.replaceAll("\\?", "");
+					langMap.put(s, key);
 				}
 			}
 			else langMap.put(resources.getString(key).trim(), key);
 		}
 		return langMap;
 	}
-
-
-	/*// add other syntax like "(" and ")"
-	private void addOtherSyntax(String fileName) {
-		try {
-			FileReader fileReader = new FileReader(fileName);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			String line = null;
-			while((line = bufferedReader.readLine()) != null) {
-				otherSymbols.add(line);
-			}
-			bufferedReader.close();
-		}
-		catch(FileNotFoundException ex) {
-			System.out.println("error in Slogo Parser"); 
-        }
-		catch(IOException ex) {
-			System.out.println("error in Slogo Parser"); 
-		}
-	}*/
-
-	private void addPatterns (String syntax) {
-        ResourceBundle resources = ResourceBundle.getBundle(syntax);
-        Enumeration<String> iter = resources.getKeys();
-        while (iter.hasMoreElements()) {
-            String key = iter.nextElement();
-            
-            String regex = resources.getString(key);
-            //System.out.println(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
-            //System.out.println(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
-            mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
-        }
-    }
 	
 	public String getSymbol (String text) {
         //for (Entry<String, Pattern> e : mySymbols) {
@@ -118,8 +82,6 @@ public class SlogoParser {
     }
 
 	public String getTranslation(String text) {
-		//System.out.println(myCommands.toString());
-		//System.out.println(mySymbols.toString());
 		ArrayList<Entry<String, String>> commandList = new ArrayList<Entry<String,String>>();
 		for(String s: myCommands.keySet()){
 			commandList.add(new SimpleEntry<String, String>(s, myCommands.get(s)));
