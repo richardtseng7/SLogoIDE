@@ -1,5 +1,6 @@
 package expression;
 import expression.Node;
+import model.turtle.Turtle;
 import parsing.Factory;
 
 import java.lang.reflect.Method;
@@ -15,15 +16,18 @@ import java.util.Collections;
 public abstract class ExpressionTree {
 	protected Node treeOfNodes;
 	protected ArrayList<Node> NodeList;
-	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds) {
+	protected Turtle myTurtle;
+	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds,Turtle t) {
 		//ArrayList<Integer> commIndexes = indexAll(symbol);
 		NodeList = new ArrayList<Node>();
+		myTurtle = t;
 		
 		//System.out.println(input.get(0));
 		//System.out.println(symbol.get(0));
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
+
 			Node newNode = new Node(input.get(i), symbol.get(i));
 			NodeList.add(newNode);
 		}
@@ -61,12 +65,14 @@ public abstract class ExpressionTree {
 			//System.out.println(NodeList.get(i+1).value);
 			
 			NodeList.get(i).left = NodeList.get(i+1);
-			System.out.println(NodeList.get(i).left.value);
+			NodeList.get(i+1).prev = NodeList.get(i);
 		}
 		else if(numArguments == 2){
 			//System.out.println("2");
 			NodeList.get(i).left = NodeList.get(i+1);
+			NodeList.get(i+1).prev = NodeList.get(i);
 			NodeList.get(i).right = NodeList.get(i+2);
+			NodeList.get(i+2).prev = NodeList.get(i);
 		}
 		else{
 			//System.out.println("HERE");
@@ -95,7 +101,7 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
 				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
 				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
-				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets))));
+				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets)), myTurtle));
 	}
 
 	private void oneCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
@@ -103,7 +109,7 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
 				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
 				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
-				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets))));
+				new ArrayList<Boolean>(bracketBounds.subList(i+1, outofbrackets)), myTurtle));
 	}
 
 	private int buildNodeList(ArrayList<Integer> layers, ArrayList<Node> NodeList, int i,
