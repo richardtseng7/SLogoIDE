@@ -11,8 +11,9 @@ import javafx.geometry.Point2D;
  */
 public abstract class Movement extends Command{
 	
-	protected double move(Turtle t, int direction) {
-		int pixels = 0;
+	protected double move(Turtle t, int distance) {
+		int pixels = distance;
+		int direction = 0; // need to get the direction from turtle
 		Point2D oldPos = t.getPos();
 		double angle = Math.toRadians(t.getHeading());
 		double x = oldPos.getX() + (direction * pixels * Math.cos(angle));
