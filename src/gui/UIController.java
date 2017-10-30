@@ -3,6 +3,7 @@ import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import gui.popups.CanvasColorPopUp;
@@ -29,6 +30,7 @@ public class UIController implements Observer {
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
+	private List<GUI> guiManager;
 	private CanvasColorPopUp canvasPop;
 	private TurtleImagePopUp turtlePop;
 	private PenColorPopUp penPop;
@@ -55,6 +57,8 @@ public class UIController implements Observer {
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 
 		lc = new LogicCenter();
+		
+		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
@@ -125,7 +129,7 @@ public class UIController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 }
