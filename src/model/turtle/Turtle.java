@@ -23,7 +23,8 @@ public class Turtle {
 	
 	private static final int TURTLE_SIZE = 30;
 	private Point2D oldPos;
-	private ObjectObservable myPos;
+	private Point2D myPos;
+	//private ObjectObservable myPos;
 	private Point2D home;
 	private final int myID;
 	private ObjectObservable heading = new ObjectObservable(90);
@@ -42,12 +43,14 @@ public class Turtle {
 		
 	//returns the turtle's X coordinate from the center of the screen
 	public double getXCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth();
+		//return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth();
+		return myPos.getX() - canvasDimension.getWidth();
 	}
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getHeight();
+		//return ((Point2D) myPos.getValue()).getX() - canvasDimension.getHeight();
+		return myPos.getY() - canvasDimension.getHeight();
 	}
 	
 	//returns the turtle's heading in degrees
@@ -81,7 +84,8 @@ public class Turtle {
 	}
 	
 	public Point2D getPos() {
-		return (Point2D) myPos.getValue();
+		//return (Point2D) myPos.getValue();
+		return myPos;
 	}	
 	
 	public int getShape(){
@@ -99,7 +103,8 @@ public class Turtle {
 	private void setHome() {
 		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
 		oldPos = home;
-		myPos.setValue(home);
+		//myPos = new ObjectObservable(home);
+		myPos = home;
 	}
 	
 	private void initializeImageView() {
@@ -122,8 +127,10 @@ public class Turtle {
 	}
 	
 	public void setPos(Point2D newPos) {
-		oldPos = (Point2D) myPos.getValue();
-		myPos.setValue(newPos);
+		//oldPos = (Point2D) myPos.getValue();
+		//myPos.setValue(newPos);
+		oldPos = myPos;
+		myPos = newPos;
 	}
 	
 	public void setShape(int index) {
