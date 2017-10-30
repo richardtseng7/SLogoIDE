@@ -30,7 +30,7 @@ public class SlogoParser {
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
         myCommands.putAll(createLanguageMap("resources/languages/English"));
-        System.out.println(myCommands.toString());
+        //System.out.println(myCommands.toString());
     }
 	
 	
@@ -43,7 +43,7 @@ public class SlogoParser {
 			if (resources.getString(key).contains("|")) {
 				String[] allTrans = resources.getString(key).split("\\|");
 				for (String indiTrans : allTrans) {
-					System.out.println(indiTrans);
+					//System.out.println(indiTrans);
 					String s = indiTrans.trim();
 					s = s.replaceAll("\\\\", "");
 					s = s.replaceAll("\\?", "");

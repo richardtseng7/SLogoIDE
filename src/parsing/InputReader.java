@@ -18,13 +18,10 @@ public class InputReader {
 	public InputReader (SlogoParser lang, String input) {
 		String WHITESPACE = "\\s+";
 		parseText(lang, input.split(WHITESPACE));
+		System.out.println(inputParsed.toString());
 		calcBracketOrder();
 		checkWarning();
-		//cleanParsing will shorten the ArrayLists
 		cleanParsing();
-        //String userInput = "fd 50 rt 90 BACK :distance Left :angle";
-        //String fileInput = readFileToString("/square.logo");
-        //parseText(lang, fileInput.split(WHITESPACE));
     }
 
 	// given some text, prints results of parsing it using the given language
