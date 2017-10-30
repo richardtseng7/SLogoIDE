@@ -16,6 +16,7 @@ import model.PositionObservable;
  */
 public class Turtle {
 	
+	private ObjectObservable image;
 	private ImageView myImageView;
 	//private ObjectObservable myImageView;
 	private static final String IMAGE1 = "Turtle_Slogo.png";
@@ -25,7 +26,7 @@ public class Turtle {
 	private static final int TURTLE_SIZE = 30;
 	private Point2D oldPos;
 	//private Point2D myPos;
-	private PositionObservable myPos;
+	private ObjectObservable myPos;
 	private Point2D home;
 	private final int myID;
 	private ObjectObservable heading = new ObjectObservable(90.0);
@@ -50,7 +51,7 @@ public class Turtle {
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getHeight();
+		return ((Point2D) myPos.getValue()).getY() - canvasDimension.getHeight();
 		//return myPos.getY() - canvasDimension.getHeight();
 	}
 	
@@ -85,7 +86,7 @@ public class Turtle {
 		return oldPos;
 	}
 	
-	public PositionObservable getPosObservable() {
+	public ObjectObservable getObjectObservable() {
 		return myPos;
 	}
 	
@@ -109,7 +110,7 @@ public class Turtle {
 	private void setHome() {
 		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
 		oldPos = home;
-		myPos = new PositionObservable(home);
+		myPos = new ObjectObservable(home);
 		//myPos = home;
 	}
 	
@@ -118,8 +119,9 @@ public class Turtle {
 		turtleImages.put(1, IMAGE1);
 		turtleImages.put(2, IMAGE2);
 		turtleImages.put(3, IMAGE3);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
-		myImageView = new ImageView(image);
+		image = new ObjectObservable(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1)));
+		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
+		myImageView = new ImageView((Image) image.getValue());
 		myImageView.setFitHeight(TURTLE_SIZE);
 		myImageView.setFitWidth(TURTLE_SIZE);
 		myImageView.setX(home.getX());
@@ -127,8 +129,9 @@ public class Turtle {
 	}
 	
 	private int setImageView(int index) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
-		myImageView.setImage(image);
+		image.setValue(new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index))));
+		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
+		myImageView.setImage((Image) image.getValue());
 		return index;
 	}
 	
