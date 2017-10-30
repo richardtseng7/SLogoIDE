@@ -21,7 +21,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class UIController implements Observer {
+public class UIController {
 	
 	public double FRAMES_PER_SECOND = 1;
 	public double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -40,6 +40,7 @@ public class UIController implements Observer {
 	private KeyFrame frame;
 	private Model m;
 	private Point2D originalPos;
+	private TurtleObserver turtleObs;
 	
 	
 	public UIController (int width, int height, Paint background) {
@@ -57,6 +58,9 @@ public class UIController implements Observer {
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 
 		lc = new LogicCenter();
+		
+		turtleObs = new TurtleObserver(m);
+		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
@@ -127,9 +131,4 @@ public class UIController implements Observer {
 		return Scene;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		
-		
-	}
 }
