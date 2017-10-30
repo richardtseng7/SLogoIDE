@@ -41,6 +41,7 @@ public class UIController {
 	private Model m;
 	private Point2D originalPos;
 	private TurtleObserver turtleObs;
+	private Canvas c;
 	
 	
 	public UIController (int width, int height, Paint background) {
@@ -54,12 +55,16 @@ public class UIController {
 		gui = new GUI();
 		
 		m = new Model(gui.canvasDimension);
+		
+		c = new Canvas(m, gui.canvasPane, gui.canvas);
+		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
+		
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
-
+		
 		lc = new LogicCenter();
 		
-		turtleObs = new TurtleObserver(m, gui.canvasPane);
+		turtleObs = new TurtleObserver(m, c);
 		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
@@ -119,6 +124,10 @@ public class UIController {
 	
 	public Model getModel() {
 		return m;
+	}
+	
+	public Canvas getCanvas() {
+		return c;
 	}
 
 }
