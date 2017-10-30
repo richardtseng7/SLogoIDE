@@ -30,19 +30,26 @@ public class SlogoParser {
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
         myCommands.putAll(createLanguageMap("resources/languages/English"));
-        this.addPatterns("resources/languages/Syntax");
+        //System.out.println(myCommands);
+        //this.addPatterns("resources/languages/Syntax");
         //this.addOtherSyntax("Symbol.txt");
         //add as many Patterns as needed/exist
+        for(int i = 0 ; i < myCommands.size(); i++){
+        	
+        }
     }
 	
 	
 	private Map<String, String> createLanguageMap(String string) {
+		
 		HashMap<String, String> langMap = new HashMap<String, String>();
 		ResourceBundle resources = ResourceBundle.getBundle(string);
+		//System.out.println(resources.keySet().toString());
 		for (String key : resources.keySet()) {
 			if (resources.getString(key).contains("|")) {
 				String[] allTrans = resources.getString(key).split("\\|");
 				for (String indiTrans : allTrans) {
+					//System.out.println(indiTrans);
 					langMap.put(indiTrans.trim(), key);
 				}
 			}
@@ -76,6 +83,7 @@ public class SlogoParser {
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
             String key = iter.nextElement();
+            
             String regex = resources.getString(key);
             //System.out.println(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
             //System.out.println(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
@@ -86,21 +94,22 @@ public class SlogoParser {
 	public String getSymbol (String text) {
         //for (Entry<String, Pattern> e : mySymbols) {
 		
-		Pattern constants = Pattern.compile("-?[0-9]+\\\\.?[0-9]*");
+		Pattern constants = Pattern.compile("[-+]?\\d*\\.?\\d+");
 		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
 		Pattern variables = Pattern.compile(":[a-zA-Z]+");
-		if (match(text, constants)) {
-			return "Constant";
-		}
-		else if (match(text, variables)) {
-			return "Variable";
-		}
-		else if (match(text, commands)) {
+		if (match(text, commands)) {
 			if (cond.contains(text)) {
 				return "Conditional";
 			}
 			else return "Command";
 		}
+		else if (match(text, constants)) {
+			return "Constant";
+		}
+		else if (match(text, variables)) {
+			return "Variable";
+		}
+
 		else return text;
     }
 	
@@ -109,21 +118,22 @@ public class SlogoParser {
     }
 
 	public String getTranslation(String text) {
-		for (Entry<String, Pattern> e : mySymbols) {
-            if (match(text, e.getValue())) {
-            		if (!(e.getKey().equalsIgnoreCase("Constant") || e.getKey().equalsIgnoreCase("Command") || e.getKey().equalsIgnoreCase("Variable")))
-            			return e.getKey();
-            		else if (e.getKey().equalsIgnoreCase("Command")) {
-            			for (String c : myCommands.keySet())  {
-            				if (text.equals(c)) {
-            					return e.getKey();
-            				}
-            			}
-            			return "Unrecognizable command";
-            		}
-            		else return text;
-            }
+		//System.out.println(myCommands.toString());
+		//System.out.println(mySymbols.toString());
+		ArrayList<Entry<String, String>> commandList = new ArrayList<Entry<String,String>>();
+		for(String s: myCommands.keySet()){
+			commandList.add(new SimpleEntry<String, String>(s, myCommands.get(s)));
+		}
+		
+		for (Entry<String, String> e : commandList) {
+			if(e.getKey().equals(text)){
+				return e.getValue();
+			}
+			else if(text.matches("[-+]?\\d*\\.?\\d+")){
+				return text;
+			}
         }
+        
 		return "error message";
 	}
 }

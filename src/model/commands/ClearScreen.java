@@ -10,4 +10,8 @@ public class ClearScreen extends Command{
 		Home h = new Home();
 		return h.execute(t);
 	}
+	@Override
+	public int getNumParam() {
+		return 0;
+	}
 }

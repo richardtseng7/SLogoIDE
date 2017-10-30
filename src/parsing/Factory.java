@@ -5,35 +5,52 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import model.commands.Command;
+import model.turtle.Turtle;
 
 /**
  * @author Peilin Lai
+ *      Paul Lee
  */
 
 public class Factory {
 	private static Command theCommand;
-	//private static Method method;
-	//for all commands, should take in 2 integers as parameters, okay not to use them
-	//private int[] parameter = new int[2];
-	//private static int numofpm = 0;
+	private String myType;
 	public Factory(String type) {
-		theCommand = makeClass(type);
+		myType = type;
+
 	}
 	
-	private static Command makeClass(String type) {
-		//Class<?>[] paramInt = new Class[2];
-		//paramInt[0] = Integer.TYPE;
-		//paramInt[1] = Integer.TYPE;
-		//Class<?> noparams[] = {};
+	public Object setArgs(Object[] args){
+		return doClass(myType, args);
+	}
+	
+	private Object doClass(String type, Object[] args) {
         try {
-        		Class<?> clazz = Class.forName("model.commands." + type);
-        		Constructor<?> ctor = clazz.getDeclaredConstructor();
-            Object o = ctor.newInstance();
-            //method = clazz.getDeclaredMethod("execute", paramInt);
-            //Method method1 = clazz.getDeclaredMethod("numOfParameter", noparams);
-            //numofpm = (int) method1.invoke(theCommand, null);
-            Command commando = (Command) o;
-        		return commando;
+            Class<?> params[] = new Class[args.length];
+            for (int i = 0; i < args.length; i++) {
+                if (args[i] instanceof Integer) {
+                	System.out.println("INT");
+                    params[i] = Integer.TYPE;
+                } else if (args[i] instanceof String) {
+                    params[i] = String.class;
+                } else if (args[i] instanceof Turtle) {
+                    params[i] = Turtle.class;
+                } else if (args[i] instanceof Double) {
+                    params[i] = Double.TYPE;
+                    System.out.println("DOUB");
+                } else if (args[i] instanceof Boolean) {
+                    params[i] = Boolean.TYPE;
+                }
+                else{ System.out.println("NONE");}
+            }
+            System.out.println(params.length);
+            Class<?> cls = Class.forName("model.commands." + type);
+            Object _instance = cls.newInstance();
+           
+            Method myMethod = cls.getDeclaredMethod("execute", params);
+            Object val = myMethod.invoke(_instance, args);
+            
+        	return val;
         } catch (Exception e) {
             e.printStackTrace();
             // return some sort of error
@@ -45,20 +62,18 @@ public class Factory {
 		return theCommand;
 	}
 	
-	/*public void setParameter(int[] para) {
-		parameter = para;
-	}
-	
-	public int getParameter(){
-		return numofpm;
-	}
-	
-	public void doExecution() {
-		try {
-			method.invoke(theCommand, parameter);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// return error
-			e.printStackTrace();
+	public int numComs(){
+		try{
+			//System.out.println("model.commands." + myType);
+	        Class<?> cls = Class.forName("model.commands." + myType);
+	        Object _instance = cls.newInstance();
+	        Method myMethod = cls.getDeclaredMethod("getNumParam");
+	        Object val = myMethod.invoke(_instance);
+	        return (int) val;
 		}
-	}*/
+		catch(Exception ex){ 
+			ex.printStackTrace();
+			return -1;
+		}
+	}
 }

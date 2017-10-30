@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  * @author Peilin Lai
+ * Paul Lee
  */
 
 // With a trained SlogoParser and user input, an InputReader gives an ArrayList of input strings in standardized slogo language
@@ -32,6 +33,7 @@ public class InputReader {
             if (s.trim().length() > 0) {
             		//translate user input to standardized language for slogo and store in an arraylist
             		String translation = lang.getTranslation(s);
+            		//System.out.println(translation);
             		inputParsed.add(translation);
             		inputParsedSymbols.add(lang.getSymbol(translation));
             }
