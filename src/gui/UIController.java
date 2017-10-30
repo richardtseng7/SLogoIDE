@@ -72,6 +72,8 @@ public class UIController {
 		
 		initRunButton();
 		
+		initAddTurtleButton();
+		
 		updateTurtleTabs();
 			
 		gui.canvasColor.setOnAction((event) -> {
@@ -92,8 +94,18 @@ public class UIController {
 		});
 	}
 
+	private void initAddTurtleButton() {
+		gui.addTurtle.setOnAction((event) -> {
+			m.addTurtle();
+			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
+			updateTurtleTabs();
+		});
+		
+	}
+
 	private void updateTurtleTabs() {
 		turtleTab = new TurtleInfoTabs(m);
+		gui.turtleInfo.getTabs().clear();
 		for(Tab tab:turtleTab.tabList) {
 			gui.turtleInfo.getTabs().add(tab);
 		}
@@ -111,6 +123,7 @@ public class UIController {
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
+			updateTurtleTabs();
 		});
 	}
 	

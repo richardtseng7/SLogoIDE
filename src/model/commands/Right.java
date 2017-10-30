@@ -9,7 +9,7 @@ import model.turtle.Turtle;
 public class Right extends Turn{
 	@Override
 	public double execute(Turtle t, double degrees) {
-		return turn(t, -degrees);
+		return turn(t, degrees);
 	}
 	@Override
 	public int getNumParam() {

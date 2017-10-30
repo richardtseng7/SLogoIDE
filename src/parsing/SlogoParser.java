@@ -1,5 +1,6 @@
 package parsing;
 
+import gui.popups.ErrorPopUp;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Map;
@@ -91,11 +92,12 @@ public class SlogoParser {
 			if(e.getKey().equals(text)){
 				return e.getValue();
 			}
-			else if(text.matches("[-+]?\\d*\\.?\\d+")){
+			else if(text.matches("[-+]?\\d*\\.?\\d+") || text.equals("[") || text.equals("]")){
 				return text;
 			}
         }
-        
-		return "error message";
+        ErrorPopUp error = new ErrorPopUp("Input Unrecognizable");
+		error.showPopUp();
+		return "error";
 	}
 }
