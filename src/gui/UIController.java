@@ -102,7 +102,7 @@ public class UIController {
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			lc.doInstructions(input,m.getTurtle(1));
+			lc.doInstructions(input,m);
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
@@ -115,6 +115,10 @@ public class UIController {
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
+	}
+	
+	public Model getModel() {
+		return m;
 	}
 
 }
