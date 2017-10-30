@@ -16,7 +16,7 @@ public class ObjectObservable extends Observable{
 	public void setValue(Object val) {
 		obj = val;
 		setChanged();
-		notifyObservers();
+		notifyObservers(obj);
 	}
 	
 	public Object getValue() {
