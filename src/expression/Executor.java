@@ -10,9 +10,10 @@ public class Executor extends ExpressionTree {
 	public void executeStarter(){
 		//for(int i = 0; i < NodeList.size(); i++){ System.out.println(NodeList.get(i).value);}
 		//System.out.println(NodeList.get(0).left.value);
-		Factory fact = new Factory(treeOfNodes.value);
-		fact.setArgs({0,0});
-		branchOut(treeOfNodes);
+		Factory fact = new Factory(NodeList.get(0).value);
+		Object[] args = {10.0};
+		fact.setArgs(args);
+		branchOut(NodeList.get(0));
 	}
 	
 	private void executeFromTreeNode(Node current){

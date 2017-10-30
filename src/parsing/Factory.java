@@ -28,19 +28,24 @@ public class Factory {
             Class<?> params[] = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
                 if (args[i] instanceof Integer) {
+                	System.out.println("INT");
                     params[i] = Integer.TYPE;
                 } else if (args[i] instanceof String) {
                     params[i] = String.class;
                 } else if (args[i] instanceof Turtle) {
                     params[i] = Turtle.class;
                 } else if (args[i] instanceof Double) {
-                    params[i] = Double.class;
+                    params[i] = Double.TYPE;
+                    System.out.println("DOUB");
                 } else if (args[i] instanceof Boolean) {
-                    params[i] = Boolean.class;
+                    params[i] = Boolean.TYPE;
                 }
+                else{ System.out.println("NONE");}
             }
+            System.out.println(params.length);
             Class<?> cls = Class.forName("model.commands." + type);
             Object _instance = cls.newInstance();
+           
             Method myMethod = cls.getDeclaredMethod("execute", params);
             myMethod.invoke(_instance, args);
             
