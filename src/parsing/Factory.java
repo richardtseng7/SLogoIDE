@@ -4,35 +4,36 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import model.commands.Command;
+
 /**
  * @author Peilin Lai
  */
 
 public class Factory {
-	private static Object theCommand;
-	private static Method method;
-	// for all commands, should take in 2 integers as parameters, okay not to use them
-	private int[] parameter = new int[2];
-	private static int numofpm = 0;
-	
+	private static Command theCommand;
+	//private static Method method;
+	//for all commands, should take in 2 integers as parameters, okay not to use them
+	//private int[] parameter = new int[2];
+	//private static int numofpm = 0;
 	public Factory(String type) {
 		theCommand = makeClass(type);
 	}
 	
-	private static Object makeClass(String type) {
-		Class<?>[] paramInt = new Class[2];
-		paramInt[0] = Integer.TYPE;
-		paramInt[1] = Integer.TYPE;
-		Class<?> noparams[] = {};
-		
+	private static Command makeClass(String type) {
+		//Class<?>[] paramInt = new Class[2];
+		//paramInt[0] = Integer.TYPE;
+		//paramInt[1] = Integer.TYPE;
+		//Class<?> noparams[] = {};
         try {
-        		Class<?> clazz = Class.forName("parsing.ExpressiontTree");
-        		Constructor<?> ctor = clazz.getDeclaredConstructor(String.class);
-            Object o = ctor.newInstance(type);
-            method = clazz.getDeclaredMethod("execute", paramInt);
-            Method method1 = clazz.getDeclaredMethod("numOfParameter", noparams);
-            numofpm = (int) method1.invoke(theCommand, null);
-        		return o;
+        		Class<?> clazz = Class.forName("model.commands." + type);
+        		Constructor<?> ctor = clazz.getDeclaredConstructor();
+            Object o = ctor.newInstance();
+            //method = clazz.getDeclaredMethod("execute", paramInt);
+            //Method method1 = clazz.getDeclaredMethod("numOfParameter", noparams);
+            //numofpm = (int) method1.invoke(theCommand, null);
+            Command commando = (Command) o;
+        		return commando;
         } catch (Exception e) {
             e.printStackTrace();
             // return some sort of error
@@ -40,12 +41,16 @@ public class Factory {
 		return null;
 	}
 
-	public Object getCommand() {
+	public Command getCommand() {
 		return theCommand;
 	}
 	
-	public void setParameter(int[] para) {
+	/*public void setParameter(int[] para) {
 		parameter = para;
+	}
+	
+	public int getParameter(){
+		return numofpm;
 	}
 	
 	public void doExecution() {
@@ -55,5 +60,5 @@ public class Factory {
 			// return error
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

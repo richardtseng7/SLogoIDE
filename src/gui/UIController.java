@@ -57,7 +57,7 @@ public class UIController implements Observer {
 			m.addTurtle();
 			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
 		}
-		
+
 		lc = new LogicCenter();
 		
 		//root.getChildren().add(gui.toolbar);

@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import parsing.InputReader;
 import parsing.SlogoParser;
+import expression.Executor;
 import expression.ExpressionTree;
 
 /**
@@ -25,33 +26,15 @@ public class LogicCenter {
 		if(inputParsed!= null && inputParsed.size()!=0){ //Prevent crash from no commands typed.
 			System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
+			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
+			ArrayList<Boolean> inputParsedBounds = reader.getInputParsedBounds();
 			System.out.println(inputParsedSymbols.toString());
-			doLogic(inputParsed, inputParsedSymbols);
+			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols) {
-		int index = 0; //used to keep track of the current reading from both ArrayLists
-		// loop through inputParsedSymbols, if .equals("Command"), build a Factory object
-		String errorMessage = checkSyntax(inputParsedSymbols);
-		if(errorMessage == ""){
-			ExpressionTree et = new ExpressionTree(inputParsed, inputParsedSymbols);
-			
-		}
-		else{
-			//Popup with error message
-			JOptionPane.showMessageDialog(null, errorMessage, "Syntax Error", JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
-	}
-	
-	private String checkSyntax(ArrayList<String> inputParsedSymbols){
-		for(String s : inputParsedSymbols){
-			if(s == "Syntax Error - Command Not Found" || s == "Syntax Error - Missing Space"){
-				return s;
-			}
-			
-		}
-		return "";
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds) {
+		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+		tree.executeStarter();
 	}
 }
