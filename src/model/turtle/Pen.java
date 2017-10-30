@@ -18,7 +18,7 @@ public class Pen {
 	private List<Line> myTrail;
 	//private boolean penDown = true;
 	private ObjectObservable penDown = new ObjectObservable(true);
-	private ObjectObservable thickness = new ObjectObservable(10);
+	private ObjectObservable thickness = new ObjectObservable(5);
 	private ObjectObservable color = new ObjectObservable(0);
 	private Color myColor;
 	private Map<Integer, Color> colorMap;

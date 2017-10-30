@@ -59,7 +59,7 @@ public class UIController {
 
 		lc = new LogicCenter();
 		
-		turtleObs = new TurtleObserver(m);
+		turtleObs = new TurtleObserver(m, gui.canvasPane);
 		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
