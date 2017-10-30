@@ -98,7 +98,7 @@ public class UIController implements Observer {
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			//lc.doInstructions(input);
+			lc.doInstructions(input);
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
