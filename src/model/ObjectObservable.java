@@ -2,6 +2,10 @@ package model;
 
 import java.util.Observable;
 
+/**
+ * @author richardtseng
+ *
+ */
 public class ObjectObservable extends Observable{
 	private Object obj;
 	

@@ -51,10 +51,8 @@ public class UIController implements Observer {
 		gui = new GUI();
 		
 		m = new Model(gui.canvasDimension);
-		for (int i = 0; i < 1; i++) {
-			m.addTurtle();
-			gui.canvasPane.getChildren().add(m.getTurtle(i).getImageView());
-		}
+		m.addTurtle();
+		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 
 		lc = new LogicCenter();
 		root.getChildren().addAll(gui.mainPane);
@@ -117,7 +115,7 @@ public class UIController implements Observer {
 	
 	protected void updateImage(String fileName) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-		m.getTurtle(0).getImageView().setImage(image);
+		m.getTurtle(1).getImageView().setImage(image);
 		//Will need to change iterate over all turtles
 	}
 

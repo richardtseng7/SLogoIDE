@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.shape.Line;
+import model.ObjectObservable;
 
 /**
  * @author richardtseng
@@ -12,7 +13,8 @@ import javafx.scene.shape.Line;
 public class Pen {
 
 	private List<Line> myTrail;
-	private boolean penDown = true;
+	//private boolean penDown = true;
+	private ObjectObservable penDown = new ObjectObservable(true);
 	int thickness = 10;
 	int color = 0;
 	
@@ -34,7 +36,7 @@ public class Pen {
 
 	//returns 1 if turtle's pen is down, 0 if it is up
 	public int getPenDown(){
-		return penDown ? 1 : 0;
+		return (boolean) penDown.getValue() ? 1 : 0;
 	}
 	
 	public int getPenSize(){
@@ -46,7 +48,7 @@ public class Pen {
 	}
 	
 	public void setPenDown(boolean bool) {
-		penDown = bool;
+		penDown.setValue(bool);
 	}
 	
 	public void setPenSize(int size) {
