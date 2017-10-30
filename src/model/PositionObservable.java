@@ -13,7 +13,7 @@ public class PositionObservable extends Observable {
 	}
 	
 	public void setValue(Point2D pos) {
-		myPos = pos;
+		myPos.add(pos.getX() - myPos.getX(), pos.getY() - myPos.getY());
 		setChanged();
 		notifyObservers();
 	}
