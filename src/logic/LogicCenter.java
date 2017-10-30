@@ -6,6 +6,7 @@ import parsing.InputReader;
 import parsing.SlogoParser;
 import expression.Executor;
 import expression.ExpressionTree;
+import model.turtle.Turtle;
 
 /**
  * @author Peilin Lai
@@ -19,7 +20,7 @@ public class LogicCenter {
 		lang = new SlogoParser();
 	}
 
-	public void doInstructions(String input) {
+	public void doInstructions(String input, Turtle t) {
 		//first parse instructions
 		InputReader reader = new InputReader(lang, input);
 		ArrayList<String> inputParsed = reader.getInputParsed();
@@ -29,12 +30,12 @@ public class LogicCenter {
 			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
 			ArrayList<Boolean> inputParsedBounds = reader.getInputParsedBounds();
 			//System.out.println(inputParsedSymbols.toString());
-			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds) {
-		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds);
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds, Turtle t) {
+		Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
 		tree.executeStarter();
 	}
 }

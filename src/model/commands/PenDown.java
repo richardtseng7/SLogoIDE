@@ -15,4 +15,8 @@ public class PenDown extends PenProperties{
 	public double execute(Turtle t) {
 		return putPen(t, true);
 	}
+	@Override
+	public int getNumParam() {
+		return 0;
+	}
 }

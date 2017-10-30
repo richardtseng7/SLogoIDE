@@ -31,9 +31,12 @@ public class SlogoParser {
         mySymbols = new ArrayList<>();
         myCommands.putAll(createLanguageMap("resources/languages/English"));
         //System.out.println(myCommands);
-        this.addPatterns("resources/languages/Syntax");
+        //this.addPatterns("resources/languages/Syntax");
         //this.addOtherSyntax("Symbol.txt");
         //add as many Patterns as needed/exist
+        for(int i = 0 ; i < myCommands.size(); i++){
+        	
+        }
     }
 	
 	
@@ -41,7 +44,7 @@ public class SlogoParser {
 		
 		HashMap<String, String> langMap = new HashMap<String, String>();
 		ResourceBundle resources = ResourceBundle.getBundle(string);
-		System.out.println(resources.keySet().toString());
+		//System.out.println(resources.keySet().toString());
 		for (String key : resources.keySet()) {
 			if (resources.getString(key).contains("|")) {
 				String[] allTrans = resources.getString(key).split("\\|");
@@ -80,6 +83,7 @@ public class SlogoParser {
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
             String key = iter.nextElement();
+            
             String regex = resources.getString(key);
             //System.out.println(Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
             //System.out.println(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
@@ -90,21 +94,22 @@ public class SlogoParser {
 	public String getSymbol (String text) {
         //for (Entry<String, Pattern> e : mySymbols) {
 		
-		Pattern constants = Pattern.compile("-?[0-9]+\\\\.?[0-9]*");
+		Pattern constants = Pattern.compile("[-+]?\\d*\\.?\\d+");
 		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
 		Pattern variables = Pattern.compile(":[a-zA-Z]+");
-		if (match(text, constants)) {
-			return "Constant";
-		}
-		else if (match(text, variables)) {
-			return "Variable";
-		}
-		else if (match(text, commands)) {
+		if (match(text, commands)) {
 			if (cond.contains(text)) {
 				return "Conditional";
 			}
 			else return "Command";
 		}
+		else if (match(text, constants)) {
+			return "Constant";
+		}
+		else if (match(text, variables)) {
+			return "Variable";
+		}
+
 		else return text;
     }
 	
