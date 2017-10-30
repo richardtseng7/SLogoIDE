@@ -1,5 +1,6 @@
 package parsing;
 
+import gui.popups.ErrorPopUp;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +96,8 @@ public class SlogoParser {
 				return text;
 			}
         }
-        
-		return "error message";
+        ErrorPopUp error = new ErrorPopUp("Input Unrecognizable");
+		error.showPopUp();
+		return "error";
 	}
 }

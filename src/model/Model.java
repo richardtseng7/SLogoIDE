@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.ToDoubleFunction;
 
 import javafx.geometry.Dimension2D;
 import model.turtle.Turtle;
@@ -53,5 +54,13 @@ public class Model {
 	public void replaceActiveTurtles(Collection<Turtle> turtles) {
 		activeTurtles.clear();
 		activeTurtles.addAll(turtles);
+	}
+	
+	public double executeOnAllActive(ToDoubleFunction<Turtle> command) throws Exception{
+		double returnVal = 0;
+		for (int i = 0; i < activeTurtles.size(); i++) {
+			returnVal = command.applyAsDouble(activeTurtles.get(i));
+		}
+		return returnVal;
 	}
 }
