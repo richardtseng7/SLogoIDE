@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -54,6 +56,8 @@ public class GUI {
 	protected Pane canvasPane;
 	protected Node canvas;
 	protected TabPane turtleInfo;
+	protected Button addTurtle;
+	private VBox leftBox;
 	
 	//Input and Input History
 	private Node inputVBox;
@@ -114,9 +118,14 @@ public class GUI {
 		((Rectangle) canvas).setFill(Color.WHITE);
 		((Rectangle) canvas).setStroke(Color.BLACK);
 		((Rectangle) canvas).setStrokeWidth(5);
-		canvasPane.getChildren().add(canvas);
-		mainPane.setLeft(canvasPane);
-		BorderPane.setMargin(canvasPane, new Insets(20,0,0,10));
+		
+		canvasPane.getChildren().addAll(canvas);
+		leftBox = new VBox(5);
+		addTurtle = new Button("Add Turtle");
+		leftBox.getChildren().addAll(canvasPane,addTurtle);
+
+		mainPane.setLeft(leftBox);
+		BorderPane.setMargin(leftBox, new Insets(20,0,0,10));
 		
 		turtleInfo = new TabPane();
 		turtleInfo.setPrefSize(TURTLELIST_WIDTH, TURTLELIST_HEIGHT);
