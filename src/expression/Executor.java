@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.turtle.Turtle;
 
 public class Executor extends ExpressionTree {
-	public Executor(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Boolean> bracketBounds, Turtle t){
+	public Executor(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds, Turtle t){
 		super(input, symbol, layers, bracketBounds, t);
 	}
 	
