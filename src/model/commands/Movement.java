@@ -28,6 +28,10 @@ public abstract class Movement extends Command{
 	}
 	
 	@Override
+	public void addmyParamType() {
+		myParamType.add("Double");
+	}
+	@Override
 	public int getNumParam() {
 		return 1;
 	}

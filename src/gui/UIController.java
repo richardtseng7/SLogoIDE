@@ -3,6 +3,7 @@ import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import gui.popups.CanvasColorPopUp;
@@ -29,6 +30,7 @@ public class UIController implements Observer {
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
+	private List<GUI> guiManager;
 	private CanvasColorPopUp canvasPop;
 	private TurtleImagePopUp turtlePop;
 	private PenColorPopUp penPop;
@@ -52,12 +54,11 @@ public class UIController implements Observer {
 		
 		m = new Model(gui.canvasDimension);
 		m.addTurtle();
-		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());
-		for (int i = 0; i < 1; i++) {
-
-		}
+		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 
 		lc = new LogicCenter();
+		
+		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
@@ -118,7 +119,7 @@ public class UIController implements Observer {
 	
 	protected void updateImage(String fileName) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-		m.getTurtle(0).getImageView().setImage(image);
+		m.getTurtle(1).getImageView().setImage(image);
 		//Will need to change iterate over all turtles
 	}
 
@@ -128,7 +129,7 @@ public class UIController implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 }

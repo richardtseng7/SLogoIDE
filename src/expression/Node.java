@@ -3,6 +3,11 @@ package expression;
 import model.commands.Command;
 import model.turtle.Turtle;
 
+/**
+ * @author Paul Lee
+ */
+
+
 public class Node extends Command {
 	String value, type;
 	Node left, right, prev;

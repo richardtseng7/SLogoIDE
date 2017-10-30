@@ -9,6 +9,7 @@ import model.turtle.Turtle;
 
 /**
  * @author Peilin Lai
+ *      Paul Lee
  */
 
 public class Factory {

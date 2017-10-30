@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  * @author Peilin Lai
+ * Paul Lee
  */
 
 // With a trained SlogoParser and user input, an InputReader gives an ArrayList of input strings in standardized slogo language
