@@ -70,7 +70,7 @@ public class InputReader {
     			calcBracketOrder(index);
     		}
     		else{
-    			if(index < limit) calcBracketOrder(index+1);
+    			if(index < limit && inputParsed.size() > limit) calcBracketOrder(index+1);
     		}
     }
     
