@@ -12,10 +12,15 @@ import model.turtle.Turtle;
  */
 
 public abstract class Command {
-	private List<String> myParam;
-	private Queue<String> myParamType;
+	public List<String> myParam;
+	public Queue<String> myParamType;
 	
 	public Command() {
+		addmyParamType();
+	}
+	
+	public void addmyParamType() {
+		
 	}
 	
 	public Boolean needMoreParam() {
