@@ -30,6 +30,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.scene.control.window.MinimizeIcon;
+import jfxtras.scene.control.window.Window;
 
 import javax.swing.*;
 
@@ -37,17 +39,24 @@ public class GUI {
 	
 	private static final int CANVAS_HEIGHT = 500;
 	private static final int CANVAS_WIDTH = 500;
-	protected static final int CENTER_WIDTH = 270;
-	private static final int RIGHT_WIDTH = 190;
-	
+	private static final int RIGHTPANE_WIDTH = 500;
+	private static final int INPUT_WIDTH = 240;
+	private static final int INPUT_HEIGHT = 310;
+	private static final int LISTS_WIDTH = 240;
+	private static final int LISTS_HEIGHT = 210;
+	private static final int TURTLELIST_HEIGHT = 250;
+	protected static final int TURTLELIST_WIDTH = 240;
+			
 	protected Dimension2D canvasDimension;
 	
 	protected BorderPane mainPane;
+	
 	
 	//Canvas and turtle
 	protected Pane canvasPane;
 	protected Node canvas;
 	protected TabPane turtleInfo;
+	
 
 	//Input and Input History
 	private Node inputVBox;
@@ -57,15 +66,20 @@ public class GUI {
 	private ScrollPane historyScroll;
 	protected Button runButton;
 	
+	//Windows
+	private Window inputWindow;
+	private Window turtleInfoWindow;
+	private Window variablesWindow;
+	private Window methodsWindow;
+	
+	private Pane windowCanvas;
+	
 	//Active Variables and Methods
-	private Node variableVBox;
-	private Label variablesLabel;
-	private Label methodsLabel;
 	private ListView<String> variablesText;
 	private ListView<String> methodsText;
 	
 	//Toolbar Buttons
-	private ToolBar toolbar;
+	protected ToolBar toolbar;
 	private Button newButton;
 	private MenuButton editButton;
 	protected MenuItem canvasColor;
@@ -109,48 +123,63 @@ public class GUI {
 		BorderPane.setMargin(canvasPane, new Insets(20,0,0,10));
 		
 		turtleInfo = new TabPane();
-		turtleInfo.setPrefSize(CENTER_WIDTH, 170);
+		turtleInfo.setPrefSize(TURTLELIST_WIDTH, TURTLELIST_HEIGHT);
 						
 		textInput = new TextArea();
-		textInput.setPrefSize(CENTER_WIDTH, 85);
+		textInput.setPrefSize(INPUT_WIDTH, 95);
 		textInput.setWrapText(true);
 		inputScroll = new ScrollPane();
 		inputScroll.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
-		inputScroll.setPrefSize(CENTER_WIDTH,95);
+		inputScroll.setPrefSize(INPUT_WIDTH,95);
 		inputScroll.setContent(textInput);
 		inputHistory = new TextArea();
-		inputHistory.setPrefSize(CENTER_WIDTH, 195);
+		inputHistory.setPrefSize(INPUT_WIDTH, 205);
 		inputHistory.setWrapText(true);
 		inputHistory.setEditable(false);
 		historyScroll = new ScrollPane();
 		historyScroll.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
-		historyScroll.setPrefSize(CENTER_WIDTH, 195);
+		historyScroll.setPrefSize(INPUT_WIDTH, 205);
 		historyScroll.setContent(inputHistory);
 		runButton = new Button("Run");
 		
+		
 		inputVBox = new VBox(5);
-		((VBox) inputVBox).getChildren().addAll(turtleInfo,historyScroll,inputScroll,runButton);
+		((VBox) inputVBox).getChildren().addAll(historyScroll,inputScroll,runButton);
+		inputWindow = new Window("Input Your Code");
+		setWindow(inputWindow,INPUT_WIDTH,INPUT_HEIGHT,5,0).getContentPane().getChildren().add(inputVBox);
+		turtleInfoWindow = new Window("Turtle Information");
+		setWindow(turtleInfoWindow,TURTLELIST_WIDTH,TURTLELIST_HEIGHT,INPUT_WIDTH+10,0).getContentPane().getChildren().add(turtleInfo);
 		
 		
-		mainPane.setCenter(inputVBox);
-		BorderPane.setMargin(inputVBox, new Insets(20,10,0,10));
-		
-		variablesLabel = new Label("Active Variables:");
-		variablesLabel.setTextFill(Color.WHITE);
-		methodsLabel = new Label("User Defined Methods:");
-		methodsLabel.setTextFill(Color.WHITE);
 		variablesText = new ListView<String>();
 		variablesText.getItems().add("test:10");
-		variablesText.setPrefSize(RIGHT_WIDTH, 210);
+		variablesText.setPrefSize(LISTS_WIDTH, LISTS_HEIGHT);
 		methodsText = new ListView<String>();
 		methodsText.getItems().add("test method");
-		methodsText.setPrefSize(RIGHT_WIDTH, 210);
+		methodsText.setPrefSize(LISTS_WIDTH, LISTS_HEIGHT);
 		
-		variableVBox = new VBox(5);
-		((VBox) variableVBox).getChildren().addAll(variablesLabel,variablesText,methodsLabel,methodsText);
+		variablesWindow = new Window("Active Variables");
+		setWindow(variablesWindow,LISTS_WIDTH,LISTS_HEIGHT,5,INPUT_HEIGHT+5).getContentPane().getChildren().add(variablesText);
 		
-		mainPane.setRight(variableVBox);
-		BorderPane.setMargin(variableVBox, new Insets(20,10,0,0));
+		methodsWindow = new Window("User Defined Methods");
+		setWindow(methodsWindow,LISTS_WIDTH,LISTS_HEIGHT,INPUT_WIDTH+10,INPUT_HEIGHT+5).getContentPane().getChildren().add(methodsText);
+		
+		windowCanvas = new Pane();
+		windowCanvas.setPrefSize(RIGHTPANE_WIDTH, 600);
+		windowCanvas.getChildren().addAll(inputWindow,turtleInfoWindow,variablesWindow,methodsWindow);
+		
+
+		
+		mainPane.setRight(windowCanvas);
+		BorderPane.setMargin(windowCanvas, new Insets(20,10,0,0));
+	}
+	
+	private Window setWindow(Window window,int width,int height,int startX,int startY) {
+		window.setPrefSize(width, height);
+		window.setLayoutX(startX);
+		window.setLayoutY(startY);
+		window.getLeftIcons().add(new MinimizeIcon(window));
+		return window;
 	}
 	
 }

@@ -18,7 +18,7 @@ public class TurtleInfoTabs {
 			Tab tab = new Tab();
 			tab.setText("Turtle "+i);
 			infoList = new ListView<String>();
-			infoList.setPrefSize(GUI.CENTER_WIDTH, 120); //Edit Height
+			infoList.setPrefSize(GUI.TURTLELIST_WIDTH, 120); //Edit Height
 			infoList.getItems().add("ID: "+i);
 			infoList.getItems().add("Position:");
 			infoList.getItems().add("x - " + 0); //replace with m.getTurtle(i).getXCor()
