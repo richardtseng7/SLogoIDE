@@ -59,8 +59,8 @@ public class UIController {
 
 		lc = new LogicCenter();
 		
-		turtleObs = new TurtleObserver(m);
-		m.getTurtle(1).getObjectObservable().addObserver(turtleObs);
+		turtleObs = new TurtleObserver(m, gui.canvasPane);
+		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
@@ -114,7 +114,7 @@ public class UIController {
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			lc.doInstructions(input,m.getTurtle(1));
+			lc.doInstructions(input,m);
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
@@ -128,6 +128,10 @@ public class UIController {
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
+	}
+	
+	public Model getModel() {
+		return m;
 	}
 
 }

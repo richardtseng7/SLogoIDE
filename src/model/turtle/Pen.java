@@ -18,14 +18,17 @@ public class Pen {
 	private List<Line> myTrail;
 	//private boolean penDown = true;
 	private ObjectObservable penDown = new ObjectObservable(true);
-	private ObjectObservable thickness = new ObjectObservable(10);
+	private ObjectObservable thickness = new ObjectObservable(5);
 	private ObjectObservable color = new ObjectObservable(0);
+	private Color myColor;
 	private Map<Integer, Color> colorMap;
 	//int thickness = 10;
 	//int color = 0;
 	
 	public Pen() {
 		myTrail = new ArrayList<>();
+		myColor = new Color(0, 0, 0, 0);
+		myColor = Color.BLACK;
 		initializeColorMap();
 	}
 	
@@ -53,13 +56,17 @@ public class Pen {
 		return colorMap;
 	}
 	
-	public int getPenColor(){
+	public int getPenColorIndex(){
 		return (int) color.getValue();
+	}
+	
+	public Color getColor() {
+		return myColor;
 	}
 
 	//returns 1 if turtle's pen is down, 0 if it is up
-	public int getPenDown(){
-		return (boolean) penDown.getValue() ? 1 : 0;
+	public boolean getPenDown(){
+		return (boolean) penDown.getValue();
 	}
 	
 	public int getPenSize(){
@@ -70,8 +77,13 @@ public class Pen {
 		colorMap.put(index, Color.rgb(r, g, b));
 	}
 	
-	public void setPenColor(int index){
+	public void setColor(Color c) {
+		myColor = c;
+	}
+	
+	public void setPenColorIndex(int index){
 		color.setValue(index);
+		setColor(colorMap.get(index));
 	}
 	
 	public void setPenDown(boolean bool) {

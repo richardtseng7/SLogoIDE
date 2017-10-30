@@ -15,7 +15,6 @@ import model.turtle.Turtle;
 public abstract class Command {
 	public List<String> myParam;
 	public Queue<String> myParamType;
-	public Model myTurtleModel;
 	
 	public Command() {
 		addmyParamType();
