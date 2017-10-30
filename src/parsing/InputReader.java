@@ -38,6 +38,7 @@ public class InputReader {
             		inputParsedSymbols.add(lang.getSymbol(translation));
             }
         }
+      
     }
     
     private void calcBracketOrder() {
@@ -98,13 +99,4 @@ public class InputReader {
 		return this.indexWarning;
 	}
     
-    // utility function that reads given file and returns its entire contents as a single string
-    /*private String readFileToString (String filename) {
-        final String END_OF_FILE = "\\z";
-        Scanner input = new Scanner(getClass().getResourceAsStream(filename));
-        input.useDelimiter(END_OF_FILE);
-        String result = input.next();
-        input.close();
-        return result;
-    }*/
 }

@@ -44,6 +44,7 @@ public abstract class ExpressionTree {
 			}
 		}
 		catch(Exception ex){
+			//ErrorPopUp(String error)
 			ex.printStackTrace();
 		}
 	}
