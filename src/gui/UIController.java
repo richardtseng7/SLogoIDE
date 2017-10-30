@@ -112,20 +112,6 @@ public class UIController {
 	public void storeOriginalPos(Turtle t) {
 		originalPos = t.getPos();
 	}
-	
-	public void updateScene(Turtle t) {
-		Line penLine = new Line(t.getPos().getX(),t.getPos().getY(), originalPos.getX(), originalPos.getY());
-		t.getImageView().setX(t.getPos().getX());
-		t.getImageView().setY(t.getPos().getY());
-		gui.canvasPane.getChildren().add(penLine);
-		
-	}
-	
-	protected void updateImage(String fileName) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-		m.getTurtle(1).getImageView().setImage(image);
-		//Will need to change iterate over all turtles
-	}
 
 	public javafx.scene.Scene getScene() {
 		return Scene;

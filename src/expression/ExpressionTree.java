@@ -22,8 +22,8 @@ public abstract class ExpressionTree {
 		NodeList = new ArrayList<Node>();
 		myTurtle = t;
 		
-		//System.out.println(input.get(0));
-		//System.out.println(symbol.get(0));
+		System.out.println(bracketBounds.toString());
+		System.out.println(layers.toString());
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
@@ -44,6 +44,7 @@ public abstract class ExpressionTree {
 			}
 		}
 		catch(Exception ex){
+			//ErrorPopUp(String error)
 			ex.printStackTrace();
 		}
 	}
