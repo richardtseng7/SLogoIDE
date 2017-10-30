@@ -14,23 +14,25 @@ public abstract class Movement extends Command{
 	protected double move(Turtle t, double distance) {
 		//System.out.println(t.getYCor());
 		Point2D oldPos = t.getPos();
-		System.out.println(t.getHeading());
+		System.out.println(distance);
 		System.out.println(t.getXCor());
 		System.out.println(t.getYCor());
 		double angle = Math.toRadians(t.getHeading());
 		double x = oldPos.getX() + (distance * Math.cos(angle));
 		double y = oldPos.getY() + (distance * Math.sin(angle));
 		Point2D newPos = new Point2D(x, y);
+		System.out.println(x);
+		System.out.println(y);
 		t.setPos(newPos);
 		System.out.println(t.getXCor());
 		System.out.println(t.getYCor());
 		return distance;
 	}
-	
+	/*
 	@Override
 	public void addmyParamType() {
 		myParamType.add("Double");
-	}
+	}*/
 	@Override
 	public int getNumParam() {
 		return 1;
