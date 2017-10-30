@@ -92,7 +92,7 @@ public class SlogoParser {
 			if(e.getKey().equals(text)){
 				return e.getValue();
 			}
-			else if(text.matches("[-+]?\\d*\\.?\\d+")){
+			else if(text.matches("[-+]?\\d*\\.?\\d+") || text.equals("[") || text.equals("]")){
 				return text;
 			}
         }
