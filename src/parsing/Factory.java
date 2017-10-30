@@ -26,7 +26,7 @@ public class Factory {
 		//paramInt[1] = Integer.TYPE;
 		//Class<?> noparams[] = {};
         try {
-        		Class<?> clazz = Class.forName("Commands." + type);
+        		Class<?> clazz = Class.forName("model.commands." + type);
         		Constructor<?> ctor = clazz.getDeclaredConstructor();
             Object o = ctor.newInstance();
             //method = clazz.getDeclaredMethod("execute", paramInt);
