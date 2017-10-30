@@ -1,13 +1,9 @@
 package model.turtle;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.ObjectObservable;
 
 /**
  * @author richardtseng
@@ -16,51 +12,47 @@ import model.ObjectObservable;
 public class Turtle {
 	
 	private ImageView myImageView;
-	private static final String IMAGE1 = "Turtle_Slogo.png";
-	private static final String IMAGE2 = "Turtle 2.png";
-	private static final String IMAGE3 = "Turtle 3.png";
-	private Map<Integer, String> turtleImages;
-	
+	private static final String TURTLE_IMAGE = "Turtle_Slogo.png";
 	private static final int TURTLE_SIZE = 30;
-	private Point2D oldPos;
 	private Point2D myPos;
-	//private ObjectObservable myPos;
 	private Point2D home;
 	private final int myID;
-	private ObjectObservable heading = new ObjectObservable(90);
-	private ObjectObservable showing = new ObjectObservable(true);
-	private int shape = 0;
+	private double heading = 90;
+	private boolean showing = true;
+	private boolean penDown = true;
 	private Dimension2D canvasDimension;
-	private Pen myPen;
 	
 	public Turtle(int ID, Dimension2D canvas) {
 		myID = ID;
 		canvasDimension = canvas;
-		setHome();		
-		initializeImageView();
-		myPen = new Pen();
+		setHome();
+		setPos(home);
+		setImageView();
 	}
 		
 	//returns the turtle's X coordinate from the center of the screen
 	public double getXCor() {
-		//return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth();
 		return myPos.getX() - canvasDimension.getWidth();
 	}
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		//return ((Point2D) myPos.getValue()).getX() - canvasDimension.getHeight();
 		return myPos.getY() - canvasDimension.getHeight();
 	}
 	
 	//returns the turtle's heading in degrees
 	public double getHeading(){
-	    return (double) heading.getValue();
+	    return heading;
 	}
 	
+	//returns 1 if turtle's pen is down, 0 if it is up
+	public int getPenDown() {
+		return penDown ? 1 : 0;
+	}
+
 	//returns 1 if turtle is showing, 0 if it is hiding
 	public int getShowing() {
-		return (boolean) showing.getValue() ? 1 : 0;
+		return showing ? 1 : 0;
 	}
 	
 	public Point2D getHome() {
@@ -75,44 +67,28 @@ public class Turtle {
 		return myImageView;
 	}
 	
-	public Pen getPen(){
-		return myPen;
-	}
-	
-	public Point2D getOldPos(){
-		return oldPos;
-	}
-	
 	public Point2D getPos() {
-		//return (Point2D) myPos.getValue();
 		return myPos;
 	}	
 	
-	public int getShape(){
-		return shape;
-	}
-	
 	public void setHeading(double degrees){
-	    heading.setValue(degrees);
+	    heading = degrees;
 	}
 	
+	public void setPen(boolean bool) {
+		penDown = bool;
+	}
+
 	public void setShowing(boolean bool) {
-		showing.setValue(bool);
+		showing = bool;
 	}
 	
 	private void setHome() {
 		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
-		oldPos = home;
-		//myPos = new ObjectObservable(home);
-		myPos = home;
 	}
 	
-	private void initializeImageView() {
-		turtleImages = new HashMap<>();
-		turtleImages.put(1, IMAGE1);
-		turtleImages.put(2, IMAGE2);
-		turtleImages.put(3, IMAGE3);
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
+	private void setImageView() {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 		myImageView = new ImageView(image);
 		myImageView.setFitHeight(TURTLE_SIZE);
 		myImageView.setFitWidth(TURTLE_SIZE);
@@ -120,20 +96,7 @@ public class Turtle {
 		myImageView.setY(home.getY());
 	}
 	
-	private int setImageView(int index) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
-		myImageView.setImage(image);
-		return index;
-	}
-	
 	public void setPos(Point2D newPos) {
-		//oldPos = (Point2D) myPos.getValue();
-		//myPos.setValue(newPos);
-		oldPos = myPos;
 		myPos = newPos;
-	}
-	
-	public void setShape(int index) {
-		shape = index;
 	}
 }
