@@ -86,7 +86,7 @@ public class Turtle {
 		return oldPos;
 	}
 	
-	public ObjectObservable getObjectObservable() {
+	public ObjectObservable getPosObservable() {
 		return myPos;
 	}
 	
