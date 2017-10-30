@@ -11,4 +11,8 @@ public class Left extends Turn{
 	public double execute(Turtle t) {
 		return turn(t, 1);
 	}
+	@Override
+	public int getNumParam() {
+		return 1;
+	}
 }

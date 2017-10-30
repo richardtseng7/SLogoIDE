@@ -11,4 +11,8 @@ public class Backward extends Movement{
 	public double execute(Turtle t) {
 		return move(t, -1);
 	}
+	@Override
+	public int getNumParam() {
+		return 1;
+	}
 }

@@ -15,4 +15,8 @@ public class HideTurtle extends Visible{
 	public double execute(Turtle t) {
 		return show(t, false);
 	}
+	@Override
+	public int getNumParam() {
+		return 0;
+	}
 }

@@ -41,7 +41,7 @@ public class SlogoParser {
 		
 		HashMap<String, String> langMap = new HashMap<String, String>();
 		ResourceBundle resources = ResourceBundle.getBundle(string);
-		System.out.println(resources.keySet().toString());
+		//System.out.println(resources.keySet().toString());
 		for (String key : resources.keySet()) {
 			if (resources.getString(key).contains("|")) {
 				String[] allTrans = resources.getString(key).split("\\|");
