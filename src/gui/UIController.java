@@ -59,13 +59,15 @@ public class UIController {
 
 		lc = new LogicCenter();
 		
-		turtleObs = new TurtleObserver(m);
+		turtleObs = new TurtleObserver(m, gui.canvasPane);
 		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
 		
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
+		
+		initAddTurtleButton();
 		
 		updateTurtleTabs();
 			
@@ -87,8 +89,18 @@ public class UIController {
 		});
 	}
 
+	private void initAddTurtleButton() {
+		gui.addTurtle.setOnAction((event) -> {
+			m.addTurtle();
+			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
+			updateTurtleTabs();
+		});
+		
+	}
+
 	private void updateTurtleTabs() {
 		turtleTab = new TurtleInfoTabs(m);
+		gui.turtleInfo.getTabs().clear();
 		for(Tab tab:turtleTab.tabList) {
 			gui.turtleInfo.getTabs().add(tab);
 		}
@@ -102,33 +114,24 @@ public class UIController {
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
-			lc.doInstructions(input,m.getTurtle(1));
+			lc.doInstructions(input,m);
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
+			updateTurtleTabs();
 		});
 	}
 	
 	public void storeOriginalPos(Turtle t) {
 		originalPos = t.getPos();
 	}
-	
-	public void updateScene(Turtle t) {
-		Line penLine = new Line(t.getPos().getX(),t.getPos().getY(), originalPos.getX(), originalPos.getY());
-		t.getImageView().setX(t.getPos().getX());
-		t.getImageView().setY(t.getPos().getY());
-		gui.canvasPane.getChildren().add(penLine);
-		
-	}
-	
-	protected void updateImage(String fileName) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-		m.getTurtle(1).getImageView().setImage(image);
-		//Will need to change iterate over all turtles
-	}
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
+	}
+	
+	public Model getModel() {
+		return m;
 	}
 
 }
