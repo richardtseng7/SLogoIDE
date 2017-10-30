@@ -48,16 +48,13 @@ public class GUI {
 	protected static final int TURTLELIST_WIDTH = 240;
 			
 	protected Dimension2D canvasDimension;
-	
 	protected BorderPane mainPane;
-	
 	
 	//Canvas and turtle
 	protected Pane canvasPane;
 	protected Node canvas;
 	protected TabPane turtleInfo;
 	
-
 	//Input and Input History
 	private Node inputVBox;
 	protected TextArea textInput;
@@ -94,8 +91,7 @@ public class GUI {
 	
 	protected void init() {
 		mainPane = new BorderPane();
-		
-		
+
 		newButton = new Button("New");
 		editButton = new MenuButton("Edit...");
 		canvasColor = new MenuItem("Canvas Settings");
@@ -142,15 +138,13 @@ public class GUI {
 		historyScroll.setContent(inputHistory);
 		runButton = new Button("Run");
 		
-		
 		inputVBox = new VBox(5);
 		((VBox) inputVBox).getChildren().addAll(historyScroll,inputScroll,runButton);
 		inputWindow = new Window("Input Your Code");
 		setWindow(inputWindow,INPUT_WIDTH,INPUT_HEIGHT,5,0).getContentPane().getChildren().add(inputVBox);
 		turtleInfoWindow = new Window("Turtle Information");
 		setWindow(turtleInfoWindow,TURTLELIST_WIDTH,TURTLELIST_HEIGHT,INPUT_WIDTH+10,0).getContentPane().getChildren().add(turtleInfo);
-		
-		
+			
 		variablesText = new ListView<String>();
 		variablesText.getItems().add("test:10");
 		variablesText.setPrefSize(LISTS_WIDTH, LISTS_HEIGHT);
@@ -167,9 +161,7 @@ public class GUI {
 		windowCanvas = new Pane();
 		windowCanvas.setPrefSize(RIGHTPANE_WIDTH, 600);
 		windowCanvas.getChildren().addAll(inputWindow,turtleInfoWindow,variablesWindow,methodsWindow);
-		
-
-		
+				
 		mainPane.setRight(windowCanvas);
 		BorderPane.setMargin(windowCanvas, new Insets(20,10,0,0));
 	}
@@ -180,6 +172,5 @@ public class GUI {
 		window.setLayoutY(startY);
 		window.getLeftIcons().add(new MinimizeIcon(window));
 		return window;
-	}
-	
+	}	
 }

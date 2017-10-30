@@ -9,7 +9,7 @@ import model.turtle.Turtle;
 public class SetPenColor extends Command{
 	@Override
 	public double execute(Turtle t){
-		t.getPen().setPenColor(0);
-		return t.getPen().getPenColor();
+		t.getPen().setPenColorIndex(0);
+		return t.getPen().getPenColorIndex();
 	}
 }
