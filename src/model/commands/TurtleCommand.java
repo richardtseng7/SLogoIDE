@@ -14,10 +14,4 @@ public class TurtleCommand extends Command{
 	public double executeOnTurtle(Turtle t) throws RuntimeException {
 		return 0;
 	}
-
-	@Override
-	public double execute(Turtle t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

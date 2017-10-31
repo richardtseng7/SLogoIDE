@@ -39,6 +39,4 @@ public abstract class Command {
 	public int getNumParam() {
 		return 0;
 	}
-	
-	public abstract double execute(Turtle t);
 }
