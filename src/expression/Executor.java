@@ -22,10 +22,6 @@ public class Executor extends ExpressionTree {
 		
 		else if(current.type.equals("Variable")) { 
 			return current.value;
-			/*
-			try{ return myTurtle.getVariablesMap().getVariables(current.value).toString(); }
-			catch (Exception ex) { return current.value;}
-			*/
 		}
 		
 		Factory fact = new Factory(current.value);
@@ -33,6 +29,13 @@ public class Executor extends ExpressionTree {
 		Object[] args = new Object[1+Math.abs(numargs)];
 		args[0] = myTurtle;
 		
+		sorter(current, numargs, args);		
+		//System.out.println(args[1]);
+		Object temp = fact.setArgs(args);
+		return temp.toString();
+	}
+
+	private void sorter(Node current, int numargs, Object[] args) {
 		if(current.type.equals("Conditional")){ 
 			if(current.value.equals("Repeat")){
 				int expr = Integer.parseInt(current.expr.executeStarter());
@@ -72,7 +75,9 @@ public class Executor extends ExpressionTree {
 				args[2] = d2;
 			}
 		}
-
+		else if(current.value.equals("SetPalette")){
+			for(int i = 1; i<5; i++){ args[i] = Double.parseDouble(NodeList.get(i).value);}
+		}
 		else if(numargs == 1){ 
 			Double d = Double.parseDouble(executeFromTreeNode(current.left));
 			args[1] = d;
@@ -83,10 +88,7 @@ public class Executor extends ExpressionTree {
 			
 			args[1] = d1;
 			args[2] = d2;
-		}		
-		//System.out.println(args[1]);
-		Object temp = fact.setArgs(args);
-		return temp.toString();
+		}
 	}
 	
 	private void branchOut(Node current){

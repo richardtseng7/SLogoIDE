@@ -47,7 +47,6 @@ public class Node extends Command {
 	
 	
 
-	@Override
 	public double execute(Turtle t) {
 		// TODO Auto-generated method stub
 		return 0;
