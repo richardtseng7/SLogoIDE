@@ -6,16 +6,17 @@ import expression.Executor;
 import model.turtle.Turtle;
 
 public class For {
-	public double execute(Turtle t, String var, int start, int end, String incr, ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds) {
-		Executor e = new Executor(input, symbol, layers, bracketBounds, t);
-		for(int i = start; i< end; i= i + 1 /*incr.val*/){
-			
+	public double execute(Turtle t, String var, int start, int end, String incr, Executor e) {
+		double returnval = 0;
+		for(int i = start; i< end; i= (int) (i + t.getVariablesMap().getVariables(incr))){
+			t.getVariablesMap().setVariables(var, (double)i);
+			e.executeStarter();
 		}
-		return 0;
+		return returnval;
 		//need variables
 	}
 	
 	public int getNumParam() {
-		return 9;
+		return 5;
 	}
 }

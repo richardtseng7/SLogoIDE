@@ -18,7 +18,14 @@ public class Executor extends ExpressionTree {
 	private String executeFromTreeNode(Node current){
 		//System.out.println(current.type.toString());
 		if(current.type.equals("Constant")){return current.value;}
-		else if(current.type.equals("Variable")) { return current.value;}
+		
+		else if(current.type.equals("Variable")) { 
+			return current.value;
+			/*
+			try{ return myTurtle.getVariablesMap().getVariables(current.value).toString(); }
+			catch (Exception ex) { return current.value;}
+			*/
+		}
 		
 		Factory fact = new Factory(current.value);
 		int numargs = fact.numComs();
@@ -32,10 +39,16 @@ public class Executor extends ExpressionTree {
 				args[2] = current.c1;
 			}
 			else if(current.value.equals("DoTimes")){
-				
+				String varVal = current.c1.executeStarter();
+				args[1] = varVal;
+				args[2] = current.c2;
 			}
 			else if(current.value.equals("For")){
-				
+				args[1] = current.c1.NodeList.get(0).value.toString();
+				args[2] = Integer.parseInt(current.c1.NodeList.get(1).value);
+				args[3] = Integer.parseInt(current.c1.NodeList.get(2).value);
+				args[4] = current.c1.NodeList.get(3).value.toString();
+				args[5] = current.c2;
 			}
 			else if(current.value.equals("If")){
 				boolean expr = Boolean.parseBoolean(current.expr.executeStarter());
