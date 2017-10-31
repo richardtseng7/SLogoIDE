@@ -7,8 +7,8 @@ import model.turtle.Turtle;
  *
  */
 public class SetPenSize extends Command{
-	public double execute(Turtle t, int pixels) {
-		t.getPen().setPenSize(pixels);
+	public double execute(Turtle t, double pixels) {
+		t.getPen().setPenSize((int) pixels);
 		return t.getPen().getPenSize();
 	}
 	

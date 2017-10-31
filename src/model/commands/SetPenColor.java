@@ -7,8 +7,8 @@ import model.turtle.Turtle;
  *
  */
 public class SetPenColor extends Command{
-	public double execute(Turtle t, int index){
-		t.getPen().setPenColorIndex(index);
+	public double execute(Turtle t, double index){
+		t.getPen().setPenColorIndex((int) index);
 		return t.getPen().getPenColorIndex();
 	}
 	

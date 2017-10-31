@@ -7,8 +7,8 @@ import model.turtle.Turtle;
  *
  */
 public class SetShape extends Command{
-	public double execute(Turtle t, int index) {
-		t.setShape(index);
+	public double execute(Turtle t, double index) {
+		t.setShape((int) index);
 		return t.getShape();
 	}
 	

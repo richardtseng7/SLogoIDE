@@ -7,7 +7,7 @@ import model.turtle.Turtle;
  *
  */
 public class SetBackground extends Command{
-	public double execute(Turtle t, int index) {
+	public double execute(Turtle t, double index) {
 		
 		return 0;
 	}
