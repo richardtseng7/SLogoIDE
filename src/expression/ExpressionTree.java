@@ -60,6 +60,7 @@ public abstract class ExpressionTree {
 			numArguments =  comms.numComs();
 		}
 		
+		System.out.println(NodeList.get(i).getType());
 		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
 			//System.out.println("3");
 			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
@@ -85,49 +86,93 @@ public abstract class ExpressionTree {
 
 	private void ifConditional(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i) {
-		int outofbrackets = buildNodeList(bracketBounds, NodeList, i, pairsOfBrackets(input.get(i)));
 		
+		ArrayList<Integer> outofbrackets = buildNodeList(bracketBounds, NodeList, i, pairsOfBrackets(input.get(i)));
+		boolean numberExpr = numExpr(input.get(i));
+		int firstB = firstBracket(bracketBounds, NodeList, i);
 		
-		
-		NodeList.get(i).left = NodeList.get(outofbrackets + 1);
+		System.out.println("Here " + outofbrackets.toString());
+		if(input.get(i).equals("If") || input.get(i).equals("Repeat")) { 
+			exprCond(input, symbol, layers, bracketBounds, NodeList, i, firstB);
+			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets, firstB);
+			
+		}
+		else if(input.get(i).equals("IfElse") || input.get(i).equals("To")) {
+			exprCond(input, symbol, layers, bracketBounds, NodeList, i, firstB);
+			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets, firstB);
+			twoCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
+		}
+		else{
+			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets, firstB);
+			twoCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
+		}
+		NodeList.get(i).left = NodeList.get(Collections.max(outofbrackets) + 1);
+	}
+
+	private void twoCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
+			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, ArrayList<Integer> outofbrackets) {
+		System.out.println("here");
+		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
+				new ArrayList<String>(symbol.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
+				new ArrayList<Integer>(layers.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
+				new ArrayList<Integer>(bracketBounds.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), myTurtle));
+	}
+
+	private void oneCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
+			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, ArrayList<Integer> outofbrackets,
+			int firstB) {
+		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(firstB+1, 1+outofbrackets.get(0))), 
+				new ArrayList<String>(symbol.subList(firstB+1, 1+outofbrackets.get(0))), 
+				new ArrayList<Integer>(layers.subList(firstB+1, 1+outofbrackets.get(0))), 
+				new ArrayList<Integer>(bracketBounds.subList(firstB+1, 1+outofbrackets.get(0))), myTurtle));
+	}
+
+	private void exprCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
+			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int firstB) {
+		NodeList.get(i).setCondExpr(new Executor(new ArrayList<String>(input.subList(i+1, firstB+1)), 
+			new ArrayList<String>(symbol.subList(i+1, firstB+1)), 
+			new ArrayList<Integer>(layers.subList(i+1, firstB+1)), 
+			new ArrayList<Integer>(bracketBounds.subList(i+1, firstB+1)), myTurtle));
+	}
+	
+	private int firstBracket(ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i){
+		for(int j = i; j < NodeList.size(); j++){
+			if(bracketBounds.get(j) == 1){
+				return j;
+			}
+		}
+		return -1;
 	}
 	
 	private int pairsOfBrackets(String comm){
 		if(comm.equals("Repeat") || comm.equals("If")) { return 1;}
 		else {return 2;}
 	}
-
-	private void twoCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int outofbrackets) {
-		oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
-		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
-				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
-				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
-				new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets)), myTurtle));
+	
+	private boolean numExpr(String comm){
+		if(comm.equals("DoTimes") || comm.equals("For")){ return false;}
+		else {return true;}
 	}
 
-	private void oneCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
-			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int outofbrackets) {
-		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(i+1, outofbrackets)), 
-				new ArrayList<String>(symbol.subList(i+1, outofbrackets)), 
-				new ArrayList<Integer>(layers.subList(i+1, outofbrackets)), 
-				new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets)), myTurtle));
-	}
-
-	private int[] buildNodeList(ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int numbrackets) {
+	private ArrayList<Integer> buildNodeList(ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int numbrackets) {
 		int outofbrackets1 = -1;
 		int outofbrackets2 = -1;
-		boolean oneBracketPair = false;
+		int BracketPairs = 0;
 		for(int j = i; j < NodeList.size(); j++){
 			if(bracketBounds.get(j) == -1){
-				if(numbrackets == 1 && !oneBracketPair){
-					outofbrackets1 = j;
-				}
-				if(numbrackets )
-				oneBracketPair = !oneBracketPair;
-				break;
+				if(BracketPairs==0){ 	outofbrackets1 = j; }
+				else if (BracketPairs == 1) { outofbrackets2 = j;}
+				BracketPairs++;
+				if(outofbrackets1 != -1) {	break;}
+			}
+			else if(bracketBounds.get(j) == 2){
+				outofbrackets1 = j;
+				BracketPairs++;
 			}
 		}
-		return {outofbrackets1, outofbrackets2};
+		ArrayList<Integer> returnarr  = new ArrayList<Integer>();
+		returnarr.add(outofbrackets1);
+		returnarr.add(outofbrackets2);
+		return returnarr;
 	}
 }

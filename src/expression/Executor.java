@@ -17,7 +17,6 @@ public class Executor extends ExpressionTree {
 	
 	private String executeFromTreeNode(Node current){
 		//System.out.println(current.type.toString());
-		
 		if(current.type.equals("Constant")){return current.value.toString();}
 		
 		Factory fact = new Factory(current.value);
@@ -27,7 +26,9 @@ public class Executor extends ExpressionTree {
 		
 		if(current.type.equals("Conditional")){ 
 			if(current.value.equals("Repeat")){
-				
+				int expr = Integer.parseInt(current.expr.executeStarter());
+				args[1] = expr;
+				args[2] = current.c1;
 			}
 			else if(current.value.equals("DoTimes")){
 				
@@ -36,10 +37,15 @@ public class Executor extends ExpressionTree {
 				
 			}
 			else if(current.value.equals("If")){
-				
+				boolean expr = Boolean.parseBoolean(current.expr.executeStarter());
+				args[1] = expr;
+				args[2] = current.c1;
 			}
 			else if(current.value.equals("IfElse")){
-				
+				boolean expr = Boolean.parseBoolean(current.expr.executeStarter());
+				args[1] = expr;
+				args[2] = current.c1;
+				args[3] = current.c2;
 			}
 			else if(current.value.equals("To")){
 				

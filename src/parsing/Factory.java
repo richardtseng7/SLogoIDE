@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import expression.Executor;
 import model.commands.Command;
 import model.turtle.Turtle;
 
@@ -42,6 +43,8 @@ public class Factory {
                     params[i] = Boolean.TYPE;
                 } else if (args[i] instanceof ArrayList){
                 	params[i] = ArrayList.class;
+                } else if (args[i] instanceof Executor){
+                	params[i] = Executor.class;
                 }
                 else{ System.out.println("NONE");}
             }
