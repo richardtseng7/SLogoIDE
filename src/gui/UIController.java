@@ -1,6 +1,11 @@
 package gui;
 import logic.LogicCenter;
 import model.Model;
+import model.commands.Backward;
+import model.commands.Forward;
+import model.commands.Left;
+import model.commands.Movement;
+import model.commands.Right;
 import model.turtle.Turtle;
 import model.variables.Variables;
 import java.awt.Desktop;
@@ -19,6 +24,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -76,7 +82,6 @@ public class UIController {
 			varPop.showPopUp();
 		});
 		
-		
 		c = new Canvas(m, gui.canvasPane, gui.canvas);
 		m = new Model(gui.canvasDimension,variableStorage,c);
 		m.addTurtle();
@@ -98,6 +103,8 @@ public class UIController {
 		
 		initAddTurtleButton();
 		updateTurtleTabs();
+		
+		Scene.setOnKeyPressed((event) -> handleKeyInput(event.getCode()));
 
 		gui.canvasColor.setOnAction((event) -> {
 			canvasPop = new CanvasColorPopUp();
@@ -119,7 +126,6 @@ public class UIController {
 	}
 	
 	public void step(double elapsedTime) {
-		
 	}
 	
 	private void initRunButton() {
@@ -132,10 +138,7 @@ public class UIController {
 			updateTurtleTabs();
 		});
 	}
-	
-	private void updateVariables() {
-		
-	}
+
 	
 	private void updateTurtleTabs() {
 		turtleTab = new TurtleInfoTabs(m);
@@ -161,9 +164,32 @@ public class UIController {
 		});
 	}
 	
-	public void storeOriginalPos(Turtle t) {
-		originalPos = t.getPos();
+	private void handleKeyInput(KeyCode code) {
+		Forward fw = new Forward();
+		if (code == KeyCode.RIGHT) {
+			for(Turtle t:m.getActiveTurtles()) {
+	            	Right rt = new Right();
+	            	rt.execute(t, 90);
+			}  
+        }
+        else if (code == KeyCode.LEFT) {
+            for(Turtle t:m.getActiveTurtles()) {
+	            	Left lt = new Left();
+	            	lt.execute(t, 90);
+            }
+        }
+        else if (code == KeyCode.UP) {
+        		for(Turtle t:m.getActiveTurtles()) {
+	            fw.execute(t, 10);
+            }
+        }
+        else if (code == KeyCode.DOWN) {
+        		for(Turtle t:m.getActiveTurtles()) {
+	            	fw.execute(t, -10);
+        		}
+        }
 	}
+	
 
 	public javafx.scene.Scene getScene() {
 		return Scene;
