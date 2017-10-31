@@ -17,7 +17,8 @@ public class Executor extends ExpressionTree {
 	
 	private String executeFromTreeNode(Node current){
 		//System.out.println(current.type.toString());
-		if(current.type.equals("Constant")){return current.value.toString();}
+		if(current.type.equals("Constant")){return current.value;}
+		else if(current.type.equals("Variable")) { return current.value;}
 		
 		Factory fact = new Factory(current.value);
 		int numargs = fact.numComs();
@@ -69,7 +70,7 @@ public class Executor extends ExpressionTree {
 			args[1] = d1;
 			args[2] = d2;
 		}		
-		System.out.println(args[1]);
+		//System.out.println(args[1]);
 		Object temp = fact.setArgs(args);
 		return temp.toString();
 	}
