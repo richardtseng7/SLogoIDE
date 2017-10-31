@@ -2,6 +2,7 @@ package model.turtle;
 
 import java.util.Map;
 
+import gui.Canvas;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -26,11 +27,13 @@ public class Turtle extends TurtleProperties{
 	private Dimension2D canvasDimension;
 	private Pen myPen;
 	private Variables variablesMap;
+	private Canvas canvasObject;
 	
-	public Turtle(int ID, Dimension2D canvas, Variables variables) {
+	public Turtle(int ID, Dimension2D canvas, Variables variables, Canvas canvasObj) {
 		myID = ID;
 		variablesMap = variables;
 		canvasDimension = canvas;
+		canvasObject = canvasObj;
 		setHome();		
 		initializeImageView();
 		myPen = new Pen();
@@ -129,6 +132,10 @@ public class Turtle extends TurtleProperties{
 	
 	public Variables getVariablesMap() {
 		return variablesMap;
+	}
+	
+	public Canvas getCanvasObject() {
+		return canvasObject;
 	}
 	
 	public int setShape(int index) {

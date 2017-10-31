@@ -1,7 +1,16 @@
 package model.turtle;
 
 import java.util.HashMap;
+
 import java.util.Map;
+
+import javafx.scene.image.Image;
+
+/**
+ * 
+ * @author richardtseng, nathanlewis
+ *
+ */
 
 public class TurtleProperties {
 	
@@ -20,5 +29,9 @@ public class TurtleProperties {
 		turtleImages.put(1, IMAGE1);
 		turtleImages.put(2, IMAGE2);
 		turtleImages.put(3, IMAGE3);
+	}
+	
+	public Image getImage(int i) {
+		return new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(i)));
 	}
 }
