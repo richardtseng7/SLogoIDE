@@ -26,7 +26,6 @@ public class UIController {
 	public double FRAMES_PER_SECOND = 1;
 	public double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-	
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
@@ -43,39 +42,29 @@ public class UIController {
 	private TurtleObserver turtleObs;
 	private Canvas c;
 	
-	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step(SECOND_DELAY));
 		
 	    animation.setCycleCount(Timeline.INDEFINITE);
-	    animation.getKeyFrames().add(frame);
-	     
+	    animation.getKeyFrames().add(frame);    
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		
 		m = new Model(gui.canvasDimension);
-		
-		c = new Canvas(m, gui.canvasPane, gui.canvas);
-		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
-		
+		c = new Canvas(m, gui.canvasPane, gui.canvas);	
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
-		
 		lc = new LogicCenter();
-		
-		turtleObs = new TurtleObserver(m, c);
+		turtleObs = new TurtleObserver(m, c);		
 		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
-		
+		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
+
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
-		
 		initRunButton();
-		
 		initAddTurtleButton();
-		
 		updateTurtleTabs();
-			
+
 		gui.canvasColor.setOnAction((event) -> {
 			canvasPop = new CanvasColorPopUp();
 			canvasPop.showPopUp();
@@ -100,7 +89,6 @@ public class UIController {
 			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
 			updateTurtleTabs();
 		});
-		
 	}
 
 	private void updateTurtleTabs() {
@@ -114,7 +102,6 @@ public class UIController {
 	public void step(double elapsedTime) {
 		
 	}
-	
 	
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
@@ -142,5 +129,4 @@ public class UIController {
 	public Canvas getCanvas() {
 		return c;
 	}
-
 }
