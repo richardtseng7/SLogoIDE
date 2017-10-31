@@ -94,6 +94,7 @@ public class UIController {
 		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
 
 		colorPalette = new ColorPalette(c.getPalette());
+		c.addObserver(colorPalette);
 		gui.paletteWindow.getContentPane().getChildren().add(colorPalette.pane);
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
