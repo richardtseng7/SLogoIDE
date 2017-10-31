@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public class XCoordinate extends Command{
 	public double execute(Turtle t) {
-		return t.getHome().getX() - t.getXCor();
+		return t.getHome().getX() + t.getXCor();
 	}
 	
 	@Override
