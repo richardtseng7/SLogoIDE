@@ -20,28 +20,29 @@ public class TurtleObserver implements Observer {
 	private Model turtleModel;
 	private Pane canvasPane;
 	
-	public TurtleObserver(Model m, Pane p) {
+	public TurtleObserver(Model m, Canvas c) {
 		turtleModel = m;
-		canvasPane = p;
+		canvasPane = c.getPane();
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-			Turtle t = turtleModel.getTurtle(1);
-			Pen p = t.getPen();
-			if (p.getPenDown()) {
-				double offsetX = t.getImageView().getLayoutBounds().getWidth()/2;
-				double offsetY = t.getImageView().getLayoutBounds().getHeight()/2;
-				double oldPosX = t.getOldPos().getX() + offsetX;
-				double oldPosY = t.getOldPos().getY() + offsetY;
-				Line l = new Line(oldPosX, oldPosY, ((Point2D) arg).getX() + offsetX, ((Point2D) arg).getY() + offsetY);
-				l.setStrokeWidth(p.getPenSize());
-				l.setFill(p.getColor());
-				canvasPane.getChildren().add(l);
-				p.addLine(l);
+			for (Turtle t : turtleModel.getActiveTurtles()) {
+				Pen p = t.getPen();
+				if (p.getPenDown()) {
+					double offsetX = t.getImageView().getLayoutBounds().getWidth()/2;
+					double offsetY = t.getImageView().getLayoutBounds().getHeight()/2;
+					double oldPosX = t.getOldPos().getX() + offsetX;
+					double oldPosY = t.getOldPos().getY() + offsetY;
+					Line l = new Line(oldPosX, oldPosY, ((Point2D) arg).getX() + offsetX, ((Point2D) arg).getY() + offsetY);
+					l.setStrokeWidth(p.getPenSize());
+					l.setFill(p.getColor());
+					canvasPane.getChildren().add(l);
+					p.addLine(l);
+				}
+				t.getImageView().toFront();
+				t.getImageView().setX(((Point2D) arg).getX());
+				t.getImageView().setY(((Point2D) arg).getY());
 			}
-			t.getImageView().toFront();
-			t.getImageView().setX(((Point2D) arg).getX());
-			t.getImageView().setY(((Point2D) arg).getY());
 	}
 }
