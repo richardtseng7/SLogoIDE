@@ -20,7 +20,7 @@ public class InputReader {
 	
 	public InputReader (SlogoParser lang, String input) {
 		String WHITESPACE = "\\s+";
-		parseText(lang, input.split(WHITESPACE));
+		parseText(lang, input.toLowerCase().split(WHITESPACE));
 		for(int i = 0; i<inputParsed.size()-countnonBracket(); i++){
 			brackets.add(0);
 			layers.add(0);
