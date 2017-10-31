@@ -8,9 +8,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.ObjectObservable;
+import model.variables.Variables;
 
 /**
- * @author richardtseng
+ * @author richardtseng, nathanlewis
  *
  */
 public class Turtle {
@@ -33,9 +34,11 @@ public class Turtle {
 	private int shape = 0;
 	private Dimension2D canvasDimension;
 	private Pen myPen;
+	private Variables variablesMap;
 	
-	public Turtle(int ID, Dimension2D canvas) {
+	public Turtle(int ID, Dimension2D canvas, Variables variables) {
 		myID = ID;
+		variablesMap = variables;
 		canvasDimension = canvas;
 		setHome();		
 		initializeImageView();
@@ -44,13 +47,13 @@ public class Turtle {
 		
 	//returns the turtle's X coordinate from the center of the screen
 	public double getXCor() {
-		return canvasDimension.getHeight() - ((Point2D) myPos.getValue()).getX();
+		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth()/2 ;
 		//return myPos.getX() - canvasDimension.getWidth();
 	}
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		return canvasDimension.getHeight() - ((Point2D) myPos.getValue()).getY();
+		return ((Point2D) myPos.getValue()).getY() - canvasDimension.getHeight()/2;
 		//return myPos.getY() - canvasDimension.getHeight();
 	}
 	
@@ -143,6 +146,10 @@ public class Turtle {
 		myPos.setValue(newPos);
 		//oldPos = myPos;
 		//myPos = newPos;
+	}
+	
+	public Variables getVariablesMap() {
+		return variablesMap;
 	}
 	
 	public void setShape(int index) {

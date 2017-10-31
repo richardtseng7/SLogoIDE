@@ -2,7 +2,7 @@ package gui;
 import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
-
+import model.variables.Variables;
 import java.awt.Desktop;
 import java.net.URL;
 import java.util.List;
@@ -23,6 +23,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class UIController {
 	
 	private static final String url = "https://www.cs.duke.edu/courses/compsci308/fall17/assign/03_slogo/commands.php";
@@ -42,6 +48,7 @@ public class UIController {
 	private KeyFrame frame;
 	private Model m;
 	private Point2D originalPos;
+	private Variables variableStorage;
 	private PositionObserver TurtlePositionObserver;
 	private HeadingObserver TurtleHeadingObserver;
 	private Canvas c;
@@ -54,7 +61,10 @@ public class UIController {
 	    animation.getKeyFrames().add(frame);    
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		m = new Model(gui.canvasDimension);
+		
+		variableStorage = new Variables();
+		
+		m = new Model(gui.canvasDimension,variableStorage);
 		c = new Canvas(m, gui.canvasPane, gui.canvas);	
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		

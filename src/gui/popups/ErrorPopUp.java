@@ -9,6 +9,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class ErrorPopUp extends PopUpScene{
 	
 	private String errorMessage;
