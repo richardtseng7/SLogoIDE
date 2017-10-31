@@ -93,6 +93,7 @@ public class SlogoParser {
     }
 
 	public String getTranslation(String text) {
+		text = text.toLowerCase();
 		ArrayList<Entry<String, String>> commandList = new ArrayList<Entry<String,String>>();
 		for(String s: myCommands.keySet()){
 			commandList.add(new SimpleEntry<String, String>(s, myCommands.get(s)));

@@ -3,6 +3,7 @@ package parsing;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import model.commands.Command;
 import model.turtle.Turtle;
@@ -40,6 +41,8 @@ public class Factory {
                     System.out.println("DOUB");
                 } else if (args[i] instanceof Boolean) {
                     params[i] = Boolean.TYPE;
+                } else if (args[i] instanceof ArrayList){
+                	params[i] = ArrayList.class;
                 }
                 else{ System.out.println("NONE");}
             }
