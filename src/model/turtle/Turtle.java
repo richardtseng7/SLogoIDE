@@ -1,6 +1,5 @@
 package model.turtle;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javafx.geometry.Dimension2D;
@@ -13,23 +12,18 @@ import model.ObjectObservable;
  * @author richardtseng
  *
  */
-public class Turtle {
+public class Turtle extends TurtleProperties{
 	
+	private Dimension2D canvasDimension;
 	private ImageView myImageView;
-	private static final String IMAGE1 = "Turtle_Slogo.png";
-	private static final String IMAGE2 = "Turtle 2.png";
-	private static final String IMAGE3 = "Turtle 3.png";
-	private Map<Integer, String> turtleImages;
-	private static final int TURTLE_SIZE = 30;
+	private final int myID;
+	private int shape = 0;
+	private Pen myPen;
+	private Point2D home;
 	private Point2D oldPos;
 	private ObjectObservable myPos;
-	private Point2D home;
-	private final int myID;
 	private ObjectObservable heading = new ObjectObservable(90.0);
 	private ObjectObservable showing = new ObjectObservable(true);
-	private int shape = 0;
-	private Dimension2D canvasDimension;
-	private Pen myPen;
 	
 	public Turtle(int ID, Dimension2D canvas) {
 		myID = ID;
@@ -65,6 +59,10 @@ public class Turtle {
 	
 	public int getID() {
 		return myID;
+	}
+	
+	public Map<Integer, String> getImageMap(){
+		return turtleImages;
 	}
 	
 	public ImageView getImageView() {
@@ -110,10 +108,6 @@ public class Turtle {
 	}
 	
 	private void initializeImageView() {
-		turtleImages = new HashMap<>();
-		turtleImages.put(1, IMAGE1);
-		turtleImages.put(2, IMAGE2);
-		turtleImages.put(3, IMAGE3);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
 		myImageView = new ImageView(image);
 		myImageView.setFitHeight(TURTLE_SIZE);
