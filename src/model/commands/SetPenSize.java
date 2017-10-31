@@ -7,9 +7,13 @@ import model.turtle.Turtle;
  *
  */
 public class SetPenSize extends Command{
-	@Override
-	public double execute(Turtle t) {
-		t.getPen().setPenSize(0);
+	public double execute(Turtle t, int pixels) {
+		t.getPen().setPenSize(pixels);
 		return t.getPen().getPenSize();
+	}
+	
+	@Override
+	public int getNumParam() {
+		return 1;
 	}
 }
