@@ -37,7 +37,7 @@ public class SlogoParser {
         myCommands.putAll(createLanguageMap("resources/languages/Spanish"));
         myCommands.putAll(createLanguageMap("resources/languages/Italian"));
         myCommands.putAll(createLanguageMap("resources/languages/German"));
-        myCommands.putAll(createLanguageMap("resources/languages/Portugese"));
+        myCommands.putAll(createLanguageMap("resources/languages/Portuguese"));
         myCommands.putAll(createLanguageMap("resources/languages/Russian"));
         //System.out.println(myCommands.toString());
     }
