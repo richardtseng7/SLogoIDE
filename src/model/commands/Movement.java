@@ -17,9 +17,4 @@ public abstract class Movement extends Command{
 		t.setPos(newPos);
 		return distance;
 	}
-
-	@Override
-	public int getNumParam() {
-		return 1;
-	}
 }

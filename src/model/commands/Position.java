@@ -14,9 +14,4 @@ public abstract class Position extends Command{
 		t.setPos(newPos);
 		return oldPos.distance(newPos);
 	}
-	
-	@Override
-	public int getNumParam() {
-		return 2;
-	}
 }
