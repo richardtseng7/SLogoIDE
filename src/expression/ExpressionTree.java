@@ -85,18 +85,16 @@ public abstract class ExpressionTree {
 
 	private void ifConditional(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
 			ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i) {
-		NodeList.get(i).left = NodeList.get(i+1);
-		int outofbrackets = -1;
-		outofbrackets = buildNodeList(layers, NodeList, i, outofbrackets);
-		if(outofbrackets != -1) { NodeList.get(i).left = NodeList.get(outofbrackets);}
+		int outofbrackets = buildNodeList(bracketBounds, NodeList, i, pairsOfBrackets(input.get(i)));
 		
-		if(NodeList.get(i).getItem() != "IfElse"){
-			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
-		}
-		else{
-			twoCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets);
-					
-		}
+		
+		
+		NodeList.get(i).left = NodeList.get(outofbrackets + 1);
+	}
+	
+	private int pairsOfBrackets(String comm){
+		if(comm.equals("Repeat") || comm.equals("If")) { return 1;}
+		else {return 2;}
 	}
 
 	private void twoCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
@@ -116,14 +114,20 @@ public abstract class ExpressionTree {
 				new ArrayList<Integer>(bracketBounds.subList(i+1, outofbrackets)), myTurtle));
 	}
 
-	private int buildNodeList(ArrayList<Integer> layers, ArrayList<Node> NodeList, int i,
-			int outofbrackets) {
-		for(int j = i+2; j < NodeList.size(); j++){
-			if(layers.get(j) == layers.get(i)){
-				outofbrackets = j;
+	private int[] buildNodeList(ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i, int numbrackets) {
+		int outofbrackets1 = -1;
+		int outofbrackets2 = -1;
+		boolean oneBracketPair = false;
+		for(int j = i; j < NodeList.size(); j++){
+			if(bracketBounds.get(j) == -1){
+				if(numbrackets == 1 && !oneBracketPair){
+					outofbrackets1 = j;
+				}
+				if(numbrackets )
+				oneBracketPair = !oneBracketPair;
 				break;
 			}
 		}
-		return outofbrackets;
+		return {outofbrackets1, outofbrackets2};
 	}
 }
