@@ -15,11 +15,8 @@ import model.variables.Variables;
  */
 public class Turtle extends TurtleProperties{
 	
-	private Dimension2D canvasDimension;
 	private ImageView myImageView;
 	private final int myID;
-	private int shape = 0;
-	private Pen myPen;
 	private Point2D home;
 	private Point2D oldPos;
 	private ObjectObservable myPos;
