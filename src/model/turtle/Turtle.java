@@ -85,7 +85,11 @@ public class Turtle {
 		return oldPos;
 	}
 	
-	public ObjectObservable getPosObservable() {
+	public ObjectObservable getHeadingObservable() {
+		return heading;
+	}
+	
+	public ObjectObservable getPositionObservable() {
 		return myPos;
 	}
 	

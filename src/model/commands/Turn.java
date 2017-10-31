@@ -13,15 +13,11 @@ public abstract class Turn extends Command {
 	    t.setHeading(newHeading);
 		return newHeading;
 	}
-	
-	
-	
+
 	@Override
 	public int getNumParam() {
 		return 1;
 	}
-
-
 
 	public double execute(Turtle t, double degrees) {
 		// TODO Auto-generated method stub
