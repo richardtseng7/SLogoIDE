@@ -64,6 +64,7 @@ public class ColorPalette implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Update Runs");
 		for(Map.Entry<Integer, Color> entry : ((HashMap<Integer, Color>) arg).entrySet()) {
 			if(entry.getValue() != colorIndex.get(entry.getKey())) {
 				rectangleMap.get(entry.getKey()).setFill(entry.getValue());

@@ -29,6 +29,7 @@ public class Model {
 		turtleID = 1;
 		variablesMap = variables;
 		canvasDimension = canvas;
+		canvasObject = canvasObj;
 		turtles = new HashMap<>();
 		activeTurtles = new ArrayList<>();
 	}
