@@ -41,14 +41,12 @@ public class Turtle extends TurtleProperties{
 		
 	//returns the turtle's X coordinate from the center of the screen
 	public double getXCor() {
-		return ((Point2D) myPos.getValue()).getX() - canvasDimension.getWidth()/2 ;
-		//return myPos.getX() - canvasDimension.getWidth();
+		return ((Point2D) myPos.getValue()).getX() - home.getX();
 	}
 	
 	//returns the turtle's Y coordinate from the center of the screen
 	public double getYCor() {
-		return ((Point2D) myPos.getValue()).getY() - canvasDimension.getHeight()/2;
-		//return myPos.getY() - canvasDimension.getHeight();
+		return  home.getY() - ((Point2D) myPos.getValue()).getY();
 	}
 	
 	//returns the turtle's heading in degrees
@@ -110,7 +108,7 @@ public class Turtle extends TurtleProperties{
 	}
 	
 	private void setHome() {
-		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
+		home = new Point2D(canvasDimension.getWidth()/2 - TURTLE_SIZE/2, canvasDimension.getHeight()/2 - TURTLE_SIZE/2);
 		oldPos = home;
 		myPos = new ObjectObservable(home);
 	}
@@ -129,7 +127,6 @@ public class Turtle extends TurtleProperties{
 		myPos.setValue(newPos);
 	}
 
-	
 	public Variables getVariablesMap() {
 		return variablesMap;
 	}
