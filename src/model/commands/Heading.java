@@ -4,15 +4,15 @@ import model.turtle.Turtle;
 
 /**
  * @author richardtseng
- *		
+ *
  */
-public class Forward extends Movement{
-	public double execute(Turtle t, double dist) {
-		return move(t, dist);
+public class Heading extends Command{
+	public double execute(Turtle t) {
+		return t.getHeading();
 	}
 	
 	@Override
 	public int getNumParam() {
-		return 1;
+		return 0;
 	}
 }

@@ -6,9 +6,13 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class SetXY extends Position{
-	@Override
+public class IsShowing extends Command{
 	public double execute(Turtle t) {
-		return moveTo(t, 0 + t.getHome().getX(), 0 + t.getHome().getY());
+		return t.getShowing();
+	}
+	
+	@Override
+	public int getNumParam() {
+		return 0;
 	}
 }

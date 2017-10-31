@@ -40,12 +40,4 @@ public class Node extends Command {
 	public void setCond2(Executor e){
 		c2 = e;
 	}
-
-
-	@Override
-	public double execute(Turtle t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }

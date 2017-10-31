@@ -36,7 +36,7 @@ public class PositionObserver implements Observer {
 					double oldPosY = t.getOldPos().getY() + offsetY;
 					Line l = new Line(oldPosX, oldPosY, ((Point2D) arg).getX() + offsetX, ((Point2D) arg).getY() + offsetY);
 					l.setStrokeWidth(p.getPenSize());
-					l.setFill(p.getColor());
+					l.setStroke(p.getColor());
 					canvasPane.getChildren().add(l);
 					p.addLine(l);
 				}

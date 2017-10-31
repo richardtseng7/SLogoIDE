@@ -1,6 +1,5 @@
 package model.turtle;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javafx.geometry.Dimension2D;
@@ -14,21 +13,16 @@ import model.variables.Variables;
  * @author richardtseng, nathanlewis
  *
  */
-public class Turtle {
+public class Turtle extends TurtleProperties{
 	
-	private ObjectObservable image;
+	private Dimension2D canvasDimension;
 	private ImageView myImageView;
-	//private ObjectObservable myImageView;
-	private static final String IMAGE1 = "Turtle_Slogo.png";
-	private static final String IMAGE2 = "Turtle 2.png";
-	private static final String IMAGE3 = "Turtle 3.png";
-	private Map<Integer, String> turtleImages;
-	private static final int TURTLE_SIZE = 30;
-	private Point2D oldPos;
-	//private Point2D myPos;
-	private ObjectObservable myPos;
-	private Point2D home;
 	private final int myID;
+	private int shape = 0;
+	private Pen myPen;
+	private Point2D home;
+	private Point2D oldPos;
+	private ObjectObservable myPos;
 	private ObjectObservable heading = new ObjectObservable(90.0);
 	private ObjectObservable showing = new ObjectObservable(true);
 	private int shape = 0;
@@ -59,7 +53,6 @@ public class Turtle {
 	
 	//returns the turtle's heading in degrees
 	public double getHeading(){
-		
 	    return (double) heading.getValue();
 	}
 	
@@ -74,6 +67,10 @@ public class Turtle {
 	
 	public int getID() {
 		return myID;
+	}
+	
+	public Map<Integer, String> getImageMap(){
+		return turtleImages;
 	}
 	
 	public ImageView getImageView() {
@@ -98,7 +95,6 @@ public class Turtle {
 	
 	public Point2D getPos() {
 		return (Point2D) myPos.getValue();
-		//return myPos;
 	}	
 	
 	public int getShape(){
@@ -117,35 +113,20 @@ public class Turtle {
 		home = new Point2D(canvasDimension.getWidth()/2, canvasDimension.getHeight()/2);
 		oldPos = home;
 		myPos = new ObjectObservable(home);
-		//myPos = home;
 	}
 	
 	private void initializeImageView() {
-		turtleImages = new HashMap<>();
-		turtleImages.put(1, IMAGE1);
-		turtleImages.put(2, IMAGE2);
-		turtleImages.put(3, IMAGE3);
-		image = new ObjectObservable(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1)));
-		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
-		myImageView = new ImageView((Image) image.getValue());
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
+		myImageView = new ImageView(image);
 		myImageView.setFitHeight(TURTLE_SIZE);
 		myImageView.setFitWidth(TURTLE_SIZE);
 		myImageView.setX(home.getX());
 		myImageView.setY(home.getY());
 	}
 	
-	private int setImageView(int index) {
-		image.setValue(new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index))));
-		//Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
-		myImageView.setImage((Image) image.getValue());
-		return index;
-	}
-	
 	public void setPos(Point2D newPos) {
 		oldPos = (Point2D) myPos.getValue();
 		myPos.setValue(newPos);
-		//oldPos = myPos;
-		//myPos = newPos;
 	}
 
 	
@@ -153,7 +134,10 @@ public class Turtle {
 		return variablesMap;
 	}
 	
-	public void setShape(int index) {
+	public int setShape(int index) {
 		shape = index;
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
+		myImageView.setImage(image);
+		return index;
 	}
 }

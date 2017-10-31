@@ -63,7 +63,7 @@ public class Executor extends ExpressionTree {
 			args[1] = d1;
 			args[2] = d2;
 		}		
-		System.out.println(args[1]);
+		//System.out.println(args[1]);
 		Object temp = fact.setArgs(args);
 		return temp.toString();
 	}

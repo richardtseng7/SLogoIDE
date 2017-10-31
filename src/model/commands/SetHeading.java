@@ -7,8 +7,12 @@ import model.turtle.Turtle;
  *
  */
 public class SetHeading extends Turn{
+	public double execute(Turtle t, double degrees) {
+		return turn(t, degrees - t.getHeading());
+	}
+	
 	@Override
-	public double execute(Turtle t) {
-		return turn(t, 0);
+	public int getNumParam() {
+		return 1;
 	}
 }

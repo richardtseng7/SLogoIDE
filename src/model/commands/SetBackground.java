@@ -7,9 +7,13 @@ import model.turtle.Turtle;
  *
  */
 public class SetBackground extends Command{
-	@Override
-	public double execute(Turtle t) {
-		// TODO Auto-generated method stub
+	public double execute(Turtle t, double index) {
+		
 		return 0;
+	}
+	
+	@Override
+	public int getNumParam() {
+		return 1;
 	}
 }
