@@ -9,8 +9,7 @@ import model.commands.Command;
 import model.turtle.Turtle;
 
 /**
- * @author Peilin Lai
- *      Paul Lee
+ * @author Paul Lee
  */
 
 public class Factory {

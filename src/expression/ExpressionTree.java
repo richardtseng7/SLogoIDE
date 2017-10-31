@@ -126,21 +126,4 @@ public abstract class ExpressionTree {
 		}
 		return outofbrackets;
 	}
-	
-	/*
-	public Node getHeader(){
-		return tree;
-	}
-	*/
-	
-	private ArrayList<Integer> indexAll(ArrayList<String> symbol){
-		ArrayList<Integer> returnlist = new ArrayList<Integer>();
-		for(int i = 0; i<symbol.size(); i++){
-			if(symbol.get(i) == "Command" || symbol.get(i) == "Conditional"){
-				returnlist.add(i);
-			}
-		}
-		return returnlist;
-	}
-	
 }
