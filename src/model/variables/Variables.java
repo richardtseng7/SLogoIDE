@@ -1,8 +1,9 @@
 package model.variables;
 
 import java.util.HashMap;
+import java.util.Observable;
 
-public class Variables {
+public class Variables extends Observable {
 	
 	private HashMap<String,Double> variablesMap;
 	
@@ -12,6 +13,8 @@ public class Variables {
 	
 	public void setVariables(String s, Double d) {
 		variablesMap.put(s, d);
+		setChanged();
+		notifyObservers(variablesMap);
 	}
 	
 	public Double getVariables(String s) {

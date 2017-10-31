@@ -159,7 +159,6 @@ public class GUI {
 		setWindow(turtleInfoWindow,TURTLELIST_WIDTH,TURTLELIST_HEIGHT,INPUT_WIDTH+10,0).getContentPane().getChildren().add(turtleInfo);
 			
 		variablesText = new ListView<String>();
-		variablesText.getItems().add("test:10");
 		variablesText.setPrefSize(LISTS_WIDTH, LISTS_HEIGHT);
 		methodsText = new ListView<String>();
 		methodsText.getItems().add("test method");
