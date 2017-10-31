@@ -1,5 +1,8 @@
 package parsing;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Peilin Lai
@@ -11,18 +14,28 @@ public class InputReader {
 	private ArrayList<String> inputParsed = new ArrayList<String>();
 	//inputParsedSymbols translates all constants in inputParsed into "Constant" symbols
 	private ArrayList<String> inputParsedSymbols = new ArrayList<String>();
-	private ArrayList<Integer> bracketOrder = new ArrayList<Integer>();
+	//private ArrayList<Integer> bracketOrder;// = new ArrayList<Integer>();
 	private ArrayList<Integer> brackets = new ArrayList<Integer>();
-	private ArrayList<Boolean> indexWarning = new ArrayList<Boolean>();
+	private ArrayList<Integer> layers = new ArrayList<Integer>();
 	
 	public InputReader (SlogoParser lang, String input) {
 		String WHITESPACE = "\\s+";
-		parseText(lang, input.split(WHITESPACE));
-		System.out.println(inputParsed.toString());
-		calcBracketOrder();
-		checkWarning();
-		cleanParsing();
+		parseText(lang, input.toLowerCase().split(WHITESPACE));
+		for(int i = 0; i<inputParsed.size()-countnonBracket(); i++){
+			brackets.add(0);
+			layers.add(0);
+		}
+		calcBracketOrder(0);
+		createLayers();
     }
+	
+	private void createLayers(){
+		int counter = 0;
+		for(int i = 0; i<brackets.size(); i++){
+			layers.set(i, counter);
+			counter += brackets.get(i);
+		}
+	}
 
 	// given some text, prints results of parsing it using the given language
     private void parseText (SlogoParser lang, String[] text) {
@@ -38,45 +51,40 @@ public class InputReader {
       
     }
     
-    private void calcBracketOrder() {
+    private void calcBracketOrder(int index) {
     		int order = 0;
-    		for (int i = 0; i<inputParsed.size(); i++) {
-    			if (inputParsed.get(i).equals("ListStart")) {
-    				order ++;
-    				brackets.add(i);
-    			}
-    			else if (inputParsed.get(i).equals("ListEnd")) {
-    				order--;
-    				brackets.add(i);
-    			}
-    			if (order<0) {
-    				//call error message: "error: unmatching brackets";
-    			}
-    			bracketOrder.add(order);
-    			indexWarning.add(false);
+    		int countafterbrackets = countnonBracket();
+    		int limit =inputParsed.size()- countafterbrackets;
+    		if(inputParsed.get(index).equals("[")){
+    			inputParsed.remove(index);
+    			inputParsedSymbols.remove(index);
+    			brackets.set(index - 1, 1);
+    			if(index == limit) {return;}
+    			calcBracketOrder(index);
     		}
-    		if (order != 0) {
-    			//call error message: "error: unmatching brackets";
+    		else if(inputParsed.get(index).equals("]")){
+    			inputParsed.remove(index);
+    			inputParsedSymbols.remove(index);
+    			brackets.set(index - 1, -1);
+    			if(index == limit) {return;}
+    			calcBracketOrder(index);
     		}
-    }
-    
-    private void checkWarning() {
-    		for (int i = 0; i<brackets.size(); i++) {
-    			if (brackets.get(i) == brackets.get(i+1)-1) {
-    				indexWarning.set(brackets.get(i)-1, true);
-    			}
+    		else{
+    			if(index < limit && inputParsed.size() > limit) calcBracketOrder(index+1);
     		}
     }
     
-    private void cleanParsing() {
-		for (int i = brackets.size()-1; i>= 0; i--) {
-			int index = brackets.get(i);
-			inputParsed.remove(index);
-			inputParsedSymbols.remove(index);
-			bracketOrder.remove(index);
-			indexWarning.remove(index);
-		}
-	}
+    
+    private int countnonBracket(){
+    	int count = 0;
+    	for(String s: inputParsed){
+    		if(s.equals("[") || s.equalsIgnoreCase("]")){
+    			count++;
+    		}
+    	}
+    	return count;
+    }
+    
 
 	public ArrayList<String> getInputParsed() {
 		return this.inputParsed;
@@ -87,13 +95,13 @@ public class InputReader {
 	}
 	
 	public ArrayList<Integer> getInputParsedType() {
-		return this.bracketOrder;
+		return this.layers;
 	}
 	
 	
 	//the special case where a ending bracket touches a starting bracket
-	public ArrayList<Boolean> getInputParsedBounds() {
-		return this.indexWarning;
+	public ArrayList<Integer> getInputParsedBounds() {
+		return this.brackets;
 	}
     
 }

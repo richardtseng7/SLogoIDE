@@ -29,13 +29,13 @@ public class LogicCenter {
 			//System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
 			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
-			ArrayList<Boolean> inputParsedBounds = reader.getInputParsedBounds();
+			ArrayList<Integer> inputParsedBounds = reader.getInputParsedBounds();
 			//System.out.println(inputParsedSymbols.toString());
 			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
 		}
 	}
 
-	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Boolean> inputParsedBounds, Model mod) {
+	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Integer> inputParsedBounds, Model mod) {
 		for (int i = 0; i<mod.getActiveTurtles().size(); i++) {
 			Turtle t = mod.getActiveTurtles().get(i);
 			Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);

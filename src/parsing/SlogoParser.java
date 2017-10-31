@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -63,7 +64,7 @@ public class SlogoParser {
 		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
 		Pattern variables = Pattern.compile(":[a-zA-Z]+");
 		if (match(text, commands)) {
-			if (cond.contains(text)) {
+			if (containCond(cond, text)) {
 				return "Conditional";
 			}
 			else return "Command";
@@ -78,11 +79,21 @@ public class SlogoParser {
 		else return text;
     }
 	
+	private boolean containCond(HashSet<String> cond2, String text) {
+		Iterator<String> it = cond2.iterator();
+	    while(it.hasNext()) {
+	    		if (it.next().equalsIgnoreCase(text))
+	    			return true;
+	    }
+		return false;
+	}
+
 	private boolean match (String text, Pattern regex) {
         return regex.matcher(text).matches();
     }
 
 	public String getTranslation(String text) {
+		text = text.toLowerCase();
 		ArrayList<Entry<String, String>> commandList = new ArrayList<Entry<String,String>>();
 		for(String s: myCommands.keySet()){
 			commandList.add(new SimpleEntry<String, String>(s, myCommands.get(s)));
@@ -92,7 +103,7 @@ public class SlogoParser {
 			if(e.getKey().equals(text)){
 				return e.getValue();
 			}
-			else if(text.matches("[-+]?\\d*\\.?\\d+")){
+			else if(text.matches("[-+]?\\d*\\.?\\d+") || text.equals("[") || text.equals("]")){
 				return text;
 			}
         }

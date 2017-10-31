@@ -3,6 +3,8 @@ import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
 import model.variables.Variables;
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,10 +31,10 @@ import javafx.util.Duration;
 
 public class UIController {
 	
+	private static final String url = "https://www.cs.duke.edu/courses/compsci308/fall17/assign/03_slogo/commands.php";
 	public double FRAMES_PER_SECOND = 1;
 	public double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
-	
 	private Scene Scene;
 	private Group root = new Group();
 	private GUI gui;
@@ -46,40 +48,42 @@ public class UIController {
 	private KeyFrame frame;
 	private Model m;
 	private Point2D originalPos;
-	private TurtleObserver turtleObs;
 	private Variables variableStorage;
-	
+	private PositionObserver TurtlePositionObserver;
+	private HeadingObserver TurtleHeadingObserver;
+	private Canvas c;
 	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> this.step(SECOND_DELAY));
 		
 	    animation.setCycleCount(Timeline.INDEFINITE);
-	    animation.getKeyFrames().add(frame);
-	     
+	    animation.getKeyFrames().add(frame);    
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
 		
 		variableStorage = new Variables();
 		
 		m = new Model(gui.canvasDimension,variableStorage);
+		c = new Canvas(m, gui.canvasPane, gui.canvas);	
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
-
 		lc = new LogicCenter();
-		
-		turtleObs = new TurtleObserver(m, gui.canvasPane);
-		m.getTurtle(1).getPosObservable().addObserver(turtleObs);
-		
+		TurtlePositionObserver = new PositionObserver(m, c);
+		TurtleHeadingObserver = new HeadingObserver(m);
+		m.getTurtle(1).getPositionObservable().addObserver(TurtlePositionObserver);
+		m.getTurtle(1).getHeadingObservable().addObserver(TurtleHeadingObserver);
+		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
+
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
-		
 		initRunButton();
 		
-		initAddTurtleButton();
+		initHelpButton();
 		
+		initAddTurtleButton();
 		updateTurtleTabs();
-			
+
 		gui.canvasColor.setOnAction((event) -> {
 			canvasPop = new CanvasColorPopUp();
 			canvasPop.showPopUp();
@@ -104,7 +108,6 @@ public class UIController {
 			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
 			updateTurtleTabs();
 		});
-		
 	}
 
 	private void updateTurtleTabs() {
@@ -119,7 +122,6 @@ public class UIController {
 		
 	}
 	
-	
 	private void initRunButton() {
 		gui.runButton.setOnAction((event) -> {
 			String input  = gui.textInput.getText();
@@ -128,6 +130,14 @@ public class UIController {
 			//Send string input to Parser
 			gui.textInput.clear();
 			updateTurtleTabs();
+		});
+	}
+	
+	private void initHelpButton() {
+		gui.helpButton.setOnAction((event) -> {
+			try {
+			    Desktop.getDesktop().browse(new URL(url).toURI());
+			} catch (Exception e) {}
 		});
 	}
 	
@@ -142,5 +152,8 @@ public class UIController {
 	public Model getModel() {
 		return m;
 	}
-
+	
+	public Canvas getCanvas() {
+		return c;
+	}
 }
