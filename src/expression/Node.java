@@ -4,7 +4,7 @@ import model.commands.Command;
 import model.turtle.Turtle;
 
 /**
- * @author Paul Lee
+ * @author Peilin Lai
  */
 
 
@@ -24,23 +24,28 @@ public class Node extends Command {
 	
 	private Turtle myT;
 	private String mySymbol;
-	private Executor c1, c2;
+	Executor c1, c2, expr;
 	
 	public String getItem(){
 		return value;
 	}
 	
 	public String getType(){
-		return mySymbol;
+		return type;
 	}
 	public void setCond1(Executor e){
+		System.out.println("Here: " + e.NodeList.get(0).value.toString());
 		c1 = e;
 	}
 	
 	public void setCond2(Executor e){
 		c2 = e;
 	}
-
+	public void setCondExpr(Executor e){
+		expr = e;
+	}
+	
+	
 
 	@Override
 	public double execute(Turtle t) {

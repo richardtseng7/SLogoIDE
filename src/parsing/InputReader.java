@@ -54,10 +54,12 @@ public class InputReader {
     		int order = 0;
     		int countafterbrackets = countnonBracket();
     		int limit =inputParsed.size()- countafterbrackets;
+    		//System.out.println(inputParsed.get(index));
     		if(inputParsed.get(index).equals("[")){
     			inputParsed.remove(index);
     			inputParsedSymbols.remove(index);
-    			brackets.set(index - 1, 1);
+    			if(brackets.get(index-1) == -1) { 	brackets.set(index - 1, 2); }
+    			else{brackets.set(index - 1, 1);}  			
     			if(index == limit) {return;}
     			calcBracketOrder(index);
     		}
