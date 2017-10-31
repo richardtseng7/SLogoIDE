@@ -14,10 +14,10 @@ import model.ObjectObservable;
 import model.turtle.Turtle;
 
 /**
- * @author richardtseng
+ * @author richardtseng,nathanlewis
  *
  */
-public class Canvas implements Observer{
+public class Canvas extends Observable implements Observer{
 	
 	private int background = 0;
 	private ObjectObservable myPen;
@@ -64,6 +64,8 @@ public class Canvas implements Observer{
 	
 	public void setPalette(int index, int r, int g, int b) {
 		palette.put(index, Color.rgb(r, g, b));
+		setChanged();
+		notifyObservers(palette);
 	}
 
 	@Override

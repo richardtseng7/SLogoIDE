@@ -8,7 +8,7 @@ import model.turtle.Turtle;
  */
 public class SetBackground extends Command{
 	public double execute(Turtle t, double index) {
-		
+		t.getCanvasObject().setBackground((int) index);
 		return 0;
 	}
 	

@@ -29,6 +29,10 @@ public abstract class PopUpScene {
 	public void showPopUp() {
 		popUpStage.show();
 	}
+	
+	public void closePopUp() {
+		popUpStage.close();
+	}
 
 	protected abstract Pane setUpPane();
 	
