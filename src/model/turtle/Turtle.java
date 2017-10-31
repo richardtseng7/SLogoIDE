@@ -11,7 +11,7 @@ import model.ObjectObservable;
 import model.variables.Variables;
 
 /**
- * @author richardtseng
+ * @author richardtseng, nathanlewis
  *
  */
 public class Turtle {

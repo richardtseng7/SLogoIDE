@@ -14,6 +14,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import model.turtle.Pen;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class PenColorPopUp extends PopUpScene{
 	
 	private ColorPicker colorPicker;

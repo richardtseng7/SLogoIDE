@@ -4,6 +4,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class Main extends Application{
 	public static final String TITLE = "SLogo";
 	public static final int HEIGHT = 600;

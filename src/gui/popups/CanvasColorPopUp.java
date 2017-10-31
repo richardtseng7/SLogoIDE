@@ -11,6 +11,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
 
 public class CanvasColorPopUp extends PopUpScene {
 	

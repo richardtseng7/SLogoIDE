@@ -7,6 +7,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import model.Model;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class TurtleInfoTabs {
 	
 	protected List<Tab> tabList;

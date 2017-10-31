@@ -3,7 +3,6 @@ import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
 import model.variables.Variables;
-
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +20,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
 
 public class UIController {
 	

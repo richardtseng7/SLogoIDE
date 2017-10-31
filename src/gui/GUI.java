@@ -1,7 +1,5 @@
 package gui;
 
-
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +34,12 @@ import jfxtras.scene.control.window.MinimizeIcon;
 import jfxtras.scene.control.window.Window;
 
 import javax.swing.*;
+
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
 
 public class GUI {
 	
