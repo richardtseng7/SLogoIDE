@@ -1,5 +1,6 @@
 package expression;
 import expression.Node;
+import gui.popups.ErrorPopUp;
 import model.turtle.Turtle;
 import parsing.Factory;
 
@@ -47,8 +48,7 @@ public abstract class ExpressionTree {
 			}
 		}
 		catch(Exception ex){
-			//ErrorPopUp(String error)
-			ex.printStackTrace();
+			ErrorPopUp error = new ErrorPopUp("Syntax Error: " + ex.toString());
 		}
 	}
 

@@ -3,6 +3,8 @@ import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,6 +25,7 @@ import javafx.util.Duration;
 
 public class UIController {
 	
+	private static final String url = "https://www.cs.duke.edu/courses/compsci308/fall17/assign/03_slogo/commands.php";
 	public double FRAMES_PER_SECOND = 1;
 	public double MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	public double SECOND_DELAY = 100.0/ FRAMES_PER_SECOND;
@@ -66,6 +69,8 @@ public class UIController {
 		root.getChildren().addAll(gui.mainPane);
 		
 		initRunButton();
+		
+		initHelpButton();
 		
 		initAddTurtleButton();
 		
@@ -119,6 +124,14 @@ public class UIController {
 			//Send string input to Parser
 			gui.textInput.clear();
 			updateTurtleTabs();
+		});
+	}
+	
+	private void initHelpButton() {
+		gui.helpButton.setOnAction((event) -> {
+			try {
+			    Desktop.getDesktop().browse(new URL(url).toURI());
+			} catch (Exception e) {}
 		});
 	}
 	
