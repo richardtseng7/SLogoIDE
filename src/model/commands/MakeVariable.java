@@ -10,8 +10,9 @@ import model.turtle.Turtle;
 
 public class MakeVariable {
 
-	public void execute(Turtle t, String s, Double d) {
+	public Double execute(Turtle t, String s, Double d) {
 		t.getVariablesMap().setVariables(s, d);
+		return d;
 	}
 	
 	public int getNumParam() {

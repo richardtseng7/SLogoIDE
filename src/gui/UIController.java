@@ -101,22 +101,6 @@ public class UIController {
 			penPop.showPopUp();
 		});
 	}
-
-	private void initAddTurtleButton() {
-		gui.addTurtle.setOnAction((event) -> {
-			m.addTurtle();
-			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
-			updateTurtleTabs();
-		});
-	}
-
-	private void updateTurtleTabs() {
-		turtleTab = new TurtleInfoTabs(m);
-		gui.turtleInfo.getTabs().clear();
-		for(Tab tab:turtleTab.tabList) {
-			gui.turtleInfo.getTabs().add(tab);
-		}
-	}
 	
 	public void step(double elapsedTime) {
 		
@@ -129,6 +113,26 @@ public class UIController {
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
+			updateTurtleTabs();
+		});
+	}
+	
+	private void updateVariables() {
+		
+	}
+	
+	private void updateTurtleTabs() {
+		turtleTab = new TurtleInfoTabs(m);
+		gui.turtleInfo.getTabs().clear();
+		for(Tab tab:turtleTab.tabList) {
+			gui.turtleInfo.getTabs().add(tab);
+		}
+	}
+	
+	private void initAddTurtleButton() {
+		gui.addTurtle.setOnAction((event) -> {
+			m.addTurtle();
+			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
 			updateTurtleTabs();
 		});
 	}
@@ -149,11 +153,5 @@ public class UIController {
 		return Scene;
 	}
 	
-	public Model getModel() {
-		return m;
-	}
 	
-	public Canvas getCanvas() {
-		return c;
-	}
 }
