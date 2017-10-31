@@ -52,6 +52,7 @@ public class UIController {
 	private PositionObserver TurtlePositionObserver;
 	private HeadingObserver TurtleHeadingObserver;
 	private Canvas c;
+	private ColorPalette colorPalette;
 	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -75,6 +76,8 @@ public class UIController {
 		m.getTurtle(1).getHeadingObservable().addObserver(TurtleHeadingObserver);
 		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
 
+		colorPalette = new ColorPalette(c.getPalette());
+		gui.paletteWindow.getContentPane().getChildren().add(colorPalette.pane);
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		initRunButton();
@@ -98,6 +101,7 @@ public class UIController {
 		
 		gui.penColor.setOnAction((event) -> {
 			penPop = new PenColorPopUp();
+			penPop.setTurtlePopUp(m);
 			penPop.showPopUp();
 		});
 	}

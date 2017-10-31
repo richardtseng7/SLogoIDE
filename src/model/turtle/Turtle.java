@@ -147,6 +147,7 @@ public class Turtle {
 		//oldPos = myPos;
 		//myPos = newPos;
 	}
+
 	
 	public Variables getVariablesMap() {
 		return variablesMap;
