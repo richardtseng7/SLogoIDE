@@ -81,7 +81,7 @@ public class GUI {
 	private Pane windowCanvas;
 	
 	//Active Variables and Methods
-	private ListView<String> variablesText;
+	protected ListView<String> variablesText;
 	private ListView<String> methodsText;
 	
 	//Toolbar Buttons

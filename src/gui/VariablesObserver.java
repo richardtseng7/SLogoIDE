@@ -25,7 +25,7 @@ public class VariablesObserver implements Observer {
 	public void update(Observable o, Object arg) {
 		variablesList.getItems().clear();
 		for(Entry<String, Double> entry : ((HashMap<String,Double>) arg).entrySet()) {
-			variablesList.getItems().add(entry.getKey() + " " + entry.getValue());
+			variablesList.getItems().add(entry.getKey().replaceAll(":", "") + ":" + entry.getValue());
 		}
 	}
 
