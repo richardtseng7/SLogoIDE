@@ -12,7 +12,7 @@ import model.turtle.Pen;
 import model.turtle.Turtle;
 
 /**
- * @author richardtseng, Nathan
+ * @author richardtseng, nathanlewis
  *
  */
 public class PositionObserver implements Observer {

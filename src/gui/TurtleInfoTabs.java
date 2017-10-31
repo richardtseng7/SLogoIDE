@@ -7,6 +7,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import model.Model;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class TurtleInfoTabs {
 	
 	protected List<Tab> tabList;
@@ -18,12 +24,12 @@ public class TurtleInfoTabs {
 			Tab tab = new Tab();
 			tab.setText("Turtle "+i);
 			infoList = new ListView<String>();
-			infoList.setPrefSize(GUI.TURTLELIST_WIDTH, 120); //Edit Height
+			infoList.setPrefSize(GUI.TURTLELIST_WIDTH, 120);
 			infoList.getItems().add("ID: "+i);
 			infoList.getItems().add("Position:");
-			infoList.getItems().add("x - " + 0); //replace with m.getTurtle(i).getXCor()
-			infoList.getItems().add("y - " + 0);	//m.getTurtle(i).getYCor()
-			infoList.getItems().add("Heading:" + 0); //m.getTurtle(i).getHeading()
+			infoList.getItems().add("x - " + m.getTurtle(i).getXCor());
+			infoList.getItems().add("y - " + m.getTurtle(i).getYCor());
+			infoList.getItems().add("Heading: " + m.getTurtle(i).getHeading());
 			tab.setContent(infoList);
 			tabList.add(tab);
 		}

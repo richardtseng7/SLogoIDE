@@ -2,7 +2,7 @@ package gui;
 import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
-
+import model.variables.Variables;
 import java.awt.Desktop;
 import java.net.URL;
 import java.util.List;
@@ -23,6 +23,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class UIController {
 	
 	private static final String url = "https://www.cs.duke.edu/courses/compsci308/fall17/assign/03_slogo/commands.php";
@@ -42,9 +48,11 @@ public class UIController {
 	private KeyFrame frame;
 	private Model m;
 	private Point2D originalPos;
+	private Variables variableStorage;
 	private PositionObserver TurtlePositionObserver;
 	private HeadingObserver TurtleHeadingObserver;
 	private Canvas c;
+	private ColorPalette colorPalette;
 	
 	public UIController (int width, int height, Paint background) {
 		frame  = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -54,7 +62,10 @@ public class UIController {
 	    animation.getKeyFrames().add(frame);    
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		m = new Model(gui.canvasDimension);
+		
+		variableStorage = new Variables();
+		
+		m = new Model(gui.canvasDimension,variableStorage);
 		c = new Canvas(m, gui.canvasPane, gui.canvas);	
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
@@ -65,6 +76,8 @@ public class UIController {
 		m.getTurtle(1).getHeadingObservable().addObserver(TurtleHeadingObserver);
 		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
 
+		colorPalette = new ColorPalette(c.getPalette());
+		gui.paletteWindow.getContentPane().getChildren().add(colorPalette.pane);
 		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		initRunButton();
@@ -88,24 +101,9 @@ public class UIController {
 		
 		gui.penColor.setOnAction((event) -> {
 			penPop = new PenColorPopUp();
+			penPop.setTurtlePopUp(m);
 			penPop.showPopUp();
 		});
-	}
-
-	private void initAddTurtleButton() {
-		gui.addTurtle.setOnAction((event) -> {
-			m.addTurtle();
-			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
-			updateTurtleTabs();
-		});
-	}
-
-	private void updateTurtleTabs() {
-		turtleTab = new TurtleInfoTabs(m);
-		gui.turtleInfo.getTabs().clear();
-		for(Tab tab:turtleTab.tabList) {
-			gui.turtleInfo.getTabs().add(tab);
-		}
 	}
 	
 	public void step(double elapsedTime) {
@@ -119,6 +117,26 @@ public class UIController {
 			gui.inputHistory.appendText(">"+input + "\n");
 			//Send string input to Parser
 			gui.textInput.clear();
+			updateTurtleTabs();
+		});
+	}
+	
+	private void updateVariables() {
+		
+	}
+	
+	private void updateTurtleTabs() {
+		turtleTab = new TurtleInfoTabs(m);
+		gui.turtleInfo.getTabs().clear();
+		for(Tab tab:turtleTab.tabList) {
+			gui.turtleInfo.getTabs().add(tab);
+		}
+	}
+	
+	private void initAddTurtleButton() {
+		gui.addTurtle.setOnAction((event) -> {
+			m.addTurtle();
+			gui.canvasPane.getChildren().add(m.getTurtle(m.getTurtles().size()).getImageView());
 			updateTurtleTabs();
 		});
 	}
@@ -139,11 +157,5 @@ public class UIController {
 		return Scene;
 	}
 	
-	public Model getModel() {
-		return m;
-	}
 	
-	public Canvas getCanvas() {
-		return c;
-	}
 }

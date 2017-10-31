@@ -26,7 +26,31 @@ public class Executor extends ExpressionTree {
 		args[0] = myTurtle;
 		
 		if(current.type.equals("Conditional")){ 
-			System.out.println("ABC");
+			if(current.value.equals("Repeat")){
+				
+			}
+			else if(current.value.equals("DoTimes")){
+				
+			}
+			else if(current.value.equals("For")){
+				
+			}
+			else if(current.value.equals("If")){
+				
+			}
+			else if(current.value.equals("IfElse")){
+				
+			}
+			else if(current.value.equals("To")){
+				
+			}
+		}
+		else if(current.value.equals("MakeVariable")){
+			String var = (executeFromTreeNode(current.left)).toString();
+			Double d2 = Double.parseDouble(executeFromTreeNode(current.right));
+			
+			args[1] = var;
+			args[2] = d2;
 		}
 		else if(numargs == 1){ 
 			Double d = Double.parseDouble(executeFromTreeNode(current.left));

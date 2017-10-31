@@ -6,6 +6,12 @@ import java.io.FileReader;
 import javax.swing.JTextArea;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author nathanlewis
+ *
+ */
+
 public class HelpPopUpMenu extends PopUpScene {
 
 	@Override
