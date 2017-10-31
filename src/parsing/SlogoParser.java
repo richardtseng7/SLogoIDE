@@ -27,7 +27,7 @@ import java.util.AbstractMap.SimpleEntry;
 public class SlogoParser {
 	private List<Entry<String, Pattern>> mySymbols = new ArrayList<Entry<String, Pattern>>();
 	private Map<String, String> myCommands = new TreeMap<String, String>();
-	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction"};
+	private static final String[] conditional = new String[] { "Repeat", "DoTimes", "For", "If", "IfElse", "MakeUserInstruction", "MakeVariable"};
 	private static final HashSet<String> cond = new HashSet<String>(Arrays.asList(conditional));
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
