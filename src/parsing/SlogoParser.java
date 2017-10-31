@@ -32,6 +32,13 @@ public class SlogoParser {
 	public SlogoParser (){
         mySymbols = new ArrayList<>();
         myCommands.putAll(createLanguageMap("resources/languages/English"));
+        myCommands.putAll(createLanguageMap("resources/languages/French"));
+        myCommands.putAll(createLanguageMap("resources/languages/Chinese"));
+        myCommands.putAll(createLanguageMap("resources/languages/Spanish"));
+        myCommands.putAll(createLanguageMap("resources/languages/Italian"));
+        myCommands.putAll(createLanguageMap("resources/languages/German"));
+        myCommands.putAll(createLanguageMap("resources/languages/Portugese"));
+        myCommands.putAll(createLanguageMap("resources/languages/Russian"));
         //System.out.println(myCommands.toString());
     }
 	
