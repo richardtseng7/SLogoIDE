@@ -1,5 +1,7 @@
 package logic;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import parsing.InputReader;
@@ -38,7 +40,7 @@ public class LogicCenter {
 	private void doLogic(ArrayList<String> inputParsed, ArrayList<String> inputParsedSymbols, ArrayList<Integer> inputParsedType, ArrayList<Integer> inputParsedBounds, Model mod) {
 		for (int i = 0; i<mod.getActiveTurtles().size(); i++) {
 			Turtle t = mod.getActiveTurtles().get(i);
-			Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
+			Executor tree = new Executor(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t, mod);
 			tree.executeStarter();
 		}
 	}

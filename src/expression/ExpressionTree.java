@@ -1,6 +1,7 @@
 package expression;
 import expression.Node;
 import gui.popups.ErrorPopUp;
+import model.Model;
 import model.turtle.Turtle;
 import parsing.Factory;
 
@@ -18,10 +19,12 @@ public abstract class ExpressionTree {
 	protected Node treeOfNodes;
 	protected ArrayList<Node> NodeList;
 	protected Turtle myTurtle;
-	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds,Turtle t) {
+	protected Model myModel;
+	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds,Turtle t, Model mod) {
 		//ArrayList<Integer> commIndexes = indexAll(symbol);
 		NodeList = new ArrayList<Node>();
 		myTurtle = t;
+		myModel = mod;
 		
 		System.out.println(input.toString());
 		System.out.println(symbol.toString());
@@ -119,11 +122,11 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(i+1, i+2)), 
 				new ArrayList<String>(symbol.subList(i+1, i+2)), 
 				new ArrayList<Integer>(layers.subList(i+1, i+2)), 
-				new ArrayList<Integer>(bracketBounds.subList(i+1, i+2)), myTurtle));
+				new ArrayList<Integer>(bracketBounds.subList(i+1, i+2)), myTurtle, myModel));
 		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(i+2, i+3)), 
 				new ArrayList<String>(symbol.subList(i+2, i+3)), 
 				new ArrayList<Integer>(layers.subList(i+2, i+3)), 
-				new ArrayList<Integer>(bracketBounds.subList(i+2, i+3)), myTurtle));
+				new ArrayList<Integer>(bracketBounds.subList(i+2, i+3)), myTurtle, myModel));
 	}
 
 	private void twoCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
@@ -132,7 +135,7 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCond2(new Executor(new ArrayList<String>(input.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
 				new ArrayList<String>(symbol.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
 				new ArrayList<Integer>(layers.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), 
-				new ArrayList<Integer>(bracketBounds.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), myTurtle));
+				new ArrayList<Integer>(bracketBounds.subList(outofbrackets.get(0)+1, 1+outofbrackets.get(1))), myTurtle, myModel));
 	}
 
 	private void oneCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
@@ -141,7 +144,7 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCond1(new Executor(new ArrayList<String>(input.subList(firstB+1, 1+outofbrackets.get(0))), 
 				new ArrayList<String>(symbol.subList(firstB+1, 1+outofbrackets.get(0))), 
 				new ArrayList<Integer>(layers.subList(firstB+1, 1+outofbrackets.get(0))), 
-				new ArrayList<Integer>(bracketBounds.subList(firstB+1, 1+outofbrackets.get(0))), myTurtle));
+				new ArrayList<Integer>(bracketBounds.subList(firstB+1, 1+outofbrackets.get(0))), myTurtle, myModel));
 	}
 
 	private void exprCond(ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers,
@@ -149,7 +152,7 @@ public abstract class ExpressionTree {
 		NodeList.get(i).setCondExpr(new Executor(new ArrayList<String>(input.subList(i+1, firstB+1)), 
 			new ArrayList<String>(symbol.subList(i+1, firstB+1)), 
 			new ArrayList<Integer>(layers.subList(i+1, firstB+1)), 
-			new ArrayList<Integer>(bracketBounds.subList(i+1, firstB+1)), myTurtle));
+			new ArrayList<Integer>(bracketBounds.subList(i+1, firstB+1)), myTurtle, myModel));
 	}
 	
 	private int firstBracket(ArrayList<Integer> bracketBounds, ArrayList<Node> NodeList, int i){
