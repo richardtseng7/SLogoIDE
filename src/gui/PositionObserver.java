@@ -15,12 +15,12 @@ import model.turtle.Turtle;
  * @author richardtseng, Nathan
  *
  */
-public class TurtleObserver implements Observer {
+public class PositionObserver implements Observer {
 	
 	private Model turtleModel;
 	private Pane canvasPane;
 	
-	public TurtleObserver(Model m, Canvas c) {
+	public PositionObserver(Model m, Canvas c) {
 		turtleModel = m;
 		canvasPane = c.getPane();
 	}
