@@ -1,6 +1,5 @@
 package model.commands;
 
-import expression.Node;
 import javafx.geometry.Point2D;
 import model.turtle.Turtle;
 
@@ -8,13 +7,12 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class Towards extends Node{
-	@Override
-	public double execute(Turtle t) {
+public class SetTowards extends Command{
+	public double execute(Turtle t, double xCor, double yCor) {
 		Point2D home = t.getHome();
 		Point2D oldPos = t.getPos();
-		double x = home.getX() + 0;
-		double y = home.getY() + 0;
+		double x = home.getX() + xCor;
+		double y = home.getY() + yCor;
 		double newHeading = Math.toDegrees(Math.atan2(x - oldPos.getY(), y - oldPos.getX()));
 		double oldHeading = t.getHeading();
 		t.setHeading(newHeading);

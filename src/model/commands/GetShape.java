@@ -2,17 +2,9 @@ package model.commands;
 
 import model.turtle.Turtle;
 
-/**
- * @author richardtseng
- *
- */
-public class ShowTurtle extends Visible{
-	/**
-	 * makes turtle visible
-	 * @return 1
-	 */
+public class GetShape extends Command{
 	public double execute(Turtle t) {
-		return show(t, true);
+		return t.getShape();
 	}
 	
 	@Override

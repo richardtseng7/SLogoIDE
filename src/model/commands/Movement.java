@@ -1,9 +1,6 @@
 package model.commands;
 
 import model.turtle.Turtle;
-
-import java.util.Queue;
-
 import javafx.geometry.Point2D;
 /**
  * @author richardtseng
@@ -12,7 +9,6 @@ import javafx.geometry.Point2D;
 public abstract class Movement extends Command{
 	
 	protected double move(Turtle t, double distance) {
-		//System.out.println(t.getYCor());
 		Point2D oldPos = t.getPos();
 		System.out.println(distance);
 		System.out.println(t.getXCor());
@@ -27,20 +23,5 @@ public abstract class Movement extends Command{
 		System.out.println(t.getXCor());
 		System.out.println(t.getYCor());
 		return distance;
-	}
-	/*
-	@Override
-	public void addmyParamType() {
-		myParamType.add("Double");
-	}*/
-	
-	@Override
-	public int getNumParam() {
-		return 1;
-	}
-
-	public double execute(Turtle t, double dist) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

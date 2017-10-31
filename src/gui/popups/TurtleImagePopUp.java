@@ -69,9 +69,10 @@ public class TurtleImagePopUp extends PopUpScene{
 	}
 
 	private void setTurtleSelect() {
-		for(int i=0; i<model.getTurtles().size(); i++) { //To change to no. of turtles
-			selectTurtle.getItems().add("Turtle " + (i+1));
+		for(int i=1; i<model.getTurtles().size()+1; i++) { //To change to no. of turtles
+			selectTurtle.getItems().add("Turtle " + (i));
 		}
+		selectTurtle.getSelectionModel().selectFirst();
 	}
 	
 	private ImageView createImageView(String filename) {

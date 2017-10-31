@@ -35,7 +35,6 @@ public class Pen {
 		myTrail.clear();
 	}
 	
-	
 	public Color getColor() {
 		return myColor;
 	}

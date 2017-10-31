@@ -45,7 +45,7 @@ public class GUI {
 	
 	private static final int CANVAS_HEIGHT = 500;
 	private static final int CANVAS_WIDTH = 500;
-	private static final int RIGHTPANE_WIDTH = 500;
+	private static final int RIGHTPANE_WIDTH = 700;
 	private static final int INPUT_WIDTH = 240;
 	private static final int INPUT_HEIGHT = 310;
 	private static final int LISTS_WIDTH = 240;
@@ -76,6 +76,7 @@ public class GUI {
 	private Window turtleInfoWindow;
 	private Window variablesWindow;
 	private Window methodsWindow;
+	protected Window paletteWindow;
 	
 	private Pane windowCanvas;
 	
@@ -170,9 +171,12 @@ public class GUI {
 		methodsWindow = new Window("User Defined Methods");
 		setWindow(methodsWindow,LISTS_WIDTH,LISTS_HEIGHT,INPUT_WIDTH+10,INPUT_HEIGHT+5).getContentPane().getChildren().add(methodsText);
 		
+		paletteWindow = new Window("Palette");
+		setWindow(paletteWindow,190,400,2*INPUT_WIDTH+15,0);
+		
 		windowCanvas = new Pane();
 		windowCanvas.setPrefSize(RIGHTPANE_WIDTH, 600);
-		windowCanvas.getChildren().addAll(inputWindow,turtleInfoWindow,variablesWindow,methodsWindow);
+		windowCanvas.getChildren().addAll(inputWindow,turtleInfoWindow,variablesWindow,methodsWindow,paletteWindow);
 				
 		mainPane.setRight(windowCanvas);
 		BorderPane.setMargin(windowCanvas, new Insets(20,10,0,0));

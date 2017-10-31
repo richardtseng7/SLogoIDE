@@ -7,9 +7,13 @@ import model.turtle.Turtle;
  *
  */
 public class SetShape extends Command{
-	@Override
-	public double execute(Turtle t) {
-		t.setShape(0);
+	public double execute(Turtle t, double index) {
+		t.setShape((int) index);
 		return t.getShape();
+	}
+	
+	@Override
+	public int getNumParam() {
+		return 1;
 	}
 }

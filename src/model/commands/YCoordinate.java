@@ -6,13 +6,9 @@ import model.turtle.Turtle;
  * @author richardtseng
  *
  */
-public class ShowTurtle extends Visible{
-	/**
-	 * makes turtle visible
-	 * @return 1
-	 */
+public class YCoordinate extends Command{
 	public double execute(Turtle t) {
-		return show(t, true);
+		return t.getHome().getY() - t.getYCor();
 	}
 	
 	@Override

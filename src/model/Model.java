@@ -30,7 +30,7 @@ public class Model {
 		turtles = new HashMap<>();
 		activeTurtles = new ArrayList<>();
 	}
-	
+
 	public void addTurtle() {
 		Turtle t = new Turtle(turtleID, canvasDimension,variablesMap);
 		turtles.put(turtleID, t);
