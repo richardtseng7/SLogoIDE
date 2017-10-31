@@ -9,6 +9,7 @@ import java.util.function.ToDoubleFunction;
 
 import javafx.geometry.Dimension2D;
 import model.turtle.Turtle;
+import model.variables.Variables;
 
 /**
  * @author richardtseng
@@ -20,16 +21,18 @@ public class Model {
 	private Dimension2D canvasDimension;
 	private Map<Integer, Turtle> turtles;
 	private List<Turtle> activeTurtles;
+	private Variables variablesMap;
 	
-	public Model(Dimension2D canvas) {
+	public Model(Dimension2D canvas, Variables variables) {
 		turtleID = 1;
+		variablesMap = variables;
 		canvasDimension = canvas;
 		turtles = new HashMap<>();
 		activeTurtles = new ArrayList<>();
 	}
 	
 	public void addTurtle() {
-		Turtle t = new Turtle(turtleID, canvasDimension);
+		Turtle t = new Turtle(turtleID, canvasDimension,variablesMap);
 		turtles.put(turtleID, t);
 		turtleID++;
 		makeActive(t);

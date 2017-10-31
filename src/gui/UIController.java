@@ -2,6 +2,7 @@ package gui;
 import logic.LogicCenter;
 import model.Model;
 import model.turtle.Turtle;
+import model.variables.Variables;
 
 import java.util.List;
 import java.util.Observable;
@@ -41,6 +42,7 @@ public class UIController {
 	private Model m;
 	private Point2D originalPos;
 	private TurtleObserver turtleObs;
+	private Variables variableStorage;
 	
 	
 	public UIController (int width, int height, Paint background) {
@@ -53,7 +55,9 @@ public class UIController {
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
 		
-		m = new Model(gui.canvasDimension);
+		variableStorage = new Variables();
+		
+		m = new Model(gui.canvasDimension,variableStorage);
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 

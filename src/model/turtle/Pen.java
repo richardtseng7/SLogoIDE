@@ -18,7 +18,7 @@ public class Pen {
 	private List<Line> myTrail;
 	//private boolean penDown = true;
 	private ObjectObservable penDown = new ObjectObservable(true);
-	private ObjectObservable thickness = new ObjectObservable(5);
+	private int thickness = 4;
 	private ObjectObservable color = new ObjectObservable(0);
 	private Color myColor;
 	private Map<Integer, Color> colorMap;
@@ -70,7 +70,7 @@ public class Pen {
 	}
 	
 	public int getPenSize(){
-		return (int) thickness.getValue();
+		return thickness;
 	}
 
 	public void setColorMap(int index, int r, int g, int b) {
@@ -91,6 +91,6 @@ public class Pen {
 	}
 	
 	public void setPenSize(int size) {
-		thickness.setValue(size);
+		thickness = size;
 	}
 }
