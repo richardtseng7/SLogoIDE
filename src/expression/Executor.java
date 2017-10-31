@@ -50,14 +50,14 @@ public class Executor extends ExpressionTree {
 			else if(current.value.equals("To")){
 				
 			}
+			else if(current.value.equals("MakeVariable")){
+				String var = (current.c1.executeStarter()).toString();
+				Double d2 = Double.parseDouble(current.c2.executeStarter());
+				args[1] = var;
+				args[2] = d2;
+			}
 		}
-		else if(current.value.equals("MakeVariable")){
-			String var = (executeFromTreeNode(current.left)).toString();
-			Double d2 = Double.parseDouble(executeFromTreeNode(current.right));
-			
-			args[1] = var;
-			args[2] = d2;
-		}
+
 		else if(numargs == 1){ 
 			Double d = Double.parseDouble(executeFromTreeNode(current.left));
 			args[1] = d;
