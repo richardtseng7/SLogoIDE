@@ -6,13 +6,43 @@ It allows users to execute simple commands in multiple different languages.
 
 <br/>
 
+## Contribution
 
-# User Interface
+Nathan Lewis (nbl7), Richard Tseng (rt120), Paul Lee (cl270), Peilin Lai (pl111)
 
-<br/>
+Date Started: 10/14/17  Date Finished: 10/31/17
 
+Estimated combined hours: 140 - 160 hours
 
-#  Input Specifications
+Nathan's Role: Nathan worked on developing the front-end of the project - the 'view' - as well as contributing to parts of the back-end where necessary such as instances where Observers in the front end needed to be linked to their Observable classes within the back end or GUI components edited specific values within the back-end of the program. He also completed a couple other miscellaneous tasks in the back-end when workload needed to be spreaded to achieve a specific goal.
+
+Richard's Role:
+
+Peilin's Role:
+
+Paul's Role:
+
+## Resources
+
+To complete the project we used a variety of online resources when necessary:
+* Java Official Documentation
+* Java2S JavaFX How To - http://www.java2s.com/Tutorials/Java/JavaFX_How_to/index.htm
+* JavaWorld Observer Observable article - https://www.javaworld.com/article/2077258/learn-java/observer-and-observable.html
+* Many specific StackOverflow question answers
+
+To start the project run the class Main which can be found in the default package of the Java project.
+
+In order for the program to run there is a .jar file in the lib folder of the project used to draw the resizable and moveable windows. This must be added with a custom build path to the Referenced Libraries of the project.
+
+## About the Program
+
+###  Input Specifications
+
+#### Key Input
+
+You may use the arrow keys on your keyboard to move the turtle forward by 10 and rotate by 90 degrees.
+
+#### Text Entry
 
 Each element of the command must be separated by space, otherwise it will be uncognizable and will pop up an error message window.
 
@@ -27,7 +57,7 @@ Please refer to the resources.languages package for dictionaries for commands.
 <br/>
 
 
-# Example Input
+#### Example Input
 
 1. When user types "fd 200", the turtle on the screen will move forward by 200 pixels, leaving a line on the path of movement.
 
@@ -35,4 +65,16 @@ Please refer to the resources.languages package for dictionaries for commands.
 
 3. When user types "penup", the turtle will leave no trace on the screen.
 
-<br/>
+
+### Assumptions
+
+* When changing properties of the pen it will change them for all future pen lines not existing.
+
+#### Front End - Known Errors
+
+* The 'New' button is not able to effectively clear the canvas.
+* The methods do not display as there is no way to store new methods in the back end.
+* Selecting active turtles graphically method didn't work, now not implemented.
+
+#### Back End - Known Erros
+
