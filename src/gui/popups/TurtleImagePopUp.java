@@ -85,14 +85,19 @@ public class TurtleImagePopUp extends PopUpScene{
 	
 	private void setTurtleButtonEvent() {
 		turtle1.setOnAction((event) -> {
-			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
+			model.getTurtle(parseComboValue(selectTurtle.getValue())).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)));
 		});
 		turtle2.setOnAction((event) -> {
-			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE2)));
+			model.getTurtle(parseComboValue(selectTurtle.getValue())).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE2)));
 		});
 		turtle3.setOnAction((event) -> {
-			model.getTurtle(0).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE3)));
+			model.getTurtle(parseComboValue(selectTurtle.getValue())).getImageView().setImage(new Image(getClass().getClassLoader().getResourceAsStream(IMAGE3)));
 		});
+	}
+	
+	private int parseComboValue(String s) {
+		String[] arr = s.split(" ");
+		return Integer.parseInt(arr[1]);
 	}
 	
 	
