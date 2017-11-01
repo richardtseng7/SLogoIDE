@@ -20,7 +20,7 @@ Richard's Role:
 
 Peilin's Role:
 
-Paul's Role:
+Paul's Role: Paul worked on the back end, the majority of the slogo parsing logic, expressiontree, executor of the expression tree which calls factory, factory which uses reflection to call commands, and also the math and booleean command classes.
 
 ## Resources
 
@@ -65,10 +65,15 @@ Please refer to the resources.languages package for dictionaries for commands.
 
 3. When user types "penup", the turtle will leave no trace on the screen.
 
+4. When user types "make :abc 1", "make :bcd 2 ", and then  "for [ :abc 2 6 :bcd ] [ fd :abc ] ", the turtle will move forward 2, then 4, then 6 pixels forward.
+
 
 ### Assumptions
 
 * When changing properties of the pen it will change them for all future pen lines not existing.
+
+* Loops and Conditionals that rely on variables (such as for) need said variables to be declared beforehand. 
+
 
 #### Front End - Known Errors
 
@@ -76,5 +81,6 @@ Please refer to the resources.languages package for dictionaries for commands.
 * The methods do not display as there is no way to store new methods in the back end.
 * Selecting active turtles graphically method didn't work, now not implemented.
 
-#### Back End - Known Erros
+#### Back End - Known Errors
 
+* The "To" command is not completely implemented.
