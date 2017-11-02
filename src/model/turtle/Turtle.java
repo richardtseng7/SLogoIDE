@@ -1,7 +1,6 @@
 package model.turtle;
 
 import java.util.Map;
-
 import gui.Canvas;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;

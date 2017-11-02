@@ -32,7 +32,7 @@ import javafx.util.Duration;
 
 /**
  * 
- * @author nathanlewis
+ * @author nathanlewis, richardtseng
  *
  */
 
@@ -82,8 +82,8 @@ public class UIController {
 			varPop.showPopUp();
 		});
 		
-		c = new Canvas(m, gui.canvasPane, gui.canvas);
 		m = new Model(gui.canvasDimension,variableStorage,c);
+		c = new Canvas(m, gui.canvasPane, gui.canvas);
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 		lc = new LogicCenter();
@@ -191,10 +191,8 @@ public class UIController {
         }
 	}
 	
-
 	public javafx.scene.Scene getScene() {
 		return Scene;
 	}
-	
-	
+		
 }

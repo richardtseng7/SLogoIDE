@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.Model;
-import model.ObjectObservable;
 import model.turtle.Turtle;
 
 /**
@@ -20,7 +19,6 @@ import model.turtle.Turtle;
 public class Canvas extends Observable implements Observer{
 	
 	private int background = 0;
-	private ObjectObservable myPen;
 	private Map<Integer, Color> palette;
 	private Pane canvasPane;
 	private Rectangle myCanvas;
