@@ -21,7 +21,7 @@ public class Executor extends ExpressionTree {
 		if(current.type.equals("Constant")){return current.value;}
 		
 		else if(current.type.equals("Variable")) { 
-			return current.value;
+		    return myTurtle.getVariablesMap().getVariables(current.value).toString();
 		}
 		
 		Factory fact = new Factory(current.value);
@@ -69,7 +69,7 @@ public class Executor extends ExpressionTree {
 				
 			}
 			else if(current.value.equals("MakeVariable")){
-				String var = (current.c1.executeStarter()).toString();
+				String var = NodeList.get(1+NodeList.indexOf(current)).value;
 				Double d2 = Double.parseDouble(current.c2.executeStarter());
 				args[1] = var;
 				args[2] = d2;
