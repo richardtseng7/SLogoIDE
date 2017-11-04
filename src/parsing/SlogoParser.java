@@ -39,7 +39,6 @@ public class SlogoParser {
         myCommands.putAll(createLanguageMap("resources/languages/German"));
         myCommands.putAll(createLanguageMap("resources/languages/Portuguese"));
         myCommands.putAll(createLanguageMap("resources/languages/Russian"));
-        //System.out.println(myCommands.toString());
     }
 	
 	
@@ -47,12 +46,10 @@ public class SlogoParser {
 		
 		HashMap<String, String> langMap = new HashMap<String, String>();
 		ResourceBundle resources = ResourceBundle.getBundle(string);
-		//System.out.println(resources.keySet().toString());
 		for (String key : resources.keySet()) {
 			if (resources.getString(key).contains("|")) {
 				String[] allTrans = resources.getString(key).split("\\|");
 				for (String indiTrans : allTrans) {
-					//System.out.println(indiTrans);
 					String s = indiTrans.trim();
 					s = s.replaceAll("\\\\", "");
 					s = s.replaceAll("\\?", "");
@@ -64,9 +61,7 @@ public class SlogoParser {
 		return langMap;
 	}
 	
-	public String getSymbol (String text) {
-        //for (Entry<String, Pattern> e : mySymbols) {
-		
+	public String getSymbol (String text) {		
 		Pattern constants = Pattern.compile("[-+]?\\d*\\.?\\d+");
 		Pattern commands = Pattern.compile("[a-zA-Z_]+(\\\\?)?|[*+-/%~]");
 		Pattern variables = Pattern.compile(":[a-zA-Z]+");

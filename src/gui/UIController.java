@@ -71,17 +71,13 @@ public class UIController {
 	    animation.getKeyFrames().add(frame);    
 		Scene = new Scene(root, width, height, background);
 		gui = new GUI();
-		
 		variableStorage = new Variables();
 		variableStorageObs = new VariablesObserver(gui.variablesText);
 		variableStorage.addObserver(variableStorageObs);
-		
 		gui.variablesText.getSelectionModel().selectedItemProperty().addListener((obs,oldVal,newVal) -> {
-			System.out.println("Clicked on, newVal = " + newVal);
 			varPop = new ChangeVariablePopUp(newVal, variableStorage);
 			varPop.showPopUp();
 		});
-		
 		m = new Model(gui.canvasDimension,variableStorage,c);
 		c = new Canvas(m, gui.canvasPane, gui.canvas);
 		m.addTurtle();
@@ -92,21 +88,15 @@ public class UIController {
 		m.getTurtle(1).getPositionObservable().addObserver(turtlePositionObserver);
 		m.getTurtle(1).getHeadingObservable().addObserver(turtleHeadingObserver);
 		m.getTurtle(1).getPen().getColorObservable().addObserver(c);
-
 		colorPalette = new ColorPalette(c.getPalette());
 		c.addObserver(colorPalette);
 		gui.paletteWindow.getContentPane().getChildren().add(colorPalette.pane);
-		//root.getChildren().add(gui.toolbar);
 		root.getChildren().addAll(gui.mainPane);
 		initRunButton();
-		
 		initHelpButton();
-		
 		initAddTurtleButton();
-		updateTurtleTabs();
-		
+		updateTurtleTabs();	
 		Scene.setOnKeyPressed((event) -> handleKeyInput(event.getCode()));
-
 		gui.canvasColor.setOnAction((event) -> {
 			canvasPop = new CanvasColorPopUp();
 			canvasPop.showPopUp();
@@ -139,7 +129,6 @@ public class UIController {
 			updateTurtleTabs();
 		});
 	}
-
 	
 	private void updateTurtleTabs() {
 		turtleTab = new TurtleInfoTabs(m);
@@ -193,6 +182,5 @@ public class UIController {
 	
 	public javafx.scene.Scene getScene() {
 		return Scene;
-	}
-		
+	}	
 }

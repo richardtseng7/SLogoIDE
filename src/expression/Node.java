@@ -1,7 +1,6 @@
 package expression;
 
 import model.commands.Command;
-import model.turtle.Turtle;
 
 /**
  * @author Peilin Lai
@@ -13,7 +12,6 @@ public class Node extends Command {
 	Node left, right, prev;
 	
 	public Node() {
-		
 	}
 	
 	public Node(String item, String symbol) {
@@ -22,8 +20,6 @@ public class Node extends Command {
 		type = symbol;
 	}
 	
-	private Turtle myT;
-	private String mySymbol;
 	Executor c1, c2, expr;
 	
 	public String getItem(){
@@ -34,22 +30,14 @@ public class Node extends Command {
 		return type;
 	}
 	public void setCond1(Executor e){
-		System.out.println("Here: " + e.NodeList.get(0).value.toString());
 		c1 = e;
 	}
 	
 	public void setCond2(Executor e){
 		c2 = e;
 	}
+	
 	public void setCondExpr(Executor e){
 		expr = e;
 	}
-	
-	
-
-	public double execute(Turtle t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }

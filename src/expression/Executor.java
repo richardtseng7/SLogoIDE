@@ -11,13 +11,10 @@ public class Executor extends ExpressionTree {
 	}
 	
 	public String executeStarter(){
-		//for(int i = 0; i < NodeList.size(); i++){ System.out.println(NodeList.get(i).value);}
-		//System.out.println(NodeList.get(0).left.value);
 		return executeFromTreeNode(NodeList.get(0));
 	}
 	
 	private String executeFromTreeNode(Node current){
-		//System.out.println(current.type.toString());
 		if(current.type.equals("Constant")){return current.value;}
 		
 		else if(current.type.equals("Variable")) { 
@@ -30,7 +27,6 @@ public class Executor extends ExpressionTree {
 		args[0] = myTurtle;
 		
 		sorter(current, numargs, args);		
-		//System.out.println(args[1]);
 		Object temp = fact.setArgs(args);
 		return temp.toString();
 	}
