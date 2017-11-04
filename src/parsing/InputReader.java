@@ -42,7 +42,6 @@ public class InputReader {
             if (s.trim().length() > 0) {
             		//translate user input to standardized language for slogo and store in an arraylist
             		String translation = lang.getTranslation(s);
-            		//System.out.println(translation);
             		inputParsed.add(translation);
             		inputParsedSymbols.add(lang.getSymbol(translation));
             }
@@ -54,7 +53,6 @@ public class InputReader {
     		int order = 0;
     		int countafterbrackets = countnonBracket();
     		int limit =inputParsed.size()- countafterbrackets;
-    		//System.out.println(inputParsed.get(index));
     		if(inputParsed.get(index).equals("[")){
     			inputParsed.remove(index);
     			inputParsedSymbols.remove(index);

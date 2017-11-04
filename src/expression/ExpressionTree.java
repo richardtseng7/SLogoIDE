@@ -13,6 +13,7 @@ import java.util.Collections;
 /**
  * @author Peilin Lai
  * 			Paul Lee
+ * 
  */
 
 public abstract class ExpressionTree {
@@ -21,16 +22,9 @@ public abstract class ExpressionTree {
 	protected Turtle myTurtle;
 	protected Model myModel;
 	protected ExpressionTree (ArrayList<String> input, ArrayList<String> symbol, ArrayList<Integer> layers, ArrayList<Integer> bracketBounds,Turtle t, Model mod) {
-		//ArrayList<Integer> commIndexes = indexAll(symbol);
 		NodeList = new ArrayList<Node>();
 		myTurtle = t;
 		myModel = mod;
-		
-		System.out.println(input.toString());
-		System.out.println(symbol.toString());
-		System.out.println(layers.toString());
-		System.out.println(bracketBounds.toString());
-
 		treeOfNodes = new Node(input.get(0), symbol.get(0));
 		
 		for(int i = 0 ; i<input.size(); i++){
@@ -62,16 +56,10 @@ public abstract class ExpressionTree {
 			Factory comms = new Factory(NodeList.get(i).getItem());
 			numArguments =  comms.numComs();
 		}
-		
-		//System.out.println(NodeList.get(i).getType());
 		if(numArguments == 3 || NodeList.get(i).getType() == "Conditional"){
-			//System.out.println("3");
 			ifConditional(input, symbol, layers, bracketBounds, NodeList, i);
 		}
 		else if(numArguments == 1){
-			//System.out.println(NodeList.get(i).value);
-			//System.out.println(NodeList.get(i+1).value);
-			
 			NodeList.get(i).left = NodeList.get(i+1);
 			NodeList.get(i+1).prev = NodeList.get(i);
 		}
@@ -81,9 +69,6 @@ public abstract class ExpressionTree {
 			NodeList.get(i+1).prev = NodeList.get(i);
 			NodeList.get(i).right = NodeList.get(i+2);
 			NodeList.get(i+2).prev = NodeList.get(i);
-		}
-		else{
-			//System.out.println("HERE");
 		}
 	}
 
@@ -98,8 +83,6 @@ public abstract class ExpressionTree {
 		ArrayList<Integer> outofbrackets = buildNodeList(bracketBounds, NodeList, i, pairsOfBrackets(input.get(i)));
 		boolean numberExpr = numExpr(input.get(i));
 		int firstB = firstBracket(bracketBounds, NodeList, i);
-		
-		System.out.println("Here " + outofbrackets.toString());
 		if(input.get(i).equals("If") || input.get(i).equals("Repeat")) { 
 			exprCond(input, symbol, layers, bracketBounds, NodeList, i, firstB);
 			oneCond(input, symbol, layers, bracketBounds, NodeList, i, outofbrackets, firstB);

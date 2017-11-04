@@ -58,60 +58,74 @@ public class Turtle extends TurtleProperties{
 		return (boolean) showing.getValue() ? 1 : 0;
 	}
 	
+	//returns the location of home as a Point2D
 	public Point2D getHome() {
 		return home;
 	}
 	
+	//returns the current turtle's ID
 	public int getID() {
 		return myID;
 	}
 	
+	//returns the map of turtle images
 	public Map<Integer, String> getImageMap(){
 		return turtleImages;
 	}
 	
+	//returns this turtle's ImageView
 	public ImageView getImageView() {
 		return myImageView;
 	}
 	
+	//returns this turtle's Pen object
 	public Pen getPen(){
 		return myPen;
 	}
 	
+	//returns the position that the turtle was in before the last command
 	public Point2D getOldPos(){
 		return oldPos;
 	}
 	
+	//returns the observable heading
 	public ObjectObservable getHeadingObservable() {
 		return heading;
 	}
 	
+	//returns the observable position
 	public ObjectObservable getPositionObservable() {
 		return myPos;
 	}
 	
+	//returns the current position of the turtle
 	public Point2D getPos() {
 		return (Point2D) myPos.getValue();
 	}	
 	
+	//returns the turtle's shape index
 	public int getShape(){
 		return shape;
 	}
 	
+	//set the observable heading to double degrees direction, any observers will be notified
 	public void setHeading(double degrees){
 	    heading.setValue(degrees);
 	}
 	
+	//set the observable showing to boolean bool (false = hidden, true = showing), any observers will be notified
 	public void setShowing(boolean bool) {
 		showing.setValue(bool);
 	}
 	
+	//initializes the observable position to home, sets oldPos to home as well
 	private void setHome() {
 		home = new Point2D(canvasDimension.getWidth()/2 - TURTLE_SIZE/2, canvasDimension.getHeight()/2 - TURTLE_SIZE/2);
 		oldPos = home;
 		myPos = new ObjectObservable(home);
 	}
 	
+	//initializes the turtle's ImageView
 	private void initializeImageView() {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
 		myImageView = new ImageView(image);
@@ -121,19 +135,23 @@ public class Turtle extends TurtleProperties{
 		myImageView.setY(home.getY());
 	}
 	
+	//updates oldPos to the current position, sets the observable position to Point2D newPos, any observers will be notified
 	public void setPos(Point2D newPos) {
 		oldPos = (Point2D) myPos.getValue();
 		myPos.setValue(newPos);
 	}
 
+	//return the variables map
 	public Variables getVariablesMap() {
 		return variablesMap;
 	}
 	
+	//returns the canvas object
 	public Canvas getCanvasObject() {
 		return canvasObject;
 	}
 	
+	//set the shape of the turtle according to the index
 	public int setShape(int index) {
 		shape = index;
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));

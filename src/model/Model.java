@@ -35,7 +35,7 @@ public class Model {
 	}
 
 	public void addTurtle() {
-		Turtle t = new Turtle(turtleID, canvasDimension,variablesMap,canvasObject);
+		Turtle t = new Turtle(turtleID, canvasDimension, variablesMap, canvasObject);
 		turtles.put(turtleID, t);
 		turtleID++;
 		makeActive(t);
@@ -62,11 +62,9 @@ public class Model {
 		activeTurtles.addAll(turtles);
 	}
 	
-	public double executeOnAllActive(ToDoubleFunction<Turtle> command) throws Exception{
-		double returnVal = 0;
+	public void executeOnAllActive(ToDoubleFunction<Turtle> command) throws Exception{
 		for (int i = 0; i < activeTurtles.size(); i++) {
-			returnVal = command.applyAsDouble(activeTurtles.get(i));
+			command.applyAsDouble(activeTurtles.get(i));
 		}
-		return returnVal;
 	}
 }

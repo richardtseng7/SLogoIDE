@@ -28,11 +28,9 @@ public class LogicCenter {
 		InputReader reader = new InputReader(lang, input);
 		ArrayList<String> inputParsed = reader.getInputParsed();
 		if(inputParsed!= null && inputParsed.size()!=0){ //Prevent crash from no commands typed.
-			//System.out.println(inputParsed.toString());
 			ArrayList<String> inputParsedSymbols = reader.getInputParsedSymbols();
 			ArrayList<Integer> inputParsedType = reader.getInputParsedType();
 			ArrayList<Integer> inputParsedBounds = reader.getInputParsedBounds();
-			//System.out.println(inputParsedSymbols.toString());
 			doLogic(inputParsed, inputParsedSymbols, inputParsedType, inputParsedBounds, t);
 		}
 	}
