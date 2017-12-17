@@ -16,7 +16,7 @@ Estimated combined hours: 140 - 160 hours
 
 Nathan's Role: Nathan worked on developing the front-end of the project - the 'view' - as well as contributing to parts of the back-end where necessary such as instances where Observers in the front end needed to be linked to their Observable classes within the back end or GUI components edited specific values within the back-end of the program. He also completed a couple other miscellaneous tasks in the back-end when workload needed to be spreaded to achieve a specific goal.
 
-Richard's Role:
+Richard's Role: Richard worked on connecting the front end with the back end through the use of the Observer/Observable design pattern. He also created the Turtle, Pen, Model classes and implemented all of the commands and queries for the turtle, as well as the display commands. On the front end side, he created the Canvas class and helped update the view to reflect the changes on the back end.
 
 Peilin's Role:
 
