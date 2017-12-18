@@ -78,8 +78,8 @@ public class UIController {
 			varPop = new ChangeVariablePopUp(newVal, variableStorage);
 			varPop.showPopUp();
 		});
+		c = new Canvas(this, gui.canvasPane, gui.canvas);
 		m = new Model(gui.canvasDimension,variableStorage,c);
-		c = new Canvas(m, gui.canvasPane, gui.canvas);
 		m.addTurtle();
 		gui.canvasPane.getChildren().add(m.getTurtle(1).getImageView());		
 		lc = new LogicCenter();
@@ -183,4 +183,8 @@ public class UIController {
 	public javafx.scene.Scene getScene() {
 		return Scene;
 	}	
+	
+	public Model getModel() {
+		return m;
+	}
 }

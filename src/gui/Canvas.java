@@ -22,10 +22,10 @@ public class Canvas extends Observable implements Observer{
 	private Map<Integer, Color> palette;
 	private Pane canvasPane;
 	private Rectangle myCanvas;
-	private Model turtleModel;
+	private UIController myUIController;
 
-	public Canvas(Model m, Pane p, Node r) {
-		turtleModel = m;
+	public Canvas(UIController controller, Pane p, Node r) {
+		myUIController = controller;
 		canvasPane = p;
 		myCanvas = (Rectangle) r;
 		initializePalette();
@@ -68,7 +68,7 @@ public class Canvas extends Observable implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		for (Turtle t : turtleModel.getActiveTurtles()) {
+		for (Turtle t : myUIController.getModel().getActiveTurtles()) {
 			t.getPen().setColor(palette.get((int) arg)); 
 		}
 	}

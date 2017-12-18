@@ -4,6 +4,7 @@ import java.util.Map;
 import gui.Canvas;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.ObjectObservable;
@@ -15,6 +16,7 @@ import model.variables.Variables;
  */
 public class Turtle extends TurtleProperties{
 	
+	private Group group;
 	private ImageView myImageView;
 	private final int myID;
 	private Point2D home;
@@ -22,7 +24,7 @@ public class Turtle extends TurtleProperties{
 	private ObjectObservable myPos;
 	private ObjectObservable heading = new ObjectObservable(90.0);
 	private ObjectObservable showing = new ObjectObservable(true);
-	private int shape = 0;
+	private int shape;
 	private Dimension2D canvasDimension;
 	private Pen myPen;
 	private Variables variablesMap;
@@ -34,8 +36,11 @@ public class Turtle extends TurtleProperties{
 		canvasDimension = canvas;
 		canvasObject = canvasObj;
 		setHome();		
-		initializeImageView();
+		myImageView = createImageView(IMAGE1, home.getX(), home.getY(), 0);
+		shape = 1;
 		myPen = new Pen();
+		group = new Group();
+		canvasObject.getPane().getChildren().add(group);
 	}
 		
 	//returns the turtle's X coordinate from the center of the screen
@@ -126,13 +131,15 @@ public class Turtle extends TurtleProperties{
 	}
 	
 	//initializes the turtle's ImageView
-	private void initializeImageView() {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(IMAGE1));
-		myImageView = new ImageView(image);
+	public ImageView createImageView(String imageName, double initX, double initY, double initAngle) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+		ImageView myImageView = new ImageView(image);
 		myImageView.setFitHeight(TURTLE_SIZE);
 		myImageView.setFitWidth(TURTLE_SIZE);
-		myImageView.setX(home.getX());
-		myImageView.setY(home.getY());
+		myImageView.setX(initX);
+		myImageView.setY(initY);
+		myImageView.setRotate(initAngle);
+		return myImageView;
 	}
 	
 	//updates oldPos to the current position, sets the observable position to Point2D newPos, any observers will be notified
@@ -157,5 +164,9 @@ public class Turtle extends TurtleProperties{
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(turtleImages.get(index)));
 		myImageView.setImage(image);
 		return index;
+	}
+	
+	public Group getGroup() {
+			return group;
 	}
 }
